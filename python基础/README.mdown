@@ -1,0 +1,9 @@
+# Python基础知识
+
+本部分是Python3的入门基础。如果是掌握了的请跳过本部分内容
+
+<br/>
+
+# 目录
+<br/>
+<a href='./chpaters/chapter1.mdown'>第一章: 数据类型、运算</a>
