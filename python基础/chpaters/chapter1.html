@@ -1,0 +1,1282 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body .markdown-body {
+    padding: 45px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+pre {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background-color: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body input {
+  font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.markdown-body a {
+  color: #4078c0;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body .select::-ms-expand {
+  opacity: 0;
+}
+
+.markdown-body .octicon {
+  font: normal normal normal 16px/1 octicons-anchor;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body .anchor {
+  display: inline-block;
+  padding-right: 2px;
+  margin-left: -18px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  color: #000;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h1 .anchor {
+  line-height: 1;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 .anchor {
+  line-height: 1;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h3 .anchor {
+  line-height: 1.2;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 .anchor {
+  line-height: 1.2;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h5 .anchor {
+  line-height: 1.1;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body h6 .anchor {
+  line-height: 1.1;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+}
+
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.markdown-body .pl-c {
+  color: #969896;
+}
+
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #0086b3;
+}
+
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #795da3;
+}
+
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #333;
+}
+
+.markdown-body .pl-ent {
+  color: #63a35c;
+}
+
+.markdown-body .pl-k {
+  color: #a71d5d;
+}
+
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #183691;
+}
+
+.markdown-body .pl-v {
+  color: #ed6a43;
+}
+
+.markdown-body .pl-id {
+  color: #b52a1d;
+}
+
+.markdown-body .pl-ii {
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+
+.markdown-body .pl-sr .pl-cce {
+  color: #63a35c;
+  font-weight: bold;
+}
+
+.markdown-body .pl-ml {
+  color: #693a17;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  color: #1d3e81;
+  font-weight: bold;
+}
+
+.markdown-body .pl-mq {
+  color: #008080;
+}
+
+.markdown-body .pl-mi {
+  color: #333;
+  font-style: italic;
+}
+
+.markdown-body .pl-mb {
+  color: #333;
+  font-weight: bold;
+}
+
+.markdown-body .pl-md {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.markdown-body .pl-mi1 {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.markdown-body .pl-mdr {
+  color: #795da3;
+  font-weight: bold;
+}
+
+.markdown-body .pl-mo {
+  color: #1d3e81;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.markdown-body .plan-price-unit {
+  color: #767676;
+  font-weight: normal;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 0.35em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+.markdown-body .plan-choice {
+  padding: 15px;
+  padding-left: 40px;
+  display: block;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  font-weight: normal;
+  background-color: #fafafa;
+}
+
+.markdown-body .plan-choice.open {
+  background-color: #fff;
+}
+
+.markdown-body .plan-choice.open .plan-choice-seat-breakdown {
+  display: block;
+}
+
+.markdown-body .plan-choice-free {
+  border-radius: 3px 3px 0 0;
+}
+
+.markdown-body .plan-choice-paid {
+  border-radius: 0 0 3px 3px;
+  border-top: 0;
+  margin-bottom: 20px;
+}
+
+.markdown-body .plan-choice-radio {
+  position: absolute;
+  left: 15px;
+  top: 18px;
+}
+
+.markdown-body .plan-choice-exp {
+  color: #999;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.markdown-body .plan-choice-seat-breakdown {
+  margin-top: 10px;
+  display: none;
+}
+
+.markdown-body :checked+.radio-label {
+  z-index: 1;
+  position: relative;
+  border-color: #4078c0;
+}
+</style><title>chapter1</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-chapter1-数据结构运算与变量" class="anchor" href="#chapter1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%90%E7%AE%97%E4%B8%8E%E5%8F%98%E9%87%8F" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chapter1 数据结构、运算与变量</h1>
+<blockquote>
+<p>author: 波比小金刚</p>
+</blockquote>
+<br>
+<p>千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter1.py</p>
+<h1>
+<a id="user-content-注释" class="anchor" href="#%E6%B3%A8%E9%87%8A" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>注释</h1>
+<p>python注释使用 # ,多行注释采用 ''' 或者 """</p>
+<pre><code># 这是一个注释
+print("Hello, World!")
+
+'''
+这是多行注释，用三个单引号
+这是多行注释，用三个单引号 
+这是多行注释，用三个单引号
+'''
+</code></pre>
+<h1>
+<a id="user-content-运算符" class="anchor" href="#%E8%BF%90%E7%AE%97%E7%AC%A6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>运算符</h1>
+<p>以下假设变量a为10，变量b为20</p>
+<p>算术运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cal.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cal.png" style="max-width:100%;"></a></p>
+<blockquote>
+<p>在python2 21/10 = 2, 直接结果就是取整了的，python3则不是，取整的除法可以用整除//(向下取整)</p>
+</blockquote>
+<p>比较运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cal2.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cal2.png" style="max-width:100%;"></a></p>
+<p>赋值运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/fuzhi.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/fuzhi.png" style="max-width:100%;"></a></p>
+<p>位运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/wei.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/wei.png" style="max-width:100%;"></a></p>
+<p>逻辑运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/lj.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/lj.png" style="max-width:100%;"></a></p>
+<p>成员运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cy.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/cy.png" style="max-width:100%;"></a></p>
+<p>身份运算符</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/sf.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/sf.png" style="max-width:100%;"></a></p>
+<blockquote>
+<p>is 用于判断两个变量引用对象是否为同一个， == 用于判断引用变量的值是否相等</p>
+</blockquote>
+<p>运算符优先级</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/yxj.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/yxj.png" style="max-width:100%;"></a></p>
+<h1>
+<a id="user-content-数字型number" class="anchor" href="#%E6%95%B0%E5%AD%97%E5%9E%8Bnumber" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>数字型(Number)</h1>
+<p>python中用数据类型(Number)来存储数字数据，数据类型是不允许改变的,
+这就意味着如果改变数字数据类型得值，将重新分配内存空间。</p>
+<ol>
+<li>整数( int )</li>
+</ol>
+<blockquote>
+<p>在python3中没有了long类型，没有上下限，所有的整数都是 int</p>
+</blockquote>
+<ol start="2">
+<li>浮点数( float )</li>
+</ol>
+<blockquote>
+<p>整数的运算都适用于浮点数，但是浮点数运算存在精度误差，整数则不会。
+浮点数存在上限和下限， 超出上限或下限将导致溢出错误</p>
+</blockquote>
+<ol start="3">
+<li>复数( complex )</li>
+</ol>
+<blockquote>
+<p>复数是 涉及 -1 的平方根的数字，python中用 1j 表示-1的平方根</p>
+</blockquote>
+<ol start="4">
+<li>类型判断</li>
+</ol>
+<p>python中可以使用 type() 或者 isinstance() 判断类型；</p>
+<blockquote>
+<ol>
+<li>type()不会认为子类是一种父类类型。</li>
+<li>isinstance()会认为子类是一种父类类型。</li>
+</ol>
+</blockquote>
+<pre><code>class A:
+    pass
+
+class B(A):
+    pass
+
+print(type(A()) == A) # true
+print(type(B()) == A) # false
+print(isinstance(A(), A)) # true
+print(isinstance(B(), A)) # true
+</code></pre>
+<ol start="5">
+<li>math模块</li>
+</ol>
+<blockquote>
+<p>模块导入的语法是</p>
+</blockquote>
+<pre><code>import math
+math.sqrt(5)
+
+# 或者
+from math import sqrt, ...
+sqrt(5)
+
+#建议采用第一种方式。因为第二种方式导入的时候，如果有同名的函数，则会产生覆盖。
+</code></pre>
+<p>数学计算函数见图:</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/math.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/math.png" style="max-width:100%;"></a></p>
+<ol start="6">
+<li>数字类型转换</li>
+</ol>
+<blockquote>
+<ol>
+<li>int(x) 将x转换为一个整数。</li>
+<li>float(x) 将x转换到一个浮点数。</li>
+<li>complex(x) 将x转换到一个复数，实数部分为 x，虚数部分为 0。</li>
+<li>complex(x, y) 将 x 和 y 转换到一个复数，实数部分为 x，虚数部分为 y。x 和 y &gt;&gt;是数字表达式。</li>
+</ol>
+</blockquote>
+<ol start="7">
+<li>随机数函数</li>
+</ol>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/random.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/random.png" style="max-width:100%;"></a></p>
+<h1>
+<a id="user-content-字符串-string-" class="anchor" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-string-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>字符串( String )</h1>
+<p>Python中的字符串用单引号(')或双引号(")或三引号(''',""")括起来，同时使用反斜杠('')转义特殊字符,字符串也是不可变的。
+字符串的截取的语法格式如下：</p>
+<blockquote>
+<p>变量[头下标:尾下标]</p>
+</blockquote>
+<ol>
+<li>索引值以 0 为开始值，-1 为从末尾的开始位置。</li>
+<li>加号 (+) 是字符串的连接符，</li>
+<li>星号 (*) 表示复制当前字符串，紧跟的数字为复制的次数。</li>
+<li>Python 没有单独的字符类型，一个字符就是长度为1的字符串</li>
+<li>Python3中，所有的字符串都是Unicode字符串，python2需要加一个 u'sss'</li>
+</ol>
+<pre><code>str = 'hello world'
+print(str[0:2]) # he
+print(str[:6]) # hello 
+print(str[:-3]) # hello wo
+print(str*2) # hello worldhello world
+print(str + '!') # hello world!
+</code></pre>
+<p>原始字符串:就是不包含转义的字符串,在字符串前边加一个 r 表示;</p>
+<pre><code>str1 = 'i\'m jack'
+rstr1 = r'i\'m jack'
+print(str1) # i'm jack
+print(rstr1) # i\'m jack
+
+# str1[0]='h' # 报错， 字符串是不可改变的
+
+</code></pre>
+<p>转义字符:</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/zzy.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/zzy.png" style="max-width:100%;"></a></p>
+<p>字符串运算符:</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/strys.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/strys.png" style="max-width:100%;"></a></p>
+<p>字符串格式化:</p>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/gsh.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/gsh.png" style="max-width:100%;"></a></p>
+<pre><code>print('this is a %s who age is %d' % ('guy',52))
+print('%:.2f' % '15.232323') # this num is 15.23
+print('this num is {:.3f}'.format(15.232323)) # this num is 15.232
+print('this num is {:,}'.format(15232323)) # this num is 15,232,323
+
+</code></pre>
+<p>多行字符串</p>
+<pre><code>para_str = """这是一个多行字符串的实例
+多行字符串可以使用制表符
+TAB ( \t )。
+也可以使用换行符 [ \n ]。
+"""
+print (para_str)
+
+</code></pre>
+<p>字符串函数</p>
+<pre><code># 字符串函数
+fstr = 'hello world'
+cstr = '中文'
+# capitalize(str) 首字母大写
+print(fstr.capitalize()) # Hello world
+
+# center(width,filter) 返回一个指定的宽度 width 居中的字符串，fillchar 为填充的字符，默认为空格
+# width不够 原样返回字符串
+print(fstr.center(15, '_')) # __hello world__
+
+# count(str, beg= 0,end=len(string))
+# 返回 str 在 string 里面出现的次数，如果 beg 或者 end 指定则返回指定范围内 str 出现的次数
+print(fstr.count('l')) # 3
+
+# encode/decode
+# 编码/解码
+e_str = cstr.encode('utf-8')
+print(e_str) # b'\xe4\xb8\xad\xe6\x96\x87'
+# Python3 中没有 decode 方法，但我们可以使用 bytes 对象的 decode() 方法来解码给定的 bytes 对象
+print(e_str.decode('utf-8')) # 中文
+# 可以粗解为通过encode把字符串编码成指定编码格式的 bytes 对象，
+# 然后通过 decode 来解码成我们需要的编码格式的字符串，主要用来处理中文乱码的问题较多。
+
+# endswith(suffix, beg=0, end=len(string))
+# 是否是以suffix结束，返回布尔值
+print(fstr.endswith('ld')) # True
+print(fstr.endswith('ld', 1, 5)) # False
+
+# expandtabs(tabsize=8)
+# 把字符串 string 中的 tab 符号转为空格
+print('tt\tt'.expandtabs()) # tt      t
+
+# find(str, beg=0 end=len(string))
+# 检测 str 是否包含在字符串中，找到第一个即返回，如果 beg 和 end 指定范围，则检查是否包含在指定范围内，
+# 如果是返回开始的索引值，否则返回-1
+# rfind()  从右开始找
+print(fstr.find('l')) # 2
+print(fstr.find('helld')) # -1
+print(fstr.find('world', -1, -11)) # -1
+
+# index(str, beg=0, end=len(string))
+# 同find,唯一不同的是找不到的话，index函数会报异常
+# rindex()  从右开始找
+print(fstr.index('l')) # 2
+# print(fstr.index('m')) # 报错
+
+# isalnum()
+# 如果字符串至少有一个字符并且所有字符都是字母或数字则返 回 True,否则返回 False
+# 必须包含字母和数字,空格什么的都不能有
+print(fstr.isalnum()) # False
+print('a4'.isalnum()) # True
+
+# isalpha()
+# 如果字符串至少有一个字符并且所有字符都是字母则返回 True, 否则返回 False
+# 只能有字母,空格什么的都不能有
+print(fstr.isalnum()) # False
+print('a4'.isalnum()) # True
+
+# isdigit()
+# 只能有数字，字母、空格什么的不能有
+print('4 4'.isalnum()) # False
+print('a4'.isalnum()) # True
+print('54.132'.isalnum()) # False
+
+# islower()
+# 如果字符串中包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是小写
+print('abc'.islower(), 'test') # True test
+print('abc d'.islower(), 'test') # True test
+print('abc4 d'.islower(), 'test') # True test
+print('Abc4 d'.islower(), 'test') # False test
+print('aBc4 d'.islower(), 'test') # False test
+
+# isnumeric()
+# 只包含数字
+print('456'.isnumeric()) # True
+print('456 7'.isnumeric()) # False
+
+
+# isspace()
+# 只包含空白
+print(' '.isspace()) # True
+print(' a'.isspace()) # False
+
+# istitle()
+# 是否是标题格式的
+print('AaBb'.istitle()) # False
+print("Ac Bs".istitle()) # True
+
+# isupper()
+# 包含至少一个区分大小写的字符，并且所有这些(区分大小写的)字符都是大写
+print('123'.isupper()) # False
+print('ab c'.isupper()) # False
+print('Abc'.isupper()) # False
+print('A'.isupper()) # True
+
+# join(seq)
+# 以指定字符串,join一个序列
+print('__'.join(('1', '2', '3'))) # 1__2__3
+print('**'.join(['1', '2'])) # 1**2
+
+# len(string)
+# 返回字符串长度
+print(len('123')) # 3
+
+# ljust(width[, fillchar]) /  rjust(width[, fillchar])   
+# 返回左/右对齐字符串，参数是长度和填充字符
+print('567'.ljust(4,'*')) # 567*
+print('567'.rjust(4,'*')) # *567
+
+# lower()
+# 小写
+print('ABCd'.lower()) # abcd
+
+# lstrip()  rstrip() strip()
+# 截掉左      右       两边 的空格
+print(' abc'.lstrip()) # abc
+print(' abc '.strip()) # abc 
+
+# replace(old, new [, max])
+# 替换，max指的是最多替换次数
+print('abca'.replace('a','_a',1)) # _abca
+print('abca'.replace('a','_a',2)) # _abc_a
+
+# split(str="", num=string.count(str))  str不能写'' 默认为所有的空字符，包括空格、换行(\n)、制表符(\t)
+# 字符串分割
+print('1234'.split()) # ['1234']
+print('1 2 3 4'.split()) # ['1', '2', '3', '4']
+print('1,2,34'.split( ',' )) # ['1', '2', '34']
+
+# startswith(str, beg=0,end=len(string))
+# 检查是否是以str开头
+print('hello'.startswith('h')) # True
+print('hello'.startswith('h',1)) # False
+
+# swapcase()
+# 大写转小写， 小写转大写
+print('hELLO'.swapcase()) # Hello
+
+# title()
+# 驼峰
+print('abc'.title()) #Abc
+print('abc def'.title()) #Abc Def
+
+# upper()
+# 大写
+
+# isdecimal()
+# 是否只包含十进制
+print('123'.isdecimal()) # True
+</code></pre>
+<h1>
+<a id="user-content-列表-list-" class="anchor" href="#%E5%88%97%E8%A1%A8-list-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>列表( List )</h1>
+<p>列表就是一堆数据的集合，可重复，可改变，有序, 用方括号括起来表示。
+列表也支持索引切片，支持拼接运算，是我们最最常用的数据类型之一。
+可以用 in 来判断是否在列表中。</p>
+<pre><code># 列表
+list1 = [1, '2', '3']
+list2 = list1 * 2
+print(list1 + list2) # [1, '2', '3', 1, '2', '3', 1, '2', '3']
+print(list1[1:]) # ['2', '3']
+print(list2[-5:]) # ['2', '3', 1, '2', '3']
+list1[0] = 12
+print(list1) # [12, '2', '3']
+
+1 in list1 # 判断
+for i in list1:
+    print(i, end='') # 迭代
+</code></pre>
+<p>列表操作常用的函数</p>
+<pre><code># 列表操作函数
+__list = [1, 2, 2,]
+
+# len() 长度
+print('长度是 %d' % (len(__list))) # 长度是 3
+
+# max() min() 最大最小值
+print('最大值:%d,最小值:%d' % (max(__list), min(__list))) # 最大值:2,最小值:1
+
+# list() 元组转列表
+print(type((1,2,3))) # &lt;class 'tuple'&gt;
+print(type(list((1,2,3)))) # &lt;class 'list'&gt;
+
+# append() 队尾添加
+__list.append(3);print(__list) # [1, 2, 2, 3]
+
+# count() 统计出现次数
+print('出现次数: {}'.format(__list.count(2))) # 出现次数: 2
+__list2 = ['a', 'b']
+
+# extend() 在队尾合并列表
+__list.extend(__list2);print(__list) # [1, 2, 2, 3, 'a', 'b']
+
+# index() 返回索引，只找一次
+print(__list.index('a')) # 4
+
+# insert(i,x) 其实就是list[i]=x
+__list.insert(0, '哈');print(__list) # ['哈', 1, 2, 2, 3, 'a', 'b']
+
+# pop(i) 删除并返回索引为 i 的元素 ,默认从队尾删除
+# 等同于 del list[i]
+print(__list.pop()) # b
+print(__list.pop(0)) # 哈
+
+# remove(x) 从头删除第一个 x，不返回值
+__list.remove('a');print(__list) # [1, 2, 2, 3]
+
+# reverse() 反转
+__list.reverse();print(__list) # [3, 2, 2, 1]
+
+# sort() 排序
+__list.sort();print(__list) # [1, 2, 2, 3]
+
+# copy() 拷贝
+__list3 = __list.copy()
+print('拷贝列表',__list3) # 拷贝列表 [1, 2, 2, 3]
+__list3[0]='aa'
+print(__list, __list3) #[1, 2, 2, 3] ['aa', 2, 2, 3]
+
+# clear() 清除
+__list3.clear();print(__list3) # []
+</code></pre>
+<p>列表解析</p>
+<p>快速生成列表的方式，简化代码。</p>
+<pre><code># 列表解析
+print([n*n for n in range(1,11)]) # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+# 传统写法
+_list_ = []
+for n in range(1, 11):
+    _list_.append( n*n )
+print(_list_)
+
+# 还可以有逻辑判断
+# 1. 筛选出大于0的
+_num_list = [-1, 34, -5, 68, 7, 0, -4]
+print([n for n in _num_list if n &gt; 0]) # [34, 68, 7]
+
+#2. 选出含有 'a' 的
+_word_list = ['am', 'test', 'apoll', 'tt']
+print([n for n in _word_list if 'a' in n]) # ['am', 'apoll']
+
+</code></pre>
+<h1>
+<a id="user-content-元组-tuple-" class="anchor" href="#%E5%85%83%E7%BB%84-tuple-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>元组( Tuple )</h1>
+<p>元组是一种不可变的序列，由圆括号括起来表示，有序可重复。
+元组也是可以包含所有类型的值，空元组用()表示，单个元素的元组用(a,)表示，单个元素的元组用末尾的逗号必不可少，不然会被当成是表达式。
+元组也是序列，所以同样支持索引、+、*、in等。</p>
+<pre><code># 元组
+_tuple = (1)
+print(type(_tuple)) # &lt;class 'int'&gt;
+
+_tuple=(1,)
+print(type(_tuple)) # &lt;class 'tuple'&gt;
+
+# _tuple[0] = '1' # 报错，tuple不可变
+_tuple2 = ('1',) + _tuple[1:]
+print(_tuple2) # ('1',)
+
+print(_tuple2 * 2 ) # ('1', '1')
+print('1' in _tuple) # False
+print(1 in _tuple) # True
+
+# tuple不可变，但是其包含可变的元素是可以改变的
+
+# del _multi_tuple[0] 既然不可变，删除其元素是违法的，但是可以删除整个元组
+
+_multi_tuple = (1, '1', (1,), [1, 3])
+print(_multi_tuple[-2:]) # ((1,), [1, 3])
+
+_multi_tuple[-1][0] = '哈'
+print(_multi_tuple[-2:]) # ((1,), ['哈', 3])
+
+</code></pre>
+<p>元组的内置函数</p>
+<pre><code># 元组的内置函数
+_tem = (0, 1, 2, 3, '4')
+
+# len() 计算长度
+print(len(_tem)) # 5
+
+# max(tuple) min() 最大最小值
+# print(max(_tem), min(_tem)) # 报错 因为有个 string
+
+# tuple() 列表转元祖
+print(type(tuple([1,]))) # &lt;class 'tuple'&gt;
+
+# .count() 统计次数
+print(_tem.count('4')) # 1
+
+# .index(x) 查找x的第一个出现的索引，找不到会报错哦
+print(_tem.index('4')) # 4
+
+</code></pre>
+<h1>
+<a id="user-content-集合-set-" class="anchor" href="#%E9%9B%86%E5%90%88-set-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>集合( set )</h1>
+<p>集合是无序不重复元素的序列。
+可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。</p>
+<pre><code># 集合
+colors = {'white', 'red', 'blue', 'red'}
+days = set('abcdefggggg')
+print('colors: {}'.format(colors)) # colors: {'white', 'blue', 'red'} 去除了重复,且无序
+print('days: {}'.format(days)) # days: {'d', 'g', 'f', 'c', 'a', 'b', 'e'}
+
+# 创建空集合要用 set()
+print(type({})) # &lt;class 'dict'&gt;
+print(type(set())) # &lt;class 'set'&gt;
+
+# set可以进行集合运算
+set1 = {'a', 'b', 'c'}
+set2 = {'b', 'c', 'd', 'e'}
+print( set1 - set2 ) # {'a'}
+print( set2 - set1 ) # {'e', 'd'}
+
+print( set1 ^ set2) # {'e', 'a', 'd'}           两个的差集
+print( set1 &amp; set2) # {'c', 'b'}                两个的交集
+print( set1 | set2) # {'a', 'b', 'c', 'e', 'd'} 两个的并集
+</code></pre>
+<h1>
+<a id="user-content-字典--dictionary-" class="anchor" href="#%E5%AD%97%E5%85%B8--dictionary-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>字典 ( Dictionary )</h1>
+<p>字典是另一种可变容器模型，且可存储任意类型对象。
+其结构是无序的键-值对，字典也称为关联数组、映射或散列表。
+字典是一种映射类型，字典用"{ }"标识，它是一个无序的键(key) : 值(value)对集合。
+键(key)必须使用不可变类型，如字符串，数字或元组。
+在同一个字典中，键(key)必须是唯一的。
+通过键值进行查找效率更快。存储的时候键如果一样则会覆盖，从而保证键的唯一性。</p>
+<pre><code># 字典
+obj = {'a':123}
+obj['b'] = 124
+print('obj: {}'.format(obj)) # obj: {'b': 124, 'a': 123}
+print('keys: {}'.format(obj.keys())) # keys: dict_keys(['b', 'a'])
+print('values: {}'.format(obj.values())) # values: dict_values([123, 124])
+aa=list(obj.keys()) # dict_values 转成 列表才可以有那些操作哦
+print(aa[0]) # a
+</code></pre>
+<p>字典中常用的操作函数有:</p>
+<pre><code># 字典常用函数
+dict1 = {'a': 123, 'b': 321}
+
+# dict.clear() 清除字典内的所有元素
+obj.clear();print(obj) # {}
+
+# dict.copy() 浅拷贝
+#     1. == 比较的是值, is 比较的地址
+#     2. 浅拷贝拷贝的是值，而不是引用地址
+dict2 = dict1.copy()
+print(dict1 == dict2) # True
+print(dict1 is dict2) # False
+dict2['b'] = 654
+print(dict1, dict2) # {'b': 321, 'a': 123} {'b': 654, 'a': 123}
+print(dict1 == dict2) # False
+
+# dict.get(key, default=None) 返回指定键的值，如果值不在字典中返回default值
+print(dict1.get('a')) # 123
+print(dict1.get('g','没有这个key')) # 没有这个key
+
+# key in dict 如果键在字典dict里返回true，否则返回false
+print('a' in dict1)  # True
+
+# dict.keys() dict.values() dict.items() 这里讲讲items就好了
+# 返回一个列表，形式大概是 [(key,value),(key,value)]
+items = list(dict1.items())
+print(items) # [('a', 123), ('b', 321)]
+print(items[0][0]) # a 这个结果不稳定的，因为返回的tuple顺序不固定
+
+# dict.update(dict2) 把dict2更新到dict
+# 键相同的话会覆盖，没有则是新增
+dict1.update({'e':999, 'a':123.3})
+print(dict1) # {'b': 321, 'a': 123.3, 'e': 999}
+
+# pop(key[,default]) 删除字典给定键 key 所对应的值，返回值为被删除的值。
+# key值必须给出。 否则，返回default值。
+print(dict1.pop('a')) # 123.3
+print(dict1) # {'b': 321, 'e': 999}
+
+# popitem()
+# 随机删除一对键值对
+print(dict1.popitem())
+print(dict1)
+
+</code></pre>
+<h1>
+<a id="user-content-python中的数据类型转换" class="anchor" href="#python%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>python中的数据类型转换</h1>
+<p><a href="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/turn.png" target="_blank"><img src="///E://Python/PythonNotes/python%E5%9F%BA%E7%A1%80/img/turn.png" style="max-width:100%;"></a></p>
+</article></body></html>

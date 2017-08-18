@@ -9,7 +9,7 @@
 部分阐述了python2.7.2与python3的区别。
 文中所说的python，若无特殊说明，均是指的是python3。
 <br/>
-<a style="color:steelblue">Google浏览器打开效果更好哦</a>
+<a href="#">Google浏览器打开效果更好哦</a>
 # 目录
 
 <a href="./python基础/README.mdown">Python基础</a>

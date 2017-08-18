@@ -7,6 +7,7 @@
 几乎所有的编程语言都是始于数据存储、运算、逻辑...
 so, 开始我们的python旅程。
 本章节代码都在./code/chapter1.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
 
 # 注释
 
@@ -39,6 +40,7 @@ print("Hello, World!")
 比较运算符
 
 <img src='../img/cal2.png'/>
+
 
 
 赋值运算符
