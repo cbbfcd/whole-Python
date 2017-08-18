@@ -6,5 +6,5 @@
 
 # 目录
 <br/>
-<a href='./chpaters/chapter1.mdown'>第一章: 数据结构、运算与变量</a>
+<a href='./chpaters/chapter1.mdown'>第一章: 数据结构、运算与变量</a><br/>
 <a href='./chpaters/chapter2.mdown'>第二章: 流程控制</a>
