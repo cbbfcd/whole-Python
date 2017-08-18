@@ -29,7 +29,7 @@ print("Hello, World!")
 
 算术运算符
 
-<img src='img/cal.png'/>
+<img src='../img/cal.png'/>
 
 
 
@@ -38,37 +38,37 @@ print("Hello, World!")
 
 比较运算符
 
-<img src='img/cal2.png'/>
+<img src='../img/cal2.png'/>
 
 
 赋值运算符
 
 
-<img src='img/fuzhi.png'/>
+<img src='../img/fuzhi.png'/>
 
 
 位运算符
 
 
-<img src='img/wei.png'/>
+<img src='../img/wei.png'/>
 
 
 逻辑运算符
 
 
-<img src='img/lj.png'/>
+<img src='../img/lj.png'/>
 
 
 成员运算符
 
 
-<img src='img/cy.png'/>
+<img src='../img/cy.png'/>
 
 
 身份运算符
 
  
-<img src='img/sf.png'/>
+<img src='../img/sf.png'/>
 
 
 >is 用于判断两个变量引用对象是否为同一个， == 用于判断引用变量的值是否相等
@@ -77,7 +77,7 @@ print("Hello, World!")
 运算符优先级
 
 
-<img src='img/yxj.png'/>
+<img src='../img/yxj.png'/>
 
 
 
@@ -138,7 +138,7 @@ sqrt(5)
 
 数学计算函数见图:
 
-<img src='img/math.png'/>
+<img src='../img/math.png'/>
 
 
 6. 数字类型转换
@@ -151,7 +151,7 @@ sqrt(5)
 
 7. 随机数函数
 
-<img src='img/random.png'/>
+<img src='../img/random.png'/>
 
 
 # 字符串( String )
@@ -191,17 +191,17 @@ print(rstr1) # i\'m jack
 
 转义字符:
 
-<img src='img/zzy.png'/>
+<img src='../img/zzy.png'/>
 
 
 字符串运算符:
 
-<img src='img/strys.png'/>
+<img src='../img/strys.png'/>
 
 
 字符串格式化:
 
-<img src='img/gsh.png'/>
+<img src='../img/gsh.png'/>
 
 ```
 print('this is a %s who age is %d' % ('guy',52))
@@ -643,4 +643,4 @@ print(dict1)
 # python中的数据类型转换
 
 
-<img src='img/turn.png'/>
+<img src='../img/turn.png'/>
