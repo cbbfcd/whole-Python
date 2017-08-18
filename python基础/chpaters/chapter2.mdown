@@ -1,0 +1,137 @@
+# Chapter2 流程控制
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter1.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+# 简介
+
+流程控制是实现复杂业务逻辑的基础，其实质就是通过if语句、循环、布尔逻辑实现分支结构，使得程序朝着你希望的方向进行。
+
+
+
+# 布尔逻辑
+
+布尔逻辑表达式就4种：
+
+1. == 判断值是不是相等( 注意和 is 的区别 )
+2. not 非，也就是取相反
+3. and 且，两个都是true结果才是true，一个为false则为false
+4. or  或，一个为true则结果为true
+
+
+# 优先级( 从高到低 )
+
+1. ==
+2. !=
+3. not
+4. and
+5. or
+
+# 短路
+
+这在编程中是很常用的技巧，可以给我们带来便利，也可能带来难以发觉的bug。
+直白的解释短路:
+p and q , 如果 p 为false，那么后边的就不用执行了。
+p or  q , 如果 p 为true，那么后边的就不用执行了。
+
+
+# if
+
+几乎所有编程都会用到的一种分支结构控制，很简单，看看下面的模拟登陆的示例大概就明白了
+
+```
+def login(username, pwd):
+    if pwd == '123' and username == 'admin':
+        print('login success!')
+    elif username == 'admin' and pwd != '123':
+        print('pwd is error')
+    else:
+        print('username is not exist')
+
+login('admin', '123') # login success!
+login('admin', '1234') # pwd is error
+login('adminss', '1234') # username is not exist
+```
+
+# 条件表达式
+
+条件表达式可以让你的代码量减少，但是我不是很喜欢。
+
+```
+color = input('what your favrita color')
+rep = '我也喜欢' if color == 'blue' else '我不是很喜欢哦'
+print(rep)
+```
+
+
+# 循环
+
+Python中常用的有 for 循环和 while 循环。
+
+1.首先了解一下内置的 range(start, end, step):
+
+>第一个参数是开始数字，第二个是结束数字，第三个是步长，含头不含尾。
+
+```
+range(10, 20, 5)
+# 表示的是 10 15
+```
+
+2.跳出循环
+break: 跳出当前的循环
+
+```
+# break
+def testBreak(num):
+    for i in range(0, num):
+        if i == 2:
+            print('i = {} , so bye~'.format(i))
+            break
+        print('i = {}'.format(i))
+
+testBreak(10)
+```
+
+continue: 跳出余下的步骤，直接进入下一次循环
+
+```
+def testContinue(num):
+    while num < 10:
+        pass
+        num = num + 1
+        if num == 5:
+            continue
+        print('this num is {}'.format(num))
+
+testContinue(0) # 不会输出this num is 5
+```
+
+break和continue都是不应该出现在你代码中的。最好不要用它们
+
+# 经典的猜数字游戏
+```
+# 猜数字 输入-1直接推出
+def guess():
+    answer = math.floor(100 * (random.random())) # 随机数
+    flag = True
+    while flag:
+        num = int(input('input a number'))
+        if num == answer:
+            flag = False
+            print('恭喜你答对了')
+        elif num < answer and num != -1:
+            print('小了一点点')
+        elif num == -1:
+            break
+        else:
+            print('太大了')
+    else:
+        print('Bye~~')
+guess()
+```
