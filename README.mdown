@@ -2,12 +2,22 @@
 
 持续更新中的从python入门到深入理解过程的所有笔记，
 包含一些示例项目,游戏、web、爬虫等。
-
+<br/>
 # notes
+
 所有的学习笔记代码运行的环境均是python3.5。
 部分阐述了python2.7.2与python3的区别。
 文中所说的python，若无特殊说明，均是指的是python3。
+<br/>
 
+# 目录
+
+<a href="./python基础/README.mdown">Python基础</a>
+
+
+
+
+<br/>
 # author
 @波比小金刚
 
