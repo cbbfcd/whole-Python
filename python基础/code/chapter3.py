@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-24 16:03:39
+# @Last Modified time: 2017-08-24 17:32:52
 import math
 import functools
 
@@ -182,7 +182,7 @@ def __error():
 	'''
 	常见错误函数
 	'''
-	a += 1 # 局部变量“a”在赋值前被引用
+	#a += 1 # 局部变量“a”在赋值前被引用
 	print(a) 
 
 __error()
