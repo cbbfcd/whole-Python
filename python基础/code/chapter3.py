@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-24 15:38:30
+# @Last Modified time: 2017-08-24 16:03:39
 import math
 import functools
 
@@ -32,7 +32,7 @@ def _changeName(new_name):
 	改变名称的方法；
 	比如： _changeName('james')
 	'''
-	global name # 加了全局变量声明之后，会输出hello, tom;这里的name就是外面的全局变量name了
+	# global name # 加了全局变量声明之后，会输出hello, tom;这里的name就是外面的全局变量name了
 	            # 不然就会被当成是一个与外层全局变量无关的局部变量name。
 	name = new_name
 
@@ -160,3 +160,29 @@ def _dictTest(a, b, **c):
 print(_dictTest('china', 'sichuan', city='chengdu', area='jinjiang'))
 #china sichuan {'area': 'jinjiang', 'city': 'chengdu'}
 #print(_dictTest('china', 'sichuan', 'chengdu', 'jinjiang')) # 报错
+
+__num1 = 1000
+def __test3():
+	#global __num1
+	__num1 = 1001
+	print('this is jbw {}'.format(__num1), end=" ")
+	def __test4():
+		nonlocal __num1
+		__num1 = 1002
+	__test4()
+	return __num1
+
+print(__test3()) 
+
+
+# 常见的错误
+a = 10
+def __error():
+
+	'''
+	常见错误函数
+	'''
+	a += 1 # 局部变量“a”在赋值前被引用
+	print(a) 
+
+__error()
