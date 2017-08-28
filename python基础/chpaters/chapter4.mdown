@@ -1,0 +1,138 @@
+# 迭代器与生成器
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter4.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+# 简介 
+
+迭代器和生成器都是Python强大的功能之一。
+
+# 迭代器
+
+迭代器和其它语言的类似，只能前进不能后退，通过iter
+()创建迭代器对象，然后通过next()进行遍历。<br/>字符串，列表或元组对象都可用于创建迭代器。<br/>
+这里有一个区别需要注意：iterable 和 iterator;<br/>前者表示可迭代对象，后者是迭代器对象。
+str, tuple, list 都是iterable，但是不是iterator;<br/>因为
+Python中的iterator表示的数据流，是有序但是不知道长度的。
+
+```
+# 迭代
+# 迭代
+str = iter(['a', 'b', 'c'])
+print(next(str), end=' ') # a
+print(next(str), end=' ') # b
+
+
+str2 = iter('abc')
+print(next(str2)) # a
+
+# 判断是否可以迭代
+
+print( isinstance('abc', collections.Iterable) ) # True
+
+# 循环迭代
+ls = '1234'
+it = iter(ls)
+# for i in it:
+#   print(i, end=',') # 1,2,3,4,
+
+while True:
+    try:
+        print(next(it))
+    except StopIteration as e:
+        sys.exit()
+```
+
+Python也可以遍历索引
+
+```
+# 遍历索引
+
+lis = ['aa', 'bb', 'cc']
+for i,t in enumerate(lis):
+    print('索引：{}，值：{}'.format(i,t))
+```
+
+
+# 生成器
+
+对生成器的了解起源于早先对ES7中生成器函数的了解.其实,生成器也是一个迭代器.<br/>
+我觉得要区别开生成器，生成器对象，生成器函数。<br/>首先，生成器是一种一边循环一边计算的机制。<br/>它是一个函数，使用了yield来控制函数的暂停执行并保存当前所有的运行信息，返回yield的值。<br/>通过next()来从当前yield的位置继续执行。
+
+
+最快捷的创建生成器的方式是类似之前学习的创建列表的快捷方式一样，把[] 换成 ()就好了。
+
+```
+# 1. 快捷创建
+
+# 回忆创建列表的快捷语法
+list1 = [ n*n for n in range(10) if n % 2 ==0 ]
+print(list1) # [0, 4, 16, 36, 64]
+
+# 创建生成器
+gener1 = ( n*n for n in range(10) if n % 2 ==0 )
+print(gener1) # <generator object <genexpr> at 0x0000028CD6046830>
+print(next(gener1)) # 0
+print(next(gener1)) # 4
+print(next(gener1)) # 16
+
+# 一直next()下去太麻烦，还是循环吧
+for i in gener1:
+    print(i, end=' ') # 36 64
+```
+
+不知道发觉一个有趣的问题没有，for 循环生成器输出的不是 [0, 4, 16, 36, 64], 而是输出了 36 64，其实看看前边，更加能体会生成器的神奇疗效。
+for 循环的本质其实也是不断的去next()，前边已经next()三次了，再用for循环，它调用next()的时候会从上次暂停的地方继续执行，所以只输出了最后两个数字，就是这么神奇。
+
+上述的列表方式创建generator固然方便，但是局限也很明显，遇到复杂的需求的时候就需要使用生成器函数。<br/>
+这里我们以著名的斐波拉契函数为例。不了解的请猛戳<a href='https://baike.baidu.com/item/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97/99145?fr=aladdin'>这里</a>
+
+首先我们不使用生成器，实现一个:
+
+```
+# 斐波拉契
+def _fibonacci(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        print(b)
+        a, b = b, a+b
+        n += 1 
+    return 'done'
+_fibonacci(6) # 1 1 2 3 5 8
+```
+
+生成器实现很简单，就是把print(b) 换成 yield b
+
+```
+# 斐波拉契生成器
+def _gener_fibonacci(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a+b
+        n += 1 
+    return 'done'
+
+# 生成器函数返回一个生成器对象，它是一个iterator
+g = _gener_fibonacci(6)
+print( isinstance(g, collections.Iterator) ) # True
+# for 循环打印不出return的语句'done'
+# for i in g:
+#   print(i) # 1 1 2 3 5 8
+
+# 想要输出迭代完了return的'done'需要捕获StopIteration异常。
+def print_g(x):
+    while True:
+        try:
+            print(next(x), end=' ')
+        except StopIteration as e: 
+            print(e.value)
+            break
+print_g(g) # 1 1 2 3 5 8 done
+```
