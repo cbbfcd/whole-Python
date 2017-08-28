@@ -10,3 +10,4 @@
 <a href='./chpaters/chapter2.mdown'>第二章: 流程控制</a><br/>
 <a href='./chpaters/chapter3.mdown'>第三章: 函数</a><br/>
 <a href='./chpaters/chapter4.mdown'>第四章: 迭代与生成器</a><br/>
+<a href='./chpaters/chapter5.mdown'>第五章: 模块</a><br/>

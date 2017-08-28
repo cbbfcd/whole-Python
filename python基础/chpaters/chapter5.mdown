@@ -1,0 +1,82 @@
+# 模块
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter5.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介 
+
+模块就是包含你定义的变量和方法的文件，以.py结尾。使用模块封装，可以有效的进行复用。还可以避免命名的冲突。
+
+## 模块的引入
+
+使用import 或者 from ... import ...或者全部导入 from ... import *来导入模块。
+但是在前边已经说过，养成好的习惯，为了避免覆盖，应该使用import。<br/>
+一个模块只会被导入一次，不管你执行了多少次import。这样可以防止导入模块被一遍又一遍地执行。<br/>
+默认情况下，Python 解释器会搜索当前目录、所有已安装的内置模块和
+第三方模块，搜索路径存放在 sys 模块的 path 变量中<br/>
+想添加搜索路径有两种方式：
+1. 使用sys.path.append('E://test/test'),这只在运行时候有效。
+2. 添加对应的环境变量。
+
+```
+import sys
+
+print(sys.path)
+
+>>>['E:\\Python\\PythonNotes\\python基础\\code', 'D:\\python\\python35.zip', 'D:\\python\\DLLs', 'D:\\python\\lib', 'D:\\python', 'D:\\python\\lib\\site-packages']
+
+```
+
+内置的函数 dir() 可以找到模块内定义的所有名称。以一个字符串列表的形式返回
+
+```
+print(dir(sys))
+>>>['__displayhook__', '__doc__', '__excepthook__', '__interactivehook__', '__loader__', '__name__', '__package__', '__spec__', '__stderr__', '__stdin__', '__stdout__', '_clear_type_cache', '_current_frames', '_debugmallocstats', '_getframe', '_home', '_mercurial', '_xoptions', 'api_version', 'argv', 'base_exec_prefix', 'base_prefix', 'builtin_module_names', 'byteorder', 'call_tracing', 'callstats', 'copyright', 'displayhook', 'dllhandle', 'dont_write_bytecode', 'exc_info', 'excepthook', 'exec_prefix', 'executable', 'exit', 'flags', 'float_info', 'float_repr_style', 'get_coroutine_wrapper', 'getallocatedblocks', 'getcheckinterval', 'getdefaultencoding', 'getfilesystemencoding', 'getprofile', 'getrecursionlimit', 'getrefcount', 'getsizeof', 'getswitchinterval', 'gettrace', 'getwindowsversion', 'hash_info', 'hexversion', 'implementation', 'int_info', 'intern', 'is_finalizing', 'maxsize', 'maxunicode', 'meta_path', 'modules', 'path', 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'set_coroutine_wrapper', 'setcheckinterval', 'setprofile', 'setrecursionlimit', 'setswitchinterval', 'settrace', 'stderr', 'stdin', 'stdout', 'thread_info', 'version', 'version_info', 'warnoptions', 'winver']
+```
+
+安装第三方模块的方式是使用pip这里就不多说，可以戳<a href='https://pip.pypa.io/en/stable/'>这里</a>。
+
+模块的应用请参见<a href='./hello.py'>code/hello.py</a><a href='./chapter5.py'>以及chapter5.py</a>
+
+## 包
+
+也是为了避免命名冲突，集中的管理模块。包是一种管理 Python 模块命名空间的形式。<br/>
+必须要有一个__init__.py文件。比如，当前所有的代码都在code这个包下边，
+要引用chapter5模块的话，就是 code.chapter5。<br/>这样使得项目有很多代码的时候也会有清晰的结构，而且模块名冲突也会得到解决。<br/>
+__init__.py:
+>最简单的情况，放一个空的 :file:__init__.py就可以了。当然这个文件中也可以包含一些初始化代码或者为 __all__变量赋值。
+
+__all__的作用:
+>导入语句遵循如下规则：如果包定义文件 __init__.py 存在一个叫做 __all__ 的列表变量，那么在使用 from package import * 的时候就把这个列表中的所有名字作为包内容导入。 
+
+## 作用域
+
+有的函数和变量我们希望仅仅在模块内部使用。在
+Python 中，是通过_前缀来实现的。<br/>
+类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，
+比如上面的__author__，__name__就是特殊变量.<br/>
+我们自己的变量一般不要用这种变
+量名。<br/>
+类似_xxx 和__xxx 这样的函数或变量就是非公开的（private），不应该被
+直接引用。<br/>
+但是记住是不应该，而不是不可以。但是这样是好的编程习惯。
+最好的做法就是封装的公共方法里使用了私有的变量或者函数。这样，我们暴露给外界的就是我们希望他们看到的，他们也不需要去计较内部的实现。
+
+```
+def _private_1(name):
+     return 'Hello, %s' % name  
+def _private_2(name):
+     return 'Hi, %s' % name  
+def greeting(name):
+     if len(name) > 3:
+              return _private_1(name)
+     else:
+              return _private_2(name
+```
+
