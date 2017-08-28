@@ -42,7 +42,7 @@ print(dir(sys))
 
 安装第三方模块的方式是使用pip这里就不多说，可以戳<a href='https://pip.pypa.io/en/stable/'>这里</a>。
 
-模块的应用请参见<a href='./hello.py'>code/hello.py</a><a href='./chapter5.py'>以及chapter5.py</a>
+模块的应用请参见<a href='../code/hello.py'>code/hello.py</a><a href='../code/chapter5.py'>以及chapter5.py</a>
 
 ## 包
 
