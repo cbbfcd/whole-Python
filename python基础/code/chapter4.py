@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-28 09:40:13
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-28 10:59:53
+# @Last Modified time: 2017-08-28 11:34:30
 import collections
 import sys
 
@@ -94,3 +94,21 @@ def print_g(x):
 			print(e.value)
 			break
 print_g(g) # 1 1 2 3 5 8 done
+
+# 混合遍历
+
+questions = ['name', 'job', 'age']
+infos = ['tom', 'student', '25']
+for i,v in zip(questions, infos):
+	print('what your {} , answer: {}'.format(i,v))
+#what your name , answer: tom
+#what your job , answer: student
+#what your age , answer: 25
+
+# 倒序遍历
+for i in reversed(range(1,11,2)):
+	print(i, end=' ') # 9 7 5 3 1 
+
+# 排序遍历
+for i in sorted([1,22,7,8,5,9]):
+	print(i, end=' ') # 1 5 7 8 9 22

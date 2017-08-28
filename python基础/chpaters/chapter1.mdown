@@ -485,6 +485,36 @@ print([n for n in _word_list if 'a' in n]) # ['am', 'apoll']
 
 ```
 
+嵌套列表解析表达式
+
+```
+# 嵌套列表解析表达式
+_q_list = [
+    [1,2,3,4],
+    [5,6,7,8],
+    [9,10,11,12]
+]
+
+# 要解析成 4X3 格式
+print([ [ row[i] for row in _q_list ] for i in range(4) ]) 
+#[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+```
+
+其他技巧
+
+```
+>>> vec1 = [2, 4, 6]
+>>> vec2 = [4, 3, -9]
+>>> [x*y for x in vec1 for y in vec2]
+[8, 6, -18, 16, 12, -36, 24, 18, -54]
+>>> [x+y for x in vec1 for y in vec2]
+[6, 5, -7, 8, 7, -5, 10, 9, -3]
+>>> [vec1[i]*vec2[i] for i in range(len(vec1))]
+[8, 12, -54]
+
+>>> [str(round(355/113, i)) for i in range(1, 6)]
+['3.1', '3.14', '3.142', '3.1416', '3.14159']
+```
 
 # 元组( Tuple )
 
@@ -646,3 +676,42 @@ print(dict1)
 
 
 <img src='../img/turn.png'/>
+
+
+# python的数据结构简单介绍
+
+### 1. 堆栈
+
+可以用列表实现堆栈的使用，堆栈结构就是先进后出的结构，最先进的最后出去。
+列表的append()\pop()方法可以使得我们模拟堆栈
+
+```
+# 堆栈结构
+_new_list = [1, 2, 3]
+
+_new_list.append(4)
+_new_list.append(5)
+print(_new_list) # [1, 2, 3, 4, 5]
+_new_list.pop()
+print(_new_list) # [1, 2, 3, 4]
+```
+
+### 2. 队列
+
+队列则是先进先出。也可以使用列表模拟
+
+```
+# 队列结构
+
+import collections
+
+queue = collections.deque(['tom', 'jack', 'rose'])
+queue.append('james')
+queue.append('eminem')
+print(queue) # deque(['tom', 'jack', 'rose', 'james', 'eminem'])
+queue.popleft()
+queue.popleft()
+print(queue) # deque(['rose', 'james', 'eminem'])
+```
+
+

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: huangteng
 # @Date:   2017-08-10 15:52:07
-# @Last Modified by:   28906
-# @Last Modified time: 2017-08-18 11:42:21
+# @Last Modified by:   cbbfcd
+# @Last Modified time: 2017-08-28 11:24:40
 # @Description: python基础一之 数据结构与变量、基本运算
 # @version:
 import math
@@ -484,3 +484,35 @@ print(dict1) # {'b': 321, 'e': 999}
 # 随机删除一对键值对
 print(dict1.popitem())
 print(dict1)
+
+# 堆栈结构
+_new_list = [1, 2, 3]
+
+_new_list.append(4)
+_new_list.append(5)
+print(_new_list) # [1, 2, 3, 4, 5]
+_new_list.pop()
+print(_new_list) # [1, 2, 3, 4]
+
+# 队列结构
+
+import collections
+
+queue = collections.deque(['tom', 'jack', 'rose'])
+queue.append('james')
+queue.append('eminem')
+print(queue) # deque(['tom', 'jack', 'rose', 'james', 'eminem'])
+queue.popleft()
+queue.popleft()
+print(queue) # deque(['rose', 'james', 'eminem'])
+
+# 嵌套列表解析表达式
+_q_list = [
+	[1,2,3,4],
+	[5,6,7,8],
+	[9,10,11,12]
+]
+
+# 要解析成 4X3 格式
+print([ [ row[i] for row in _q_list ] for i in range(4) ]) 
+#[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
