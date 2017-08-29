@@ -1,0 +1,116 @@
+# 异常处理
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter7.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介 
+
+运行期检测到的错误被称为异常。
+大多数的异常都不会被程序处理，会启动追踪显示你错误的地方，便于调试。<br/>
+一般而言，错误信息的前面部分显示了异常发生的上下文，并以调用栈的形式显示具体信息。
+
+## 语法
+
+类比于java异常的捕获结构，Python中抛出异常使用的是 raise,<br/>
+但是，你能够引发的错误或异常必须是直接或间接从属于 Exception（异常）    类的派生类。<br/>
+
+语法:
+
+```
+try:
+    pass
+except Exception as e:
+    raise
+else:
+    pass
+finally:
+    pass
+```
+
+1. try语句块里面是可能引发异常的代码块，就算是在里面调用了其它方法，也可以捕捉调用的方法里抛出的异常。
+2. 当没有发生异常的时候，except语句不会执行，else...finally...都会执行，else指的是不发生异常就会执行，finally是发不发生异常都会执行。else语句必须放在所有except语句之后。
+3. raise 唯一的一个参数指定了要被抛出的异常。它必须是一个异常的实例或者是异常的类（也就是 Exception 的子类)。如果你只想知道这是否抛出了一个异常，并不想去处理它，那么一个简单的 raise 语句就可以再次把它抛出。
+4. except后面可以跟一个异常 except IOError，或者多个 except (IOError,NameError),或者什么都不跟，表示所有异常。通配所有异常需要写在最后边。
+5. 执行的顺序是，如果有异常，那么try语句块中接下来的代码都不会执行，else语句块的代码也不会执行，若except匹配到了对应的异常，则会执行except语句块，最后执行finally中的代码，如果一个异常没有与任何的except匹配，那么这个异常将会传递给上层的try中，该异常在finally执行完之后会被抛出。
+6. 可以自定义异常，异常应该继承自 Exception 类，或者直接继承，或者间接继承。
+7. 当创建一个模块有可能抛出多种不同的异常时，一种通常的做法是为这个包建立一个基础异常类，然后基于这个基础类为不同的错误情况创建不同的子类。
+8. with 语句可以简化清理行为的代码，常用于IO操作中。
+
+## 一个综合案例
+
+```
+## 异常处理综合案例
+
+# 自定义一个异常类
+
+class Error(Exception):
+    '''这是一个所有自定义异常都可以继承的基类'''
+    pass
+
+# 超重的异常
+class TooLangError(Error):
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+
+# 计算平均每样商品的价格
+def _cal_ava_price(total_price, total_num):
+    return total_price/total_num
+
+param = [
+    {
+    'name':'肉',
+    'price':'15',
+    'weight':'3'
+    },
+    {
+    'name':'苹果',
+    'price':8,
+    'weight':'3'
+    },
+    {
+    'name':'青菜',
+    'price':'2',
+    'weight':'12'
+    }
+]
+
+## 超市结账系统
+def super_cal(t):
+    if t:
+        try:
+            flag = True
+            # 总价
+            total_price = sum(float(i['weight']) * float(i['price']) for i in t)
+            # 总重
+            total_num = sum(float(j['weight']) for j in t)
+            # 单位价格
+            per_price = _cal_ava_price(total_price,total_num)
+
+            if total_num>10: # 超过10斤，提示东西买的太多了。不会做生意就这样。
+                flag = False
+                raise TooLangError(expression=None, message='东西买太多了')
+        except TypeError as e:
+            print('貌似类型出现异常了哦')     
+        except TooLangError as e:
+            print(e.message)
+        except:
+            print('这是一个漏网的异常')
+            raise
+        else:
+            print('总价：{}，平均单价：{:.3f}'.format(total_price, per_price))
+        finally:
+            str = '欢迎再次光临' if flag else '请检查输入'
+            print(str)
+
+
+super_cal(param)  # 改变参数 试试
+```
+
+
