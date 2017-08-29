@@ -12,8 +12,9 @@ so, 开始我们的python旅程。
 ## 简介 
 
 面向对象是一种程序设计思想，简称OOP。具有封装、继承、多态的特征。<br/>
-可以说，python中一切皆是对象。这里需要引入类(class)的概念，类是一个模子、设计蓝图，实例化得到对应的对象，封装了属性和行为。<br/>
-在python中，一个int值也是一个对象。是int类的实例对象。这点与java或者c不同。
+可以说，python中一切皆是对象。这里需要引入类(class)的概念，类是一个模子、设计蓝图，按照它实例化得到对应的对象，封装了定义的属性和行为。<br/>
+在python中，一个int值也是一个对象。是int类的实例对象。这点与java或者c不同。<br/>
+有点类似于java中的开箱拆箱。
 
 ## 语法
 
@@ -32,11 +33,11 @@ class myClass():
     """
     一个简单的实例
     """
-    name = 'tom'
-    def sayHello(self):
+    name = 'tom' # 类变量: tom
+    def sayHello(self): # 方法
         return 'hello world'
 
-a = myClass()
+a = myClass() # a 就是实例化的对象
 print('类变量: {}'.format(a.name)) # 类变量: tom
 print('方法输出: {}'.format(a.sayHello())) # 方法输出: hello world
 ```
@@ -73,6 +74,7 @@ print('输出：{},{}'.format(b.m, b.x)) # 输出：message,tom
 ```
 # 私有变量
 class Players():
+    # 下面两个都是定义的私有变量
     _name = 'Tom'
     __job = 'basketball player'
 
@@ -80,6 +82,7 @@ c = Players()
 # 我们约定可以使用_name表示私有变量，但是，这只是约定。并不代表不可以访问。
 # 如果我们用__job表示，python会认为它就是私有的，不能直接访问的，需要使用 ._类名__job访问。
 print('name:{}'.format(c._name)) # name:Tom
+print('job:{}'.format(c.__job)) # 报错，私有变量不能直接访问
 print('job:{}'.format(c._Players__job)) # job:basketball player
 ```
 
@@ -109,6 +112,8 @@ print('name is {}, and {}'.format(cat.name, cat.run())) # name is jack, and jack
 子类还可以重写基类中的方法。
 
 5. 多继承
+
+在子类中找不到的方法就会从左到右在基类中寻找，找到第一个出现的就直接调用了。
 
 ```
 # 多继承
@@ -155,7 +160,6 @@ def cal(type):
                 print('这是求平均数', end=' ')
             elif type == 'sum':
                 print('这是求和操作', end=' ')
-
             return func(*args, **kw)
         return wrapper
     return cal_sometype
