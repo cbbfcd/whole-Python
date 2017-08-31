@@ -14,3 +14,4 @@
 <a href='./chpaters/chapter6.mdown'>第六章: I/O</a><br/>
 <a href='./chpaters/chapter7.mdown'>第七章: 异常处理</a><br/>
 <a href='./chpaters/chapter8.mdown'>第八章: 面向对象编程</a><br/>
+<a href='./chpaters/chapter9.mdown'>第九章: 简单的一些标准库使用</a><br/>

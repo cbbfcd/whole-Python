@@ -12,7 +12,7 @@
 <a href="#">Google浏览器打开效果更好哦</a>
 # 目录
 
-<a href="./python基础/README.mdown">Python基础</a>
+<a href="./python基础/README.mdown">基础篇--Python基础</a>
 
 
 
