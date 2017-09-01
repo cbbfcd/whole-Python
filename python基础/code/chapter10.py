@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-09-01 09:40:20
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-01 11:16:28
+# @Last Modified time: 2017-09-01 11:24:10
 import re
 
 # 正则表达式
@@ -132,3 +132,4 @@ def fun(m):
 print(pp.sub(fun, str)) # Hello Tom
 
 
+print(re.sub(r'\W','&',str)) # hello&tom
