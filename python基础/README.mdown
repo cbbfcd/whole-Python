@@ -15,3 +15,4 @@
 <a href='./chpaters/chapter7.mdown'>第七章: 异常处理</a><br/>
 <a href='./chpaters/chapter8.mdown'>第八章: 面向对象编程</a><br/>
 <a href='./chpaters/chapter9.mdown'>第九章: 简单的一些标准库使用</a><br/>
+<a href='./chpaters/chapter10.mdown'>第十章: 正则表达式</a><br/>
