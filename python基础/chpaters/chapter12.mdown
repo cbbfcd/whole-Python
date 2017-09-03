@@ -1,0 +1,250 @@
+# json与xml
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter12.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+Json数据，Xml数据也是我们日常开发中接触非常频繁的数据结构。<br/>现在我们来熟悉在python中如何去使用他们。
+
+## Json
+
+Python中提供了json模块，用来操作json数据。
+主要掌握以下api：
+
+>1. json.dumps(): 对数据进行编码。Python 编码为 JSON 类型
+ 2. json.loads(): 对数据进行解码。JSON 解码为 Python 类型
+ 3. json.dump(): 对文件数据进行编码
+ 4. json.load(): 对文件数据进行解码
+
+案例:
+
+```
+# JSON
+import json
+
+# python字典编码为 json数据
+dic = {
+    'name' : 'tom',
+    'age' : 25
+}
+
+json_str = json.dumps(dic)
+print('原始数据:{}'.format(repr(dic))) # 原始数据:{'age': 25, 'name': 'tom'}
+print('json数据:{}'.format(json_str)) # json数据:{"age": 25, "name": "tom"}
+
+# json 对象转为 Python字典
+new_dic = json.loads(json_str)
+print(new_dic['name']) # tom
+
+
+
+# 读取json文件
+# 如果你要处理的是文件而不是字符串，你可以使用 json.dump() 和 json.load() 来编码和解码JSON数据
+# 读取json数据
+with open(r'../files/jt.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+    print(data) # {'name': 'Python3基础', 'version': '1.0.0', 'author': 'taylor huang'}
+
+data1 = {
+    "time" : "2017-9-3"
+}
+# 写入json数据
+with open(r'../files/jt.json', 'w', encoding='utf-8') as ff:
+    json.dump(data1, ff)
+
+```
+
+## xml
+
+1. sax解析xml
+
+>ContentHandler类方法介绍
+characters(content)方法
+调用时机：
+从行开始，遇到标签之前，存在字符，content的值为这些字符串。
+从一个标签，遇到下一个标签之前， 存在字符，content的值为这些字符串。
+从一个标签，遇到行结束符之前，存在字符，content的值为这些字符串。
+标签可以是开始标签，也可以是结束标签。
+startDocument()方法
+文档启动的时候调用。
+endDocument()方法
+解析器到达文档结尾时调用。
+startElement(name, attrs)方法
+遇到XML开始标签时调用，name是标签的名字，attrs是标签的属性值字典。
+endElement(name)方法
+遇到XML结束标签时调用
+
+实例:
+
+```
+# xml
+# 1. sax解析xml
+# 该方式适用于大型项目中，基于事件驱动，最重要的就是写一个ContentHanlder类实现自己的业务需求
+# 步骤:
+#      1. 创建一个新的解析器对象并返回 利用sax.xml.make_parser([parser_list])
+#      2. 然后解析 xml.sax.parse( xmlfile, contenthandler[, errorhandler])
+#         还可以解析xml字符串  xml.sax.parseString(xmlstring, contenthandler[, errorhandler])
+
+# demo
+# ContentHandler实现见 MoviesHandler.py
+
+
+
+
+import xml.sax
+
+# 解析movies.xml的handler类，必须继承ContentHandler
+# 通俗的理解 执行顺序是 startDocument->startElement->characters->endElement->endDocument
+class MoviesHandler(xml.sax.ContentHandler):
+    
+    _movies = []
+
+    item = {
+
+    }
+
+    def __init__(self):
+        self.CurrentData = ""
+        self.type = ""
+        self.format = ""
+        self.year = ""
+        self.rating = ""
+        self.stars = ""
+        self.description = ""
+
+    # 文档开始
+    def startDocument(self):
+        print('开始解析...')
+
+    # 遇到element时调用
+    def startElement(self, tag, attributes):
+        self.CurrentData = tag
+        if tag == 'movie':
+            title = attributes['title']
+            self.item['title'] = title
+
+
+    # 标签结束的时候调用
+    def endElement(self, tag):
+        if self.CurrentData == 'type':
+            self.item['type'] = self.type
+
+        if self.CurrentData == 'format':
+            self.item['format'] = self.format
+
+        if self.CurrentData == 'year':
+            self.item['year'] = self.year
+
+        if self.CurrentData == 'rating':
+            self.item['rating'] = self.rating
+
+        if self.CurrentData == 'stars':
+            self.item['stars'] = self.stars
+
+        if self.CurrentData == 'description':
+            self.item['description'] = self.description
+
+        if tag == 'movie':
+            self._movies.append(self.item)
+        
+        self.CurrentData = ""
+
+    # 读取内容
+    def characters(self, content):
+        if self.CurrentData == 'type':
+            self.type = content
+
+        if self.CurrentData == 'format':
+            self.format = content
+
+        if self.CurrentData == 'year':
+            self.year = content
+
+        if self.CurrentData == 'rating':
+            self.rating = content
+
+        if self.CurrentData == 'stars':
+            self.stars = content
+
+        if self.CurrentData == 'description':
+            self.description = content
+
+    # 结束
+    def endDocument(self):
+        print('over....')
+        print(self._movies)
+
+if __name__ == '__main__':
+    
+    # 创建parser
+    parser = xml.sax.make_parser()
+
+    # turn off namepsaces
+    parser.setFeature( xml.sax.handler.feature_namespaces, 0 )
+
+    # 重写ContentHandler
+    movieHandler = MoviesHandler()
+
+    parser.setContentHandler( movieHandler )
+
+    parser.parse(r'../files/movies.xml')
+```
+
+2. dom解析xml
+
+```
+# 2. dom解析xml
+# python中用xml.dom.minidom来解析xml文件
+
+import xml.dom.minidom
+
+_movies = {}
+_movies_list = []
+
+# 使用minidom解析器打开 XML 文档
+DOMTree =  xml.dom.minidom.parse(r'../files/movies.xml')
+
+# 获取根元素
+collection = DOMTree.documentElement
+# 获取根元素的属性
+if collection.hasAttribute('shelf'):
+    _movies['shelf'] = collection.getAttribute('shelf')
+
+# 获取所有元素
+movies = collection.getElementsByTagName('movie')
+
+# 遍历解析
+for m in movies:
+    _movies_item = {}
+    if m.hasAttribute('title'):
+        _movies_item['title'] = m.getAttribute('title')
+
+    types = m.getElementsByTagName('type')[0]
+    _movies_item['type'] = types.childNodes[0].data
+
+    formats = m.getElementsByTagName('format')[0]
+    _movies_item['format'] = formats.childNodes[0].data
+
+    years = m.getElementsByTagName('year')[0]
+    _movies_item['year'] = years.childNodes[0].data
+
+    rating  = m.getElementsByTagName('rating')[0]
+    _movies_item['rating '] = rating .childNodes[0].data
+
+    stars = m.getElementsByTagName('stars')[0]
+    _movies_item['stars'] = stars.childNodes[0].data
+
+    description = m.getElementsByTagName('description')[0]
+    _movies_item['description'] = description.childNodes[0].data
+
+    _movies_list.append(_movies_item)
+
+print(_movies_list)
+```

@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-31 10:03:51
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-31 10:53:31
+# @Last Modified time: 2017-09-03 18:58:24
 
 ## 简单的一些标准库的使用
 
@@ -37,6 +37,20 @@ yesterday = now - timedelta(days=1)
 print(yesterday) # 2017-08-30
 
 print(time.strftime('%H:%M:%S')) # 10:30:42
+
+print(time.asctime(time.localtime())) # Sun Sep  3 18:55:55 2017
+print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())) # 2017-09-03 18:57:00
+
+# 月历
+import calendar
+print(calendar.month(2017,9))
+#    September 2017
+# Mo Tu We Th Fr Sa Su
+#              1  2  3
+#  4  5  6  7  8  9 10
+# 11 12 13 14 15 16 17
+# 18 19 20 21 22 23 24
+# 25 26 27 28 29 30
 
 
 # 数据打包和压缩
