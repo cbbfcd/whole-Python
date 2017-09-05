@@ -18,3 +18,4 @@
 <a href='./chpaters/chapter10.mdown'>第十章: 正则表达式</a><br/>
 <a href='./chpaters/chapter11.mdown'>第十一章: 连接Mysql数据库</a><br/>
 <a href='./chpaters/chapter12.mdown'>第十二章: json与xml</a><br/>
+<a href='./chpaters/chapter13.mdown'>第十三章: 多线程</a><br/>

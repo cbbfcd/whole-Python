@@ -1,0 +1,304 @@
+# 多线程
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter12.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+多线程类似于同时执行多个不同程序。带来的不仅仅是速度上的优化。现在我们就开始去熟悉基本的多线程操作。
+
+## 进程与线程
+
+每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br/>
+其实进程和线程都指的是CPU工作时间段的描述。<br/>
+其中进程指的是：
+>进程就是包换上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文
+
+而线程是共享了进程的上下文环境，的更为细小的CPU时间段。
+
+在CPU的世界里就是给某个进程分配一个时间段执行，这个进程中包含了多个共享该进程资源的线程异步或者并发的执行。
+
+在单CPU中这里的并发不是绝对的，只是时间间隙很小。看起来就是并发一样。
+
+在Python3中，我们推荐使用threading模块来实现多线程。
+
+## threading
+
+```
+# 多线程
+
+
+# 首先我们模拟一下单任务的情景
+# from time import ctime, sleep
+
+# def _music1(musicName):
+#   print('我在听{},时间: {}'.format(musicName, ctime()))
+#   sleep(2)
+
+# def _movies(movieName):
+#   print('我在看{},时间: {}'.format(movieName, ctime()))
+#   sleep(4)
+
+# def main1():
+#   _music1('老子明天不上班')
+#   _movies('战狼2')
+#   print('all over {}'.format(ctime()))
+
+
+# if __name__ == '__main__':
+#   main1()
+# 输出结果
+# 我在听老子明天不上班,时间: Tue Sep  5 20:29:46 2017
+# 我在看战狼2,时间: Tue Sep  5 20:29:48 2017
+# all over Tue Sep  5 20:29:52 2017
+# 依次执行，很明显
+
+
+# 我们用多线程来试试
+# import threading
+# from time import ctime, sleep
+
+# def _music1(musicName):
+#   print('我在听{},时间: {}'.format(musicName, ctime()))
+#   sleep(2)
+
+# def _movies(movieName):
+#   print('我在看{},时间: {}'.format(movieName, ctime()))
+#   sleep(4)
+
+# def main1():
+#   threads = []
+#   # 创建线程
+#   # 语法:class threading.Thread(group=None, target=None, name=None, args=(), kwargs={})
+#   t1 = threading.Thread(target=_music1, args=('老子明天不上班',))
+#   t2 = threading.Thread(target=_movies, args=('战狼2',))
+#   threads.append(t1)
+#   threads.append(t2)
+
+#   for t in threads:
+#       # 守护线程 必须在start() 方法调用之前设置，如果不设置为守护线程程序会被无限挂起
+#       # 设置守护线程就是说这个线程不重要，主程序要退出不需要等待它执行完成。
+#       # 否则，需要所有的非守护线程执行完了才可以退出
+#       t.setDaemon(True) 
+#       t.start()
+
+#   print('all over {}'.format(ctime()))
+
+
+# if __name__ == '__main__':
+#   main1()
+# 我在听老子明天不上班,时间: Tue Sep  5 20:36:48 2017
+# 我在看战狼2,时间: Tue Sep  5 20:36:48 2017
+# all over Tue Sep  5 20:36:48 2017
+# 看看时间就知道了，是同时执行的。
+
+
+# 再试试 join() 方法
+# import threading
+# from time import ctime, sleep
+
+# def _music1(musicName):
+#   print('我在听{},时间: {}'.format(musicName, ctime()))
+#   sleep(2)
+
+# def _movies(movieName):
+#   print('我在看{},时间: {}'.format(movieName, ctime()))
+#   sleep(4)
+
+# def main1():
+#   threads = []
+#   # 创建线程
+#   t1 = threading.Thread(target=_music1, args=('老子明天不上班',))
+#   t2 = threading.Thread(target=_movies, args=('战狼2',))
+#   threads.append(t1)
+#   threads.append(t2)
+
+#   for t in threads:
+#       # 守护线程 必须在start() 方法调用之前设置，如果不设置为守护线程程序会被无限挂起
+#       # 设置守护线程就是说这个线程不重要，主程序要退出不需要等待它执行完成。
+#       # 否则，需要所有的非守护线程执行完了才可以退出
+#       t.setDaemon(True) 
+#       t.start()
+
+#   t.join()
+
+#   print('all over {}'.format(ctime()))
+
+
+# if __name__ == '__main__':
+#   main1()
+
+# 我在听老子明天不上班,时间: Tue Sep  5 20:41:53 2017
+# 我在看战狼2,时间: Tue Sep  5 20:41:53 2017
+# all over Tue Sep  5 20:41:57 2017
+# 神奇吧， 注意 t.join()位置在for循环外，
+# join（）的作用是，在子线程完成运行之前，这个子线程的父线程将一直被阻塞。
+
+
+# 上面的案例都是用的threading.Thread()方法创建线程。
+# 实际项目中常用到的是通过类继承实现
+import threading
+from time import ctime, sleep
+
+class myThread (threading.Thread):
+
+    def __init__(self, threadName, delay):
+        threading.Thread.__init__(self)
+        self.threadName = threadName
+        self.delay = delay
+
+    def run(self):
+        print('{} is start at {}'.format(self.threadName, ctime()))
+        delay_time(threadName=self.threadName, delay=self.delay)
+
+def delay_time(delay, threadName):
+    print('{} at {}'.format(threadName, ctime()))
+    sleep(delay)
+
+if __name__ == '__main__':
+    thread1 = myThread('线程1', 2)
+    thread2 = myThread('线程2', 4)
+    threads = []
+    threads.append(thread1)
+    threads.append(thread2)
+    for t in threads:
+        t.setDaemon(True)
+        t.start()
+        t.join()
+    print('over at {}'.format(ctime()))
+```
+
+
+## 同步锁
+
+多个线程同时操作一个数据的时候，那么就会有很大的隐患了。这个时候就需要加入同步锁机制了。<br/>
+
+一个很形象但不恰当的比喻就是，同步锁类似就是试衣间的门栓，当A进去试衣服的时候就上锁了，那么BCD..就只能等A弄完了，释放锁（开门）才能试衣服。
+
+```
+## 同步锁机制
+class myThread (threading.Thread):
+
+    def __init__(self, threadName, delay):
+        threading.Thread.__init__(self)
+        self.threadName = threadName
+        self.delay = delay
+
+    def run(self):
+        print('{} is start at {}'.format(self.threadName, ctime()))
+        threadLock.acquire() # 上锁
+        print('{}上锁'.format(self.threadName))
+        delay_time(threadName=self.threadName, delay=self.delay)
+        threadLock.release() # 释放锁
+        print('{}释放锁'.format(self.threadName))
+
+def delay_time(delay, threadName):
+    print('{} at {}'.format(threadName, ctime()))
+    sleep(delay)
+
+if __name__ == '__main__':
+    # 使用 Thread 对象的 Lock 和 Rlock 可以实现简单的线程同步
+    threadLock = threading.Lock()
+
+    thread1 = myThread('线程1', 3)
+    thread2 = myThread('线程2', 5)
+
+    thread1.start()
+    thread2.start()
+
+    threads = []
+    threads.append(thread1)
+    threads.append(thread2)
+
+    # 等待所有线程完成
+    for t in threads:
+        t.join()
+        
+    print('over at {}'.format(ctime()))
+# 线程1 is start at Tue Sep  5 21:26:38 2017
+# 线程1上锁
+# 线程1 at Tue Sep  5 21:26:38 2017
+# 线程2 is start at Tue Sep  5 21:26:38 2017
+# 线程1释放锁
+# 线程2上锁
+# 线程2 at Tue Sep  5 21:26:41 2017
+# 线程2释放锁
+# over at Tue Sep  5 21:26:46 2017
+
+```
+
+
+## Queue
+
+Python 的 Queue 模块中提供了同步的、线程安全的队列类，包括FIFO（先入先出)队列Queue，LIFO（后入先出）队列LifoQueue，和优先级队列 PriorityQueue。<br/> 
+这些队列都实现了锁原语，能够在多线程中直接使用，可以使用队列来实现线程间的同步.
+
+>Queue 模块中的常用方法:
+
+>1. Queue.qsize() 返回队列的大小 
+>2. Queue.empty() 如果队列为空，返回True,反之False 
+>3. Queue.full() 如果队列满了，返回True,反之False
+>4. Queue.full 与 maxsize 大小对应 
+>5. Queue.get([block[, timeout]])获取队列，timeout等待时间 
+>6. Queue.get_nowait() 相当Queue.get(False)
+>7. Queue.put(item) 写入队列，timeout等待时间 
+>8. Queue.put_nowait(item) 相当Queue.put(item, False)
+>9. Queue.task_done() 在完成一项工作之后，Queue.task_done()函数向任务已经完成的队列发送一个信号
+>10. Queue.join() 实际上意味着等到队列为空，再执行别的操作
+
+
+```
+## 一个简单的Queue与多线程
+import queue
+import threading
+from time import ctime, sleep
+
+q = queue.Queue(10)
+MAX_THREAD_NUM = 3 # 线程数
+
+class myThread(threading.Thread):
+
+    def __init__(self, func):
+        threading.Thread.__init__(self)
+        self.func = func
+
+    def run(self):
+        self.func()
+
+def worker():
+    global q
+    while not q.empty():
+        item = q.get() #获取任务
+        print('Processing : {}'.format(item))
+        sleep(1)
+def main():
+    global q
+    threads = []
+
+    for i in range(5): #向队列填充任务
+        q.put(i)
+
+    for j in range(MAX_THREAD_NUM):
+        thread = myThread(worker)
+        thread.start()
+        threads.append(thread)
+
+    for o in threads:
+        o.join()
+    print('all over')
+if __name__ == '__main__':
+    main()
+
+# Processing : 0
+# Processing : 1
+# Processing : 2
+# Processing : 3
+# Processing : 4
+# all over
+```
