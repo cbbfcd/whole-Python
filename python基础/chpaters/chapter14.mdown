@@ -1,0 +1,93 @@
+# SMTP
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter12.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+>SMTP（Simple Mail Transfer Protocol）即简单邮件传输协议,它是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。<br/>
+python的smtplib提供了一种很方便的途径发送电子邮件。它对smtp协议进行了简单的封装。
+
+## smtplib
+
+语法:
+
+```
+smtpObj = smtplib.SMTP( [host [, port [, local_hostname]]] )
+```
+
+发送邮件:
+
+```
+SMTP.sendmail(from_addr, to_addrs, msg[, mail_options, rcpt_options]
+```
+
+from_addr: 发送者地址。
+to_addrs：目标地址。
+msg: 内容。
+
+案列:
+
+```
+# 使用第三方发送邮件
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+
+
+sender = '1651651@qq.com' # 发件人
+password = 'XXXXXX' # 第三方SMTP给你的授权码
+receivers = ['2890636389@qq.com'] # 收件人
+
+
+msg = '''  
+    <p>就发个邮件试一试嘛</p>
+    <img src="cid:image1"></img>
+'''                              # msg
+
+mail_msg = MIMEText(msg, 'html', 'utf-8') # 构造邮件正文
+
+message = MIMEMultipart('related') # 可构造附件
+msgAlternative = MIMEMultipart('alternative') # 带图片正文
+message.attach(msgAlternative)
+
+message['From'] = Header('Python', 'utf-8')
+message['To'] = Header('someone', 'utf-8')
+subject = '这是一个测试'
+message['Subject'] = Header(subject, 'utf-8')
+
+# 加入邮件正文
+
+msgAlternative.attach(mail_msg)
+
+# 指定图片为当前目录
+f = open('test.png','rb')
+msgImg = MIMEImage(f.read())
+f.close()
+
+# 定义图片ID，在html中引用
+msgImage.add_header('Content-ID', '<image1>')
+message.attach(msgImage)
+
+# 构造附件1
+att1 = MIMEText(open(r'../test.txt').read(), 'base64', 'utf-8')
+att1['Content-Type'] = 'application/octet-stream'
+# filename 可以随便填  对方看到的就是这个名字
+att1['Content-Disposition'] = 'attachment; filename="test.txt"'
+message.attach(att1)
+
+try:
+    smtpObj = smtplib.SMTP_SSL('smtp.qq.com', 465)# 第三方的地址和端口
+    smtpObj.login(sender, password)# 登陆
+    smtpObj.sendmail(sender, receivers, message.as_string())
+    smtpObj.quit()
+except smtplib.SMTPException:
+    print('邮件发送失败')
+
+```
