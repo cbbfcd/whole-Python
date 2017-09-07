@@ -1,0 +1,176 @@
+# Socket
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter12.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+socket, 有点后端知识的，比如java。应该知道socket也就是我们说的套接字。
+可以实现网络请求和回应，也就是"通讯"。<br/>
+
+Python中，我们使用socket模块实现网络通讯的功能。
+
+## Socket模块
+
+语法:
+
+```
+socket.socket([family[, type[, protocol]]])
+
+family: 套接字家族可以使AF_UNIX或者AF_INET
+type: 套接字类型可以根据是面向连接的还是非连接分为SOCK_STREAM或SOCK_DGRAM
+protocol: 一般不填默认为0
+```
+
+API：
+
+<a href="https://docs.python.org/3/library/socket.html">猛戳这里</a>
+
+Demo:
+
+服务端:
+
+```
+# 服务端
+# 客户端 见 client.py
+import socket
+import sys
+
+# 创建socket对象
+serversocket  = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 绑定端口
+host = socket.gethostname()
+port = 8888
+serversocket.bind((host, port))
+# 设置最大链接数，超过排队
+serversocket.listen(5)
+
+while True:
+    # 建立客户端连接
+    clientsocket, addr = serversocket.accept()
+
+    print('连接地址{}'.format(addr))
+
+    msg = 'welcome'
+
+    clientsocket.send(msg.encode('utf-8'))
+    clientsocket.close()
+
+```
+
+客户端:
+
+```
+import socket
+import sys
+
+# 创建 socket 对象
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+
+# 获取本地主机名
+host = socket.gethostname() 
+
+# 设置端口好
+port = 8888
+
+# 连接服务，指定主机和端口
+s.connect((host, port))
+
+# 接收小于 1024 字节的数据
+msg = s.recv(1024)
+
+s.close()
+
+print (msg.decode('utf-8'))
+```
+
+Run:
+
+分别在cmd中运行 python chapter15.py python client.py
+
+tips:
+
+上面的demo源自菜鸟教程，只是简单的实现，只能连接一个客户端，也没有相互的持续对话。<br/>
+接下来我们略微升级,实现可以同时连接多个客户端的demo。
+
+## 简单并发
+
+服务端:
+
+```
+## 并发服务端
+import socketserver
+
+# 我的服务端类，继承BaseRequestHandler
+class myServer(socketserver.BaseRequestHandler):
+
+    # 重写handle
+    def handle(self):
+        while 1:
+            # 下面代码等价于conn,addr = socket.accept()
+            conn = self.request
+            addr = self.client_address
+            while 1:
+                accept_data = str(conn.recv(1024), encoding='utf-8')
+                print(accept_data)
+                if accept_data == 'bye':
+                    break
+                send_data = bytes(input("server:"), encoding='utf-8')
+                conn.sendall(send_data)
+            conn.close()
+
+if __name__ == '__main__':
+    server = socketserver.ThreadingTCPServer(('127.0.0.1',8989), myServer)
+    server.serve_forever()
+```
+
+客户端1:
+
+```
+## 并发客户端 client1
+import socket
+
+s = socket.socket()
+s.connect(('127.0.0.1', 8989))
+
+while True:
+    msg = input('client:')
+    send_data = bytes(msg, encoding='utf-8')
+    s.sendall(send_data)
+    if msg == 'bye':
+        break
+    accept_data = str(s.recv(1024), encoding='utf-8')
+    print(''.join(("接受内容:", accept_data)))
+s.close()
+```
+
+客户端2:
+
+```
+## 并发客户端 client2
+import socket
+
+s = socket.socket()
+s.connect(('127.0.0.1', 8989))
+
+while True:
+    msg = input('client:')
+    send_data = bytes(msg, encoding='utf-8')
+    s.sendall(send_data)
+    if msg == 'bye':
+        break
+    accept_data = str(s.recv(1024), encoding='utf-8')
+    print(''.join(("接受内容:", accept_data)))
+s.close()
+```
+
+Run:
+
+同上，打开三个命令窗口跑一次就好了.
