@@ -1,0 +1,77 @@
+为了便于测试用的是jetty运行项目: mvn clean package jetty:run -Dspring.profiles.active="local"
+为了便于测试不用去写js,ajax请安装 CURL windows_x86_64.zip
+
+1. 发送认证请求
+curl -i  "http://localhost:8080/openid-connect-server-webapp/authorize?response_type=code&client_id=e5325be7-77e6-4549-9abb-0bdb5e6ba41b&scope=openid&redirect_uri=http://localhost:8080/"
+2. 用参数code=FxjNEo 获取id_token和access_token
+curl -X POST -u e5325be7-77e6-4549-9abb-0bdb5e6ba41b:secret -d "grant_type=authorization_code&code=HEHi5d&redirect_uri=http://localhost:8080/" http://localhost:8080/openid-connect-server-webapp/token | python -m json.tool
+
+返回的数据:
+{
+    "access_token": "eyJraWQiOiJvaWRjIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJodHRwc0BcL1wvZGVmYXVsdC1jbGllbnQtMiIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDgwXC8iLCJleHAiOjE1MDQ2NjE3ODEsImlhdCI6MTUwNDU3NTM4MSwianRpIjoiNThiNDczYWUtMTQ1Ni00Njk0LWE1MTYtNjRjN2JhMmY2NTA5In0.d1kNpOGBhQ4QgloX9MHGyhPxTOMKyXYbI0Q-7tOeOJElrPlu6CuBFeX7xyxSxM5DttoTqcTH4k0ugha8gqwkiuBzIzAi23P0UL2E83PleKeIcJojLq0EN02Uhp5bszzi5Y95inVsKNS_63Ym7y5h6AwNOi5rjM0Abhr2RBeNWfICYW-cfXlg2jcw14mbXcolEwwxWCN47quLP5JZ7wrjVDgiVaPOYyuZE8QnAXmdati1Xc7Bd9BguGpYo2BIqxdURGeebYh3lWspys1_3-PHRAOW3TJf9gcav2W6SCxF5OC8YDu4CdWcMXZ9Ioj3M2p0_uf1hrNSvl82KTnBavXQ5Q",
+    "token_type": "Bearer",
+    "expires_in": 86399,
+    "scope": "openid",
+    "id_token": "eyJraWQiOiJvaWRjIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiI3NTcyNmUzYS02MzZmLTZjNmMtNjE2Mi0zYTcwNjU3MjczNmYiLCJhdWQiOiJodHRwc0BcL1wvZGVmYXVsdC1jbGllbnQtMiIsImtpZCI6Im9pZGMiLCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODA4MFwvIiwiZXhwIjoxNTA0NTc1OTgxLCJpYXQiOjE1MDQ1NzUzODEsImp0aSI6IjU0ODAwNjEwLTU3YzMtNGQ3Yy1hMGEzLTM0ZThjOTk5ZTIwYSJ9.LxPFsbpYPb_cILGvyD6OH_4geiCV9LYmRb0phKkzMaYBpTqVsuWPzWWCYKhNZLzgjn5MuLdLTYhryRiXXp_r04XBrimk4qQ7sFGPrS7wd3YKCyxTU892XVR9F79C4gJ-yuMIRi2QH8OVOjF6tJpHfO_v7xeLPxSTYjotqs8SYVz-mOvIv4yhqyeQIPiWx_ymc8Y1RfnbdCXWVlzCT9FIQBdC6e0kpb2Glchb9anGXbv2nOQobVxAadQ68Cz8zEGsR6W8FrT6fF0CsjmyHy5hsXWhFPvJqBnV7XUc2Rw2_62EZgkgZhuzl4ziw3_LCAAETByq5LzFseU1e5mhgizB0Q"
+}
+
+3. client验证id_token和access_token
+这一步在client完成,完成之后登陆client(SSO)
+
+4. 用access_token请求用户cliams
+curl -u https@//default-client-2:secret -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/introspect?token=eyJraWQiOiJvaWRjIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJodHRwc0BcL1wvZGVmYXVsdC1jbGllbnQtMiIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDgwXC8iLCJleHAiOjE1MDQ2NjE3ODEsImlhdCI6MTUwNDU3NTM4MSwianRpIjoiNThiNDczYWUtMTQ1Ni00Njk0LWE1MTYtNjRjN2JhMmY2NTA5In0.d1kNpOGBhQ4QgloX9MHGyhPxTOMKyXYbI0Q-7tOeOJElrPlu6CuBFeX7xyxSxM5DttoTqcTH4k0ugha8gqwkiuBzIzAi23P0UL2E83PleKeIcJojLq0EN02Uhp5bszzi5Y95inVsKNS_63Ym7y5h6AwNOi5rjM0Abhr2RBeNWfICYW-cfXlg2jcw14mbXcolEwwxWCN47quLP5JZ7wrjVDgiVaPOYyuZE8QnAXmdati1Xc7Bd9BguGpYo2BIqxdURGeebYh3lWspys1_3-PHRAOW3TJf9gcav2W6SCxF5OC8YDu4CdWcMXZ9Ioj3M2p0_uf1hrNSvl82KTnBavXQ5Q" | python -m json.tool
+
+返回:
+{
+    "active": true,
+    "scope": "openid",
+    "expires_at": "2017-09-06T09:36:22+0800",
+    "exp": 1504661782,
+    "sub": "75726e3a-636f-6c6c-6162-3a706572736f",
+    "user_id": "75726e3a-636f-6c6c-6162-3a706572736f",
+    "client_id": "https@//default-client-2",
+    "token_type": "Bearer",
+    "schac_home": "surfnet.nl",
+    "unspecified_id": "urn:collab:person:example.com:local",
+    "authenticating_authority": "http://mock-idp",
+    "edu_person_principal_name": "principal_name"
+}
+
+5. 访问UE获取info
+curl -H "Authorization: bearer eyJraWQiOiJvaWRjIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJodHRwc0BcL1wvZGVmYXVsdC1jbGllbnQtMiIsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDgwXC8iLCJleHAiOjE1MDQ2NjE3ODEsImlhdCI6MTUwNDU3NTM4MSwianRpIjoiNThiNDczYWUtMTQ1Ni00Njk0LWE1MTYtNjRjN2JhMmY2NTA5In0.d1kNpOGBhQ4QgloX9MHGyhPxTOMKyXYbI0Q-7tOeOJElrPlu6CuBFeX7xyxSxM5DttoTqcTH4k0ugha8gqwkiuBzIzAi23P0UL2E83PleKeIcJojLq0EN02Uhp5bszzi5Y95inVsKNS_63Ym7y5h6AwNOi5rjM0Abhr2RBeNWfICYW-cfXlg2jcw14mbXcolEwwxWCN47quLP5JZ7wrjVDgiVaPOYyuZE8QnAXmdati1Xc7Bd9BguGpYo2BIqxdURGeebYh3lWspys1_3-PHRAOW3TJf9gcav2W6SCxF5OC8YDu4CdWcMXZ9Ioj3M2p0_uf1hrNSvl82KTnBavXQ5Q" -H "Content-type: application/json" http://localhost:8080/userinfo | python -m json.tool
+返回:
+{
+    "sub": "75726e3a-636f-6c6c-6162-3a706572736f",
+    "name": "John Doe",
+    "preferred_username": "John Doe",
+    "given_name": "John",
+    "family_name": "Doe",
+    "locale": "NL",
+    "email": "john.doe@example.org",
+    "schac_home_organization": "surfnet.nl",
+    "schac_home_organization_type": "institution",
+    "edu_person_principal_name": "principal_name",
+    "edu_person_targeted_id": "fd9021b35ce0e2bb4fc28d1781e6cbb9eb720fed",
+    "edu_person_affiliations": [
+        "student",
+        "faculty"
+    ],
+    "edu_person_scoped_affiliations": [
+        "student",
+        "faculty"
+    ],
+    "is_member_ofs": [
+        "surfnet"
+    ],
+    "edu_person_entitlements": [
+        "http://xstor.com/contracts/HEd123",
+        "urn:mace:washington.edu:confocalMicroscope"
+    ],
+    "schac_personal_unique_codes": [
+        "personal"
+    ],
+    "uids": [
+        "uid2",
+        "uid1"
+    ]
+}

@@ -1,0 +1,443 @@
+# CGI
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/CGI
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+CGI(Common Gateway Interface),通用网关接口,它是一段程序,运行在服务器上如：HTTP服务器，提供同客户端HTML页面的接口。
+
+
+为了更好的了解CGI是如何工作的，我们可以从在网页上点击一个链接或URL的流程：<br/>
+    1、使用你的浏览器访问URL并连接到HTTP web 服务器。<br/>
+    2、Web服务器接收到请求信息后会解析URL，并查找访问的文件在服务器上是否存在，如果存在返回文件的内容，否则返回错误信息。<br/>
+    3、浏览器从服务器上接收信息，并显示接收的文件或者错误信息。<br/>
+CGI程序可以是Python脚本，PERL脚本，SHELL脚本，C或者C++程序等。<br/>
+
+
+## 搭建Apache环境
+
+首先官网下载:<a href="http://httpd.apache.org/download.cgi">Download</a>
+下载并解压到你指定的目录中。大概有下边这些目录:<br/>
+    bin：命令行操作文件夹，使用cmd使要在此文件夹路径下发出命令<br/>
+    cgi-bin：一般CGI文件就放在这里<br/>
+    conf：配置、参数文件夹<br/>
+    htdos：二级目录，其他css，JavaScript等文件放在这里<br/>
+    logs：日志，其中error.log文件很重要，这是你进行不下去时，找到下一线索的重要途径<br/>
+
+>建议下载2.4.x版本的。
+
+流程：
+
+1. Define SRVROOT "D:\Apache24" 引号内是你的安装路径。
+2. 改一下Listen 和 ServerName，改一下端口号，默认的80很可能被占用。
+3. AddHandler cgi-script .cgi .pl 后边加一个 .py
+4. ScriptInterpreterSource Registry 最后加一句这个
+5. 管理员运行 cmd,然后cd 到 bin里面执行，httpd.exe -k install
+
+### 第一个CGI脚本
+
+在cgi-bin/下创建一个hello.py
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>Hello Word - 我的第一个 CGI 程序！</title>')
+print ('</head>')
+print ('<body>')
+print ('<h2>Hello Word!  - 我的第一个 CGI 程序！</h2>')
+print ('</body>')
+print ('</html>')
+```
+
+
+然后在浏览器打开: http://localhost:8088/cgi-bin/hello.py
+
+## 开始我们的一个综合案例
+
+上述的案例是用 Apache Httpserver 2.4.5完成的，也讲解了如何配置。
+但是还是麻烦。
+最好的测试办法是使用 python3 自带的cgi 服务器实现。
+
+语法:
+(默认端口8000，可以自定义)
+```
+python -m http.server --cgi
+```
+    
+Demo:
+
+代码在code/cgi-bin/
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>Hello Word - 我的第一个 CGI 程序！</title>')
+print ('</head>')
+print ('<body>')
+print ('<h2>Hello Word!  - 我的第一个 CGI 程序！</h2>')
+print ('</body>')
+print ('</html>')
+```
+
+#### get/post请求的demo
+代码在code/clients/test.html 和 code/cgi-bin/test.py,注意不能放在一个目录下。
+浏览器:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+    <h2>post请求测试</h2>
+    <!--method改成get就可以测试get请求-->
+    <form action="/cgi-bin/test.py" method="post"> 
+        用户名：<input type="text" name="username"/><br/>
+        密码：<input type="text" name="password"/><br/>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
+```
+
+服务器:
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, cgitb
+
+# 创建 FieldStorage 的实例化
+form = cgi.FieldStorage()
+
+# 获取数据
+user = form.getvalue('username')
+pwd = form.getvalue('password')
+
+# 响应页面
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print ('<h2>用户名：{}</h2>'.format(user))
+print ('</body>')
+print ('</html>')
+```
+
+#### checkbox
+
+客户端(code/clients/checkbox.html)
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试checkbox</title>
+</head>
+<body>
+    <h2>测试checkbox</h2>
+    <form action="/cgi-bin/checkbox.py" method="post" target="_blank"> 
+        <input type="checkbox" name="Google"/> Google <br/>
+        <input type="checkbox" name="FaceBook"/>FaceBook <br/> 
+        <input type="submit" value="选择">
+    </form>
+</body>
+</html>
+```
+
+服务端(code/cgi-bin/checkbox.py)
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, cgitb
+
+# 创建 FieldStorage 的实例化
+form = cgi.FieldStorage()
+
+# 获取数据
+
+if form.getvalue('Google'):
+    google = "yes"
+else:
+    google = "no"
+if form.getvalue('FaceBook'):
+    facebook = "yes"
+else:
+    facebook = "no"
+# 响应页面
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print('<h1>checkbox测试</h1>')
+print ('<h3>选择了google吗？：{}</h3>'.format(google))
+print ('<h3>选择了facebook吗？：{}</h3>'.format(facebook))
+print ('</body>')
+print ('</html>')
+
+```
+
+#### radio测试
+
+客户端(code/clients/raio.html)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试radio</title>
+</head>
+<body>
+    <h2>测试radio</h2>
+    <form action="/cgi-bin/radio.py" method="post" target="_blank"> 
+        <input type="radio" name="site" vale="谷歌"/> Google <br/>
+        <input type="radio" name="site" value="脸书"/>FaceBook <br/> 
+        <input type="submit" value="选择">
+    </form>
+</body>
+</html>
+```
+
+服务端(code/cgi-bin/radio.py)
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, cgitb
+
+# 创建 FieldStorage 的实例化
+form = cgi.FieldStorage()
+
+# 获取数据
+
+if form.getvalue('site'):
+    site = form.getvalue('site')
+else:
+    site = "没有选择网站"
+# 响应页面
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print('<h1>checkbox测试</h1>')
+print ('<h3>选择了：{}</h3>'.format(site))
+print ('</body>')
+print ('</html>')
+
+```
+
+#### 文件上传和下载
+
+客户端(code/clients/file.html)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试file</title>
+</head>
+<body>
+    <h2>测试文件上传下载</h2>
+    <form enctype="multipart/form-data" action="/cgi-bin/file.py" method="post"> 
+        <input type="file" name="filename"/>
+        <input type="submit" value="上传">
+    </form>
+</body>
+</html>
+```
+
+服务端(code/cgi-bin/file.py)
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, os
+import cgitb; cgitb.enable()
+
+# 创建 FieldStorage 的实例化
+form = cgi.FieldStorage()
+
+# 获取数据
+fileitem = form['filename']
+
+
+if fileitem.filename:
+    # 设置文件路径 
+    fn = os.path.basename(fileitem.filename)
+    open(r'E:\Python\PythonNotes\python基础\files\files.txt', 'wb').write(fileitem.file.read())
+    message = '文件 "' + fn + '" 上传成功'
+else:
+    message = '文件没有上传'
+   
+
+
+# 响应页面
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print('<h1>checkbox测试</h1>')
+print ('<h3>{}</h3>'.format(message))
+print ('</body>')
+print ('</html>')
+
+
+```
+
+文件下载:
+
+```
+#!/usr/bin/python3
+
+# HTTP 头部
+print ("Content-Disposition: attachment; filename=\"foo.txt\"")
+print ()
+# 打开文件
+fo = open(r'E:\Python\PythonNotes\python基础\files\files.txt', "rb")
+
+str = fo.read();
+print (str)
+
+# 关闭文件
+fo.close()
+```
+
+#### 下拉选
+
+客户端(code/clients/dropdown.html)
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>下拉测试</title>
+</head>
+<body>
+<form action="/cgi-bin/select.py" method="post" target="_blank"> 
+    <select name="dropdown">
+        <option value="facebook" selected>FaceBook</option>
+        <option value="google">Google</option>
+    </select>
+    <input type="submit" value="提交"/>
+</form>
+</body>
+</html>
+```
+
+服务端(code/cgi-bin/dropdown.py)
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, cgitb
+
+# 创建 FieldStorage 的实例化
+form = cgi.FieldStorage()
+
+# 获取数据
+
+if form.getvalue('dropdown'):
+    site =  form.getvalue('dropdown')
+else:
+    site = "没有选择网站"
+# 响应页面
+print ("Content-type:text/html")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print('<h1>下拉选</h1>')
+print ('<h3>选择了：{}</h3>'.format(site))
+print ('</body>')
+print ('</html>')
+
+```
+
+#### cookie
+
+```
+语法:
+Set-cookie:name=name;expires=date;path=path;domain=domain;secure 
+
+name=name: 需要设置cookie的值(name不能使用";"和","号),有多个name值时用 ";" 分隔，例如：name1=name1;name2=name2;name3=name3。 
+expires=date: cookie的有效期限,格式： expires="Wdy,DD-Mon-YYYY HH:MM:SS"
+
+path=path: 设置cookie支持的路径,如果path是一个路径，则cookie对这个目录下的所有文件及子目录生效，例如： path="/cgi-bin/"，如果path是一个文件，则cookie指对这个文件生效，例如：path="/cgi-bin/cookie.cgi"。 
+
+domain=domain: 对cookie生效的域名，例如：domain="www.runoob.com" 
+
+secure: 如果给出此标志，表示cookie只能通过SSL协议的https服务器来传递。 
+cookie的接收是通过设置环境变量HTTP_COOKIE来实现的，CGI程序可以通过检索该变量获取cookie信息。
+```
+
+set-cookie: 可以在chrome中F12查看
+
+```
+#!D:\python\python.exe
+# -*- coding: utf-8 -*-
+
+import cgi, cgitb
+
+
+# 响应页面
+print ("Content-type:text/html")
+print("Set-Cookie: name='test';expires=Wed, 28 Aug 2016 18:30:00 GMT")
+print ()                             # 空行，告诉服务器结束头部
+print ('<html>')
+print ('<head>')
+print ('<meta charset="gbk">')
+print ('<title>test</title>')
+print ('</head>')
+print ('<body>')
+print('<h1>设置cookie</h1>')
+print ('</body>')
+print ('</html>')
+
+```
