@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-24 17:32:52
+# @Last Modified time: 2017-09-12 10:14:37
 import math
 import functools
 
@@ -86,6 +86,16 @@ def _someInfo(name, age, job='student'):
 	return;
 
 _someInfo('tom',age=18) # i'm tom and i'm a student who age is 18 
+
+
+# 踩坑
+def test_m(L = []):
+	L.append('END')
+	print(L)
+test_m() # ['END']
+# 再调用
+test_m() # ['END', 'END']
+
 
 # 不定长参数
 def getArr( num ,*arr ):
@@ -186,3 +196,27 @@ def __error():
 	print(a) 
 
 __error()
+
+
+
+# 递归函数和尾递归优化
+
+def fact(n):
+	if n == 1:
+		return 1
+	else:
+		return n * fact(n-1)
+
+print(fact(5)) # 120
+
+
+# 尾递归优化
+def fact2(n):
+	return fact_iter(n, 1)
+
+def fact_iter(num, p):
+	if num == 1:
+		return p
+	return fact_iter(num-1, num*p)
+
+print(fact2(5)) #120
