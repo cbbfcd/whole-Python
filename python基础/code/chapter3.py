@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-12 10:14:37
+# @Last Modified time: 2017-09-14 23:05:55
 import math
 import functools
 
@@ -134,6 +134,39 @@ print([x*2+10 for x in test_list]) #[10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
 # python3中从全局移除了reduce,放进了functools中。
 val = functools.reduce( lambda x, y: x+y, test_list)
 print(val) # 45
+
+# filter
+# 筛选非空的
+new_filter = filter(lambda x: isinstance(x, str) and x and x.strip(),['A','',None,'B',' ','C ']);
+print('filter函数 ：',list(new_filter)) # filter函数 ： ['A', 'B', 'C ']
+
+
+
+## 获取所有的素数
+
+# 1. 利用生成器，获取所有奇数，从3开始。
+def _if_odd():
+	n = 1
+	while True:
+		n += 2
+		yield n
+# 2. 筛选函数，筛选掉其倍数。
+def _filter(s):
+	return lambda x: x % s > 0
+
+# 3. 定义一个生成器，返回结果
+def _primes():
+	yield 2
+	it = _if_odd()
+	while True:
+		n = next(it)
+		yield n
+		it = filter(_filter(n), it)
+for i in _primes():
+	if i < 20:
+		print(i,end=' ') # 2 3 5 7 11 13 17 19
+	else:
+		break
 
 
 # 作用域示例
