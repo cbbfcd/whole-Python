@@ -370,3 +370,80 @@ print(fact2(5)) #120
 ```
 
 ps: 标准的python解释器没有做尾调用优化，所以就是上边的fact2()也会溢出。
+
+
+## 内置函数 map(), reduce(), filter(),sorted()
+
+### 1. map
+
+```
+# 1. map(func,list); 和js中的一样，就是列表每个元素都会执行一次func
+list = [0,1,2,3,4,5,6,7,8,9]
+_list1 = map(lambda x: x*2+10, list)
+print(_list1) #[10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
+```
+
+### 2. reduce()
+
+reduce(func(now,next), list);
+
+其中func(now,next)必须接受两个参数，表示当前的和接下来的结果。
+
+```
+# reduce
+# python3中从全局移除了reduce,放进了functools中。
+val = functools.reduce( lambda x, y: x+y, [0,1,2,3,4,5,6,7,8,9])
+print(val) # 45
+```
+
+### 3. filter()
+
+filter(func(),list)
+
+筛选函数
+
+```
+## 获取所有的素数
+
+# 1. 利用生成器，获取所有奇数，从3开始。
+def _if_odd():
+    n = 1
+    while True:
+        n += 2
+        yield n
+# 2. 筛选函数，筛选掉其倍数。
+def _filter(s):
+    return lambda x: x % s > 0
+
+# 3. 定义一个生成器，返回结果
+def _primes():
+    yield 2
+    it = _if_odd()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(_filter(n), it)
+for i in _primes():
+    if i < 20:
+        print(i,end=' ') # 2 3 5 7 11 13 17 19
+    else:
+        break
+```
+
+
+
+### 4. sorted
+
+排序函数
+
+sorted(list, key=func, reverse=True); <br/>key函数表示排序的元素都会先执行这个函数，reverse表示反转。
+
+```
+## sorted
+sorted_list1 = sorted([1,2,-8,55,99])
+sorted_list2 = sorted([1,2,-8,55,99], key=abs)
+sorted_list3 = sorted([1,2,-8,55,99], key=abs, reverse=True)
+print(sorted_list1) # [-8, 1, 2, 55, 99]
+print(sorted_list2) # [1, 2, -8, 55, 99]
+print(sorted_list3) # [99, 55, -8, 2, 1]
+```

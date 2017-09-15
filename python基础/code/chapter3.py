@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-14 23:05:55
+# @Last Modified time: 2017-09-15 11:37:05
 import math
 import functools
 
@@ -167,6 +167,14 @@ for i in _primes():
 		print(i,end=' ') # 2 3 5 7 11 13 17 19
 	else:
 		break
+
+## sorted
+sorted_list1 = sorted([1,2,-8,55,99])
+sorted_list2 = sorted([1,2,-8,55,99], key=abs)
+sorted_list3 = sorted([1,2,-8,55,99], key=abs, reverse=True)
+print(sorted_list1) # [-8, 1, 2, 55, 99]
+print(sorted_list2) # [1, 2, -8, 55, 99]
+print(sorted_list3) # [99, 55, -8, 2, 1]
 
 
 # 作用域示例
