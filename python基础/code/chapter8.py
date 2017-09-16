@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-29 21:57:22
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-17 00:19:33
+# @Last Modified time: 2017-09-17 00:46:56
 
 # 语法
 class Person():
@@ -237,3 +237,21 @@ class S():
 
 s = S()
 s() # 类似 isinstance.method()
+
+
+#### 枚举类
+from enum import Enum, unique
+
+@unique #-->验重
+class Colors(Enum):
+	Black ='黑色' # NAME的value = tom
+	Orange='橙色'
+print(Colors.Black) # Colors.Black
+print(Colors['Black']) # Colors.Black
+print(Colors['Black'].value) # 黑色
+print(Colors('黑色')) # Colors.Black
+print(Colors('黑色') == Colors.Black) # True
+for a,b in Colors.__members__.items():
+	print('{}==>{}==>value is{}'.format(a,b,b.value))
+#Black==>Colors.Black==>value is黑色
+#Orange==>Colors.Orange==>value is橙色

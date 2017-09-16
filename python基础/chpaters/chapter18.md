@@ -1,0 +1,218 @@
+# 补充知识
+>author: 波比小金刚
+
+<br/>
+
+千里之行，始于足下。
+几乎所有的编程语言都是始于数据存储、运算、逻辑...
+so, 开始我们的python旅程。
+本章节代码都在./code/chapter18.py
+<a href="#">图片没加载出来，请直接下载并打开对应的html页面</a>
+
+## 简介
+
+记录各路好汉摸索出来的一些知识点
+
+
+## 1. super()
+
+语法:
+
+```
+super(class, self).someFunc()      # 调用父类函数
+super(class, self).__init__(*args) # 调用父类构造
+```
+
+<p style="color:'red'">super 关键点1：super()只能用于新式类中</p>，
+所谓新式类，旧类的，关键就是看是不是有基类，有基类的就是形式类，比如class A(object),所以class A()自然就是旧式类了。
+
+1. 在单继承的情况下，super()和我们想的一样很简单。
+
+这种情况下super() 等价于使用Parent.__init__(self) or Paren.sayHello()
+
+```
+# 单继承
+class A(object):
+
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def sayHello(self):
+        print('this is class A, a={},b={}'.format(self.a, self.b))
+
+class B(A):
+
+    def __init__(self, a, b, c):
+        super(B, self).__init__(a,b)
+        self.c = c
+
+    def sayHello(self):
+        super(B, self).sayHello() 
+        print('this is b call')
+
+b = B('b','also b','test')
+b.sayHello() 
+# this is class A, a=b,b=also b
+# this is b call
+```
+
+2. mro
+
+<p style="color:'red'">super 关键点2：super 其实和父类没有实质性的关联</p><br/>
+
+
+多重继承下，super就没有那么简单了。
+
+我们先看一个多重继承的demo:
+
+```
+# 多重继承
+
+class Base(object):
+    def __init__(self):
+        print('enter Base')
+        print('out Base')
+class A(Base):
+    def __init__(self):
+        print('enter A')
+        super(A, self).__init__()
+        print('out A')
+class B(Base):
+    def __init__(self):
+        print('enter B')
+        super(B, self).__init__()
+        print('out B')
+class C(A, B):
+    def __init__(self):
+        print('enter C')
+        super(C, self).__init__()
+        print('out C')
+
+c = C()
+#enter C
+#enter A
+#enter B
+#enter Base
+#out Base
+#out B
+#out A
+#out C
+```
+
+这个案例的继承关系很简单:
+>其中，Base 是父类，A, B 继承自 Base, C 继承自 A, B
+
+如果super是表示调用父类的话，上边的执行应该是 C->A->Base->B
+
+但是实际执行顺序是 C->A->B->Base
+
+所以：
+
+<p style="color:'red'">super 关键点2：super 其实和父类没有实质性的关联</p><br/>
+
+现在我们来试着搞清楚super的实现原理。
+
+首先我们要理解一个概念：
+
+#### mro
+
+>方法解析顺序（Method Resolution Order, MRO）列表，它代表了类继承的顺序
+
+可以打印C.mro() 看看结果
+```
+[<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class '__main__.Base'>, <class 'object'>]
+```
+
+>所以可以解释上边的执行了，先执行C的构造器函数。执行print('enter C')之后，开始执行super(c)(#简写了就),这个super执行后会返回下一个执行顺序的函数 也就是A ， 所以跟着执行print(A)，然后执行super(A)，然后返回下一个执行顺序就是B,
+所以执行print(B)，再是super(B)，依次类推。
+
+mro采用C3 线性化算法，遵循一下规则：
+1. 子类永远在父类前面
+2. 如果有多个父类，会根据它们在列表中的顺序被检查
+3. 如果对下一个类存在两个合法的选择，选择第一个父类
+
+super的原理：
+
+```
+super(cls, inst):
+    mro = inst.__class__.mro()
+    return mro[mro.index(cls)+1]
+```
+
+so:
+<p style="color:'red'">关键点3：super不是父类，而是继承顺序的下一个类</p>
+
+try:
+
+```
+# 多重继承
+
+class D(object):
+    def __init__(self):
+        print('enter D')
+        super(D, self).__init__()
+        print('out D')
+
+class Base(object):
+    def __init__(self):
+        print('enter Base')
+        print('out Base')
+class A(D,Base):
+    def __init__(self):
+        print('enter A')
+        super(A, self).__init__()
+        print('out A')
+class B(Base):
+    def __init__(self):
+        print('enter B')
+        super(B, self).__init__()
+        print('out B')
+class C(A, B):
+    def __init__(self):
+        print('enter C')
+        super(C, self).__init__()
+        print('out C')
+
+c = C() #-->[C->A->D->B->Base]
+```
+
+新增加一个 D ，分别把它加到 C , A, B 的基类。试试输出的顺序。
+注意加到 base 前和后 是不同的结果哦。
+
+注意使用类似Parent.__init__(self)的方式就不会再有mro算法的魔力。
+上面的案例中如果把A中的super()换成是 Base.__init__(self)的话，就不会再顺序执行了，会直接跳到Base中，而忽略了B。
+如果把A中的super()换成是 super(C, self).__init__()则会造成死循环。
+
+<p style="color:'red'">关键点3：super()可以避免重复调用</p>
+
+```
+# 避免重复
+class E(object):
+    def __init__(self):
+        print('enter E')
+        print('out E')
+class F(E):
+    def __init__(self):
+        print('enter F')
+        E.__init__(self) #-> 这样使用的哦，会重复
+        print('out F')
+class G(F, E):
+    def __init__(self):
+        print('enter G')
+        F.__init__(self)
+        E.__init__(self)
+        print('out G')
+g = G()
+# enter G
+# enter F
+# enter E
+# out E
+# out F
+# enter E
+# out E
+# out G
+```
+
+看上述的例子，发现E 被执行了两次，因为里头没有使用super()方式。
+使用super()方式就会只被执行一次。

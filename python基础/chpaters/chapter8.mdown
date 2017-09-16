@@ -463,6 +463,46 @@ s = S()
 s() # 类似 isinstance.method()
 ```
 
+
+#### 13. 枚举类
+
+应用的场景：
+在java中我们定义一个常量是 private static final String NAME = 'Tom';<br/>
+在Python中，我们定义常量如果使用 NAME = "Tom",它依然是变量。
+
+我们可以使用枚举类实现，因为class是不可变的。
+
+```
+#### 枚举类
+from enum import Enum, unique
+
+@unique #-->验重
+class Colors(Enum):
+    Black ='黑色' # NAME的value = tom
+    Orange='橙色'
+print(Colors.Black) # Colors.Black
+print(Colors['Black']) # Colors.Black
+print(Colors['Black'].value) # 黑色
+print(Colors('黑色')) # Colors.Black
+print(Colors('黑色') == Colors.Black) # True
+for a,b in Colors.__members__.items():
+    print('{}==>{}==>value is{}'.format(a,b,b.value))
+#Black==>Colors.Black==>value is黑色
+#Orange==>Colors.Orange==>value is橙色
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 总结
 
 在开发过程中，设计类的时候需要有全面的考虑，对于一些信息，比如 类说明、作者等<br/>。
