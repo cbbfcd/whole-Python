@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-29 21:57:22
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-30 00:12:22
+# @Last Modified time: 2017-09-17 00:19:33
 
 # 语法
 class Person():
@@ -148,5 +148,92 @@ s.score = 80
 print(s.score) # 80
 s.score = 125
 print(s.score) # 125
-s.score = -125
+# s.score = -125
 print(s.score) # score must be 0~150
+
+
+## 装饰器
+## 简单的装饰器函数
+# import functools
+# def log(func):
+# 	@functools.wraps(func)
+# 	def wrapper(*args, **kw):
+# 		print('log here...',end=' ')
+# 		return func(*args, **kw)
+# 	return wrapper
+
+# @log
+# def now():
+# 	print('2017-9-16')
+
+# now() # log here... 2017-9-16
+
+## 带参数装饰器
+import functools
+def log(text):
+	def d(func):
+		@functools.wraps(func)
+		def wrapper(*args, **kw):
+			print(text, end=' ')
+			return func(*args, **kw)
+		return wrapper
+	return d
+	
+
+@log('hello world')
+def now():
+	print('2017-9-16')
+
+now() # hello world 2017-9-16
+
+### 可迭代实例
+class Iter():
+
+	def __init__(self):
+		self.a, self.b = 0, 1
+
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		self.a, self.b = self.b, self.a+self.b
+		if self.a > 150:
+			raise StopIteration('该结束了，北鼻')
+		return self.a
+
+	def __getitem__(self, n):
+		a, b = 1, 1
+		for i in range(n):
+			a, b = b, a+b
+		return a
+
+for i in Iter():
+	print(i, end=" ") # 1 1 2 3 5 8 13 21 34 55 89 144
+
+print(Iter()[0], Iter()[1], Iter()[2]) # 1 1 2
+
+
+### 动态属性
+class Attr():
+	def __init__(self, uri=''):
+		self.uri = uri
+
+	def __getattr__(self, path):
+		return Attr('{}/{}'.format(self.uri, path))
+
+	def __str__(self):
+		return self.uri
+
+	__repr__ = __str__ # 就是简便写法，让repr也返回一样的
+
+print(Attr().C.file.pythonnotes) # /C/file/pythonnotes
+
+
+
+#### 反射
+class S():
+	def __call__(self):
+		print('类似 isinstance.method()')
+
+s = S()
+s() # 类似 isinstance.method()

@@ -25,7 +25,7 @@ class Person():
 
 ## 实例
 
-1. 一个简单的实例
+#### 1. 一个简单的实例
 
 ```
 # 一个简单的实例
@@ -48,8 +48,21 @@ print('方法输出: {}'.format(a.sayHello())) # 方法输出: hello world
 3. 实例化：创建一个类的实例，类的具体对象。
 4. 对象：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。
 5. 类的方法与普通的函数只有一个特别的区别——它们必须有一个额外的第一个参数名称, 按照惯例它的名称是 self，self 代表的是类的实例，代表当前对象的地址，而 self.class 则指向类。
+6. 如果实例属性和类属性重名，实例属性会覆盖类属性，但不会删除。只是实例属性优先级高
+```
+class A():
+    name = 'Tom'
+a = A()
+a.name="Jack"
 
-2. 构造方法
+print(a.name) # Jack
+print(A.name) # Tom
+del a.name #---> 删除实例属性
+print(a.name) # Tom
+print(A.name) # Tom
+```
+
+#### 2. 构造方法
 
 ```
 # 构造方法
@@ -69,7 +82,7 @@ print('输出：{},{}'.format(b.m, b.x)) # 输出：message,tom
 
 构造器的作用就是初始化对象。
 
-3. 私有变量
+#### 3. 私有变量
 
 ```
 # 私有变量
@@ -86,7 +99,7 @@ print('job:{}'.format(c.__job)) # 报错，私有变量不能直接访问
 print('job:{}'.format(c._Players__job)) # job:basketball player
 ```
 
-4. 继承
+#### 4. 继承
 
 ```
 # 继承
@@ -111,7 +124,7 @@ print('name is {}, and {}'.format(cat.name, cat.run())) # name is jack, and jack
 类后边的圆括号里写基类，在子类中找不到的方法就会从左到右在基类中寻找。<br/>
 子类还可以重写基类中的方法。
 
-5. 多继承
+#### 5. 多继承
 
 在子类中找不到的方法就会从左到右在基类中寻找，找到第一个出现的就直接调用了。
 
@@ -138,14 +151,86 @@ class C(B, A):
 print(C().speaker()) # it from B
 ```
 
-6. 装饰器
+#### 6. 装饰器
 
-装饰器的原则就是对被装饰的函数来说是完全透明的，不能影响被装饰的函数的结构和执行结果。
+装饰器是利用闭包实现的，意思是用一个包装函数包裹被装饰的函数。最后返回这个装饰器函数。<br/>
+
+装饰器的原则就是对被装饰的函数来说是完全透明的，不能影响被装饰的函数的结构和执行结果。<br/>
+
+所以常见的装饰器的基本结构是这样的:
+
+```
+def decorator_name(func): # --> 被装饰的函数作为参数传入
+     @functools.wraps(func)
+    def wrapper(*args, **kw): # --> 包裹函数
+        ## your code...
+        return func(*args, **kw)# --> 返回被装饰函数的执行结果
+    return wrapper # --> 返回包裹函数,最终执行的是这个函数
+```
+
+>@functools.wraps(func)是内置的装饰器函数，目的是解决被装饰器修饰的函数的__name__属性变成了返回的 wrapper 的问题。
+
+一个简单的实例：
+
+```
+## 简单的装饰器函数
+import functools
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        print('log here...',end=' ')
+        return func(*args, **kw)
+    return wrapper
+
+@log
+def now():
+    print('2017-9-16')
+
+now() # log here... 2017-9-16
+```
+
+>这里执行 @log 其实等价于 now = log(now);
+
+带参数的装饰器函数结构：
+```
+def decorator_name(*args):
+    def decorator(func):
+         @functools.wraps(func)
+         def wrapper(*args, **kw):
+            # your code ...
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+
+>实现带参数的装饰器函数，就是在包装函数wrapper的外边再包装一层用来接收被包装函数。
+
+案例：
+```
+## 带参数装饰器
+import functools
+def log(text):
+    def d(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print(text, end=' ')
+            return func(*args, **kw)
+        return wrapper
+    return d
+    
+
+@log('hello world')
+def now():
+    print('2017-9-16')
+
+now() # hello world 2017-9-16
+```
+
 
 装饰器需要掌握的就是几个点，需要自己去理解：
-> 1. 函数也是一个'变量'
+> 1. 函数也是一个'变量'，函数名就是该函数的引用。
 > 2. 函数可以作为参数，把一个函数名作为实参传递给另外一个函数
-> 3. 返回值中包含函数名，函数还可以嵌套(闭包)
+> 3. 返回值中包含函数名也就是该函数的引用，函数还可以嵌套(闭包)
 
 ```
 # 装饰器
@@ -155,6 +240,7 @@ def cal(type):
     根据类型进行不同的计算
     '''
     def cal_sometype(func):
+        @functools.wraps(func)
         def wrapper(*args, **kw): # (*args, **kw) 表示任意参数
             if type == 'average':
                 print('这是求平均数', end=' ')
@@ -177,7 +263,7 @@ def aver(*args):
 print(aver(2,5,8)) # 这是求平均数 5.0
 ```
 
-7. __slots__
+#### 7. __slots__
 
 就是限制你给实例对象随意添加属性的
 
@@ -193,32 +279,193 @@ d.age = 25
 ```
 
 
-8. @property
+#### 8. @property
 
-为了属性不可以被随意的更改，或者加以限制，需要写getter/setter方法，但是写起来太麻烦了。<br/>
-最快捷的方式就是使用内置的装饰器@property,其用法就是使得方法名字和你要定义get/set的属性名字一样，再利用装饰器定义限制。
+为了属性不可以被随意的更改，或者加以限制，<br/>我们在设计类的时候就需要把这些属性设置成私有属性(__name)，对外提供对应的getter/setter方法，但是写起来太麻烦了。<br/>
+最快捷的方式就是使用内置的装饰器@property,其用法就是使得方法名字和你要定义get/set的属性名字一样，再利用装饰器定义限制。<br/>
+同理，如果只提供getter，那么这个属性就是只读属性。
 
 ```
-# @property
 class Student():
+    def __init__(self, score):
+        self.__score__ = score
 
-    @property
-    def score(self): # 相当于getter
-        return self._score
+    @property # -->getter
+    def score(self): 
+        return self.__score
 
-    @score.setter
-    def score(self, value): # 相当于setter
+    @score.setter # -->setter
+    def score(self, value): 
         if not isinstance(value, int):
             raise ValueError('score must be a number')
         if value < 0 or value > 150:
             raise ValueError('score must be 0~150')
-        self._score = value
+        self.__score = value
+
+s = Student(80)
+#s.__score #报错
+s.score = 80
+s.score(60)
+s.score = 60
+```
+
+#### 9. __str__ & __repr__
+
+直接在命令行工具打印一个 class 打印出来的东西是类型、内存地址之类的信息。看起来不太方便。<br/>
+可以定义 __str__ 函数来打印出你想的东西。
+
+```
+>>> class Student(object):
+...     def __init__(self, name):
+...         self.name = name
+...     def __str__(self):
+...         return 'Student object (name: %s)' % self.name
+...
+>>> print(Student('Michael'))
+Student object (name: Michael)
+```
+
+>str() 与 repr() 的区别：<br/>
+>str() 打印出来的东西是给用户看的，print()函数调用的其实就是 str()。<br/>
+>repr() 打印出来的是给Python解释器看的。命令行回车后打印出来的就是repr。
+
+```
+print('hello world')
+>>> hello world
+
+s = 'hello world'
+s
+>>> "'hello world'"
+```
+
+#### 10. __iter__ & __next__ & __getitem__
+
+这三个属性可以让你的类可以拥有list般的魔力，可以迭代，可以切片。
+
+```
+class Iter():
+
+    def __init__(self):
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.a, self.b = self.b, self.a+self.b
+        if self.a > 150:
+            raise StopIteration('该结束了，北鼻')
+        return self.a
+
+for i in Iter(): # --> 这个类实例可以迭代了
+    print(i, end=" ") # 1 1 2 3 5 8 13 21 34 55 89 144
+```
+
+再让它支持索引查找。
+```
+class Iter():
+
+    def __init__(self):
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.a, self.b = self.b, self.a+self.b
+        if self.a > 150:
+            raise StopIteration('该结束了，北鼻')
+        return self.a
+
+    def __getitem__(self, n): # --> 支持索引查找
+        a, b = 1, 1
+        for i in range(n):
+            a, b = b, a+b
+        return a
+
+for i in Iter():
+    print(i, end=" ") # 1 1 2 3 5 8 13 21 34 55 89 144
+
+print(Iter()[0], Iter()[1], Iter()[2]) # 1 1 2 # --> 支持索引查找
+```
+
+还可以支持切片查找:(liao大神案例)
+```
+def __getitem__(self, n):
+        if isinstance(n, int): # n是索引
+            a, b = 1, 1
+            for x in range(n):
+                a, b = b, a + b
+            return a
+        if isinstance(n, slice): # n是切片
+            start = n.start
+            stop = n.stop
+            if start is None:
+                start = 0
+            a, b = 1, 1
+            L = []
+            for x in range(stop):
+                if x >= start:
+                    L.append(a)
+                a, b = b, a + b
+            return L
+```
+
+
+#### 11. __getattr__
+
+动态添加属性。调用实例不存在的属性的时候会报错。有这个函数后我们可以变出点有意思的：
+```
+### 动态属性
+class Attr():
+    def __init__(self, uri=''):
+        self.uri = uri
+
+    def __getattr__(self, path):
+        return Attr('{}/{}'.format(self.uri, path))
+
+    def __str__(self):
+        return self.uri
+
+    __repr__ = __str__ # 就是简便写法，让repr也返回一样的
+
+print(Attr().C.file.pythonnotes) # /C/file/pythonnotes
+```
+
+
+```
+# demo
+class Student(object):
+
+    def __init__(self):
+        self.name = 'Michael'
+
+    def __getattr__(self, attr):
+        if attr=='score':
+            return 99
 
 s = Student()
-s.score = 80
-print(s.score) # 80
-s.score = 125
-print(s.score) # 125
-s.score = -125
-print(s.score) # score must be 0~150
+s.name #---> Michael
+s.score#--->99
 ```
+
+#### 12. __call__
+
+想想java中的反射机制。
+直白的说就是类实例对象可以执行自身，自身就好比是一个函数对象一样。
+```
+#### 反射
+class S():
+    def __call__(self):
+        print('类似 isinstance.method()')
+
+s = S()
+s() # 类似 isinstance.method()
+```
+
+## 总结
+
+在开发过程中，设计类的时候需要有全面的考虑，对于一些信息，比如 类说明、作者等<br/>。
+我们可以定义为类属性，所有实例都可以访问。<br/>
+对于一些属性不希望外界可以直接访问，可以设置为私有变量，对外提供getter来访问。
+至于setter则根据你是否希望外界可以改变这个属性来定义。

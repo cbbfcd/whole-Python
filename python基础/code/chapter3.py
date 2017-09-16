@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-08-24 09:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-15 11:37:05
+# @Last Modified time: 2017-09-16 12:09:05
 import math
 import functools
 
@@ -261,3 +261,41 @@ def fact_iter(num, p):
 	return fact_iter(num-1, num*p)
 
 print(fact2(5)) #120
+
+
+## 闭包
+def lazy_sum(*args):
+	def sums():
+		total = 0
+		for i in args:
+			total += i
+		return total
+	return sums
+
+f = lazy_sum(1,2,3,4,5)
+print(f()) # 15
+
+
+def lazy_sum2(*args):
+	funcs = []
+	for i in range(1,4):
+		def f():
+			return i * i
+		funcs.append(f)
+	return funcs
+
+f1, f2, f3 = lazy_sum2()
+print(f1(), f2(), f3()) # 9 9 9
+
+def lazy_sum3(*args):
+    def f(g):
+        def m():
+            return g*g
+        return m
+    funcs = []
+    for i in range(1,4):
+        funcs.append(f(i))
+    return funcs
+
+f4, f5, f6 = lazy_sum3()
+print(f4(), f5(), f6()) # 1 4 9 

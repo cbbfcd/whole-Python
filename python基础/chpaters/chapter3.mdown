@@ -447,3 +447,73 @@ print(sorted_list1) # [-8, 1, 2, 55, 99]
 print(sorted_list2) # [1, 2, -8, 55, 99]
 print(sorted_list3) # [99, 55, -8, 2, 1]
 ```
+
+
+## 闭包
+
+至今为止我看过的所有介绍闭包的书中，我觉得最准确的阐述是:
+
+>函数保持对当前词法作用域的访问，哪怕函数在该词法作用域外执行。
+
+如何理解上边这句话呢，想想最简单的闭包的案例。一个函数内部有一个函数A,外部函数返回值是A函数的引用。<br/>
+
+闭包的两个条件:
+1. 必须有一个包装函数，隔离出一个作用域。
+2. 返回值必须包含至少一个函数的引用。
+
+最简单的闭包demo:
+
+```
+## 闭包
+def lazy_sum(*args):# --> 包装函数
+    def sums():
+        total = 0
+        for i in args:
+            total += i
+        return total
+    return sums # --> 这里返回了内部函数的引用
+
+f = lazy_sum(1,2,3,4,5)# --> 每次都会返回的是一个新的函数哦
+print(f()) # 15 # --> 在外部作用域执行
+```
+
+闭包有一个常见的坑点。我们先踩:
+
+```
+def lazy_sum2(*args):
+    funcs = []
+    for i in range(1,4):
+        def f():
+            return i * i
+        funcs.append(f)
+    return funcs
+
+f1, f2, f3 = lazy_sum2()
+print(f1(), f2(), f3())
+```
+
+如果熟悉JavaScript的童鞋肯定对这个坑点比较了解。<br/>
+原因一样，就是函数和引用的局部参数 i 之间并没有绑定。所以循环结束的时候i=3<br/>
+这个时候调用方法得到的结果都是9。<br/>
+在JS中，ES6提出了一个 let 声明，每次循环的时候都会重新绑定。解决了这个问题。<br/>
+在Python中，没有 let 声明来帮助我们解决这个问题。我们可以声明一个函数,<br/>用函数参数存下每一次的循环因子，然后把它和外部的函数绑定在一起。
+
+```
+def lazy_sum3(*args):
+    def f(g):
+        def m():
+            return g*g
+        return m
+    funcs = []
+    for i in range(1,4):
+        funcs.append(f(i))
+    return funcs
+
+f4, f5, f6 = lazy_sum3()
+print(f4(), f5(), f6()) # 1 4 9
+```
+
+## 装饰器函数
+
+<a href="./chapter8.mdown">GO...</a>
+
