@@ -177,6 +177,20 @@ print('size:{}'.format(getAllSize())) # size:28109
 
 <img src='../img/os.jpg'/>
 
+一些常用的方法：
+```
+os.name # 操作系统类型
+os.uname() # 获取详细的系统信息
+os.environ.get('key') # 获取某个环境变量
+os.path.abspath('.') #查看当前目录的绝对路径
+
+# 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来
+os.path.join('/Users/michael', 'testdir')
+os.mkdir('/Users/michael/testdir') # 然后创建一个目录
+os.rmdir('/Users/michael/testdir') # 删除一个目录
+os.rename('test.txt', 'test.py') # 对文件重命名
+os.remove('test.py') # 删掉文件
+```
 
 ## 获取网页
 
@@ -195,3 +209,20 @@ webbrowser.open('http://www.baidu.com')
 ```
 
 
+## StringIO & BytesIO
+
+在内存中操作str 或者 二进制数据。同文件读写差不多。
+
+```
+# StringIO
+from io import StringIO
+ff = StringIO()
+ff.write('hello wolrd')
+print(ff.getvalue()) # hello wolrd
+
+# BytesIO
+from io import BytesIO
+bb = BytesIO()
+bb.write('你好'.encode('utf-8'))
+print(bb.getvalue().decode('utf-8')) # 你好
+```

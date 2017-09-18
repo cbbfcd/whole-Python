@@ -61,6 +61,26 @@ with open(r'../files/jt.json', 'w', encoding='utf-8') as ff:
 
 ```
 
+ps:
+如果是把一个class的实例转json怎么办?
+
+先定义一个class2dict的方法，比如：
+```
+def class2dict(st):
+    return {
+        'name': st.name,
+        'age': st.age
+    }
+```
+
+然后用json.dumps():
+
+```
+s = Student()
+json.dumps(s, default=class2dict);
+```
+
+
 ## xml
 
 1. sax解析xml

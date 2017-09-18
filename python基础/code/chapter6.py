@@ -2,7 +2,7 @@
 # @Author: cbbfcd
 # @Date:   2017-08-28 15:19:03
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-08-28 17:22:06
+# @Last Modified time: 2017-09-18 21:16:12
 
 # IO操作
 
@@ -141,3 +141,16 @@ print(html)
 # 用代码打开网页
 import webbrowser
 webbrowser.open('http://www.baidu.com')
+
+
+# StringIO
+from io import StringIO
+ff = StringIO()
+ff.write('hello wolrd')
+print(ff.getvalue()) # hello wolrd
+
+# BytesIO
+from io import BytesIO
+bb = BytesIO()
+bb.write('你好'.encode('utf-8'))
+print(bb.getvalue().decode('utf-8')) # 你好
