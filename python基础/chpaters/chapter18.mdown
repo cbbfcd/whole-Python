@@ -23,10 +23,10 @@ super(class, self).someFunc()      # 调用父类函数
 super(class, self).__init__(*args) # 调用父类构造
 ```
 
-<p style="color:'red'">super 关键点1：super()只能用于新式类中</p>，
+<a>super 关键点1：super()只能用于新式类中</a>，
 所谓新式类，旧类的，关键就是看是不是有基类，有基类的就是形式类，比如class A(object),所以class A()自然就是旧式类了。
 
-1. 在单继承的情况下，super()和我们想的一样很简单。
+### 1. 在单继承的情况下，super()和我们想的一样很简单。
 
 这种情况下super() 等价于使用Parent.__init__(self) or Paren.sayHello()
 
@@ -57,9 +57,9 @@ b.sayHello()
 # this is b call
 ```
 
-2. mro
+### 2. mro
 
-<p style="color:'red'">super 关键点2：super 其实和父类没有实质性的关联</p><br/>
+<a>super 关键点2：super 其实和父类没有实质性的关联</a><br/>
 
 
 多重继承下，super就没有那么简单了。
@@ -109,7 +109,7 @@ c = C()
 
 所以：
 
-<p style="color:'red'">super 关键点2：super 其实和父类没有实质性的关联</p><br/>
+<a>super 关键点2：super 其实和父类没有实质性的关联</a><br/>
 
 现在我们来试着搞清楚super的实现原理。
 
@@ -141,7 +141,7 @@ super(cls, inst):
 ```
 
 so:
-<p style="color:'red'">关键点3：super不是父类，而是继承顺序的下一个类</p>
+<a>关键点3：super不是父类，而是继承顺序的下一个类</a>
 
 try:
 
@@ -184,7 +184,7 @@ c = C() #-->[C->A->D->B->Base]
 上面的案例中如果把A中的super()换成是 Base.__init__(self)的话，就不会再顺序执行了，会直接跳到Base中，而忽略了B。
 如果把A中的super()换成是 super(C, self).__init__()则会造成死循环。
 
-<p style="color:'red'">关键点3：super()可以避免重复调用</p>
+<a>关键点4：super()可以避免重复调用</a>
 
 ```
 # 避免重复

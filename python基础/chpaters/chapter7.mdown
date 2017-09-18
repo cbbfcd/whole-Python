@@ -120,7 +120,8 @@ super_cal(param)  # 改变参数 试试
 ```
 def foo(s):
     n = int(s)
-    assert n != 0, 'n is zero!' # 意思是 n应该不等于0，否则输出 n is zero，并抛出异常
+    # 意思是 n应该不等于0，否则输出 n is zero，并抛出异常
+    assert n != 0, 'n is zero!'
     return 10 / n
 
 def main():

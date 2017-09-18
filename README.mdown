@@ -5,21 +5,19 @@
 <br/>
 # notes
 
-所有的学习笔记代码运行的环境均是python3.5。
-部分阐述了python2.7.2与python3的区别。
+所有的学习笔记代码运行的环境均是python3.5。<br/>
+部分阐述了python2.7.2与python3的区别。<br/>
 文中所说的python，若无特殊说明，均是指的是python3。
 <br/>
-<a href="#">Google浏览器打开效果更好哦</a>
+<a href="#">部分图片加载问题，Google浏览器打开效果更好哦</a>
 # 目录
 
 <a href="./python基础/README.mdown">基础篇--Python基础</a>
 
 
-
-
-<br/>
 # author
 <a href="https://github.com/cbbfcd">@波比小金刚</a>
 
+>欢迎fork。如果觉得不错请扔个star过来。
 
 > 如要转载，请注明出处。

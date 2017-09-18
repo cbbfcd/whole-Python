@@ -448,6 +448,7 @@ print(sorted_list2) # [1, 2, -8, 55, 99]
 print(sorted_list3) # [99, 55, -8, 2, 1]
 ```
 
+>list.sort() 是永久排序， 而sorted(list)是临时排序。就是不影响原列表。
 
 ## 闭包
 

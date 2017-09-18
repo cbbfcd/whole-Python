@@ -24,3 +24,11 @@
 <a href='./chpaters/chapter16.mdown'>第十六章: CGI</a><br/>
 <a href='./chpaters/chapter17.mdown'>第十七章: 类的高级魔法</a><br/>
 <a href='./chpaters/chapter18.mdown'>第十八章: 补充知识</a><br/>
+
+
+# author
+<a href="https://github.com/cbbfcd">@波比小金刚</a>
+
+>欢迎fork。如果觉得不错请扔个star过来。
+
+> 如要转载，请注明出处。
