@@ -20,13 +20,13 @@ so, 开始我们的python旅程。
 其中进程指的是：
 >进程就是包换上下文切换的程序执行时间总和 = CPU加载上下文+CPU执行+CPU保存上下文
 
-而线程是共享了进程的上下文环境，的更为细小的CPU时间段。
+而线程是共享了进程的上下文环境，的更为细小的CPU时间段。<br/>
 
-在CPU的世界里就是给某个进程分配一个时间段执行，这个进程中包含了多个共享该进程资源的线程异步或者并发的执行。
+在CPU的世界里就是给某个进程分配一个时间段执行，这个进程中包含了多个共享该进程资源的线程异步或者并发的执行。也可以说进程是由若干线程组成的，一个进程至少有一个线程。<br/>
 
-在单CPU中这里的并发不是绝对的，只是时间间隙很小。看起来就是并发一样。
+在单CPU中这里的并发不是绝对的，只是时间间隙很小。看起来就是并发一样。<br/>
 
-在Python3中，我们推荐使用threading模块来实现多线程。
+在Python3中，我们推荐使用threading模块来实现多线程。<br/>
 
 ## threading
 
@@ -302,3 +302,39 @@ if __name__ == '__main__':
 # Processing : 4
 # all over
 ```
+
+
+
+### ThreadLocal
+
+一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。
+
+
+```
+# threadlocal
+import threading
+
+# 创建一个local
+local_student = threading.local()
+
+def proce():
+    std = local_student.student
+    print('hello,{}-->in thread {}'.format(std, threading.current_thread().name))
+
+def make_local(name):
+    local_student.student = name
+    proce()
+
+if __name__ == '__main__':
+    t1 = threading.Thread(target= make_local, args=('Alice',), name='Thread-A')
+    t2 = threading.Thread(target= make_local, args=('Bob',), name='Thread-B')
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+# hello,Alice-->in thread Thread-A
+# hello,Bob-->in thread Thread-B
+```
+

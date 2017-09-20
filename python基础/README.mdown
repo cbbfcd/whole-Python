@@ -23,7 +23,8 @@
 <a href='./chpaters/chapter15.mdown'>第十五章: Socket</a><br/>
 <a href='./chpaters/chapter16.mdown'>第十六章: CGI</a><br/>
 <a href='./chpaters/chapter17.mdown'>第十七章: 类的高级魔法</a><br/>
-<a href='./chpaters/chapter18.mdown'>第十八章: 补充知识</a><br/>
+<a href='./chpaters/chapter18.mdown'>第十八章: 补充知识 1 -- super</a><br/>
+<a href='./chpaters/chapter19.mdown'>第十九章: 补充知识 2 -- 多进程</a><br/>
 
 
 # author

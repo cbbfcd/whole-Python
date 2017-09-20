@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-09-05 19:52:22
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-05 23:01:49
+# @Last Modified time: 2017-09-20 23:28:04
 
 
 # 多线程
@@ -255,68 +255,93 @@
 
 
 # demo: 用三个线程输出 one two three four five
-import queue
+# import queue
+# import threading
+# from time import ctime, sleep
+
+# # 定义一个开关
+# flag = 0
+
+# # 线程类，重写run方法
+# class myThread(threading.Thread):
+
+# 	def __init__(self, id, name, q):
+# 		threading.Thread.__init__(self)
+# 		self.id = id
+# 		self.name = name
+# 		self.q = q
+
+# 	def run(self):
+# 		print('启动线程{}'.format(self.name))
+# 		print_s(self.name, self.q)
+# 		print('退出线程{}'.format(self.name))
+
+# # 打印方法
+# def print_s(name, q):
+# 	while not myQueue.empty():
+# 		print('{} process {}'.format(name, q.get()))
+# 		sleep(2)
+
+# threadNameList = ['线程1', '线程2', '线程3']
+# numQueue = ['one', 'two', 'three', 'four', 'five']
+
+# # 同步锁
+# queueLock = threading.Lock()
+# # 队列
+# myQueue = queue.Queue(10)
+
+# threadId = 1
+# threads = []
+
+# # 队列填充数据
+# #queueLock.acquire()
+# for i in numQueue:
+# 	myQueue.put(i)
+# #queueLock.release()
+
+
+# # 创建线程
+# for t in threadNameList:
+# 	_t = myThread(threadId, t, myQueue)
+# 	_t.start()
+# 	threads.append(_t)
+# 	threadId += 1
+
+
+
+# # # 等待队列清空
+# # while not myQueue.empty():
+# #     pass
+
+# flag = 1
+
+# for j in threads:
+# 	j.join()
+
+
+
+# threadlocal
 import threading
-from time import ctime, sleep
 
-# 定义一个开关
-flag = 0
+# 创建一个local
+local_student = threading.local()
 
-# 线程类，重写run方法
-class myThread(threading.Thread):
+def proce():
+	std = local_student.student
+	print('hello,{}-->in thread {}'.format(std, threading.current_thread().name))
 
-	def __init__(self, id, name, q):
-		threading.Thread.__init__(self)
-		self.id = id
-		self.name = name
-		self.q = q
+def make_local(name):
+	local_student.student = name
+	proce()
 
-	def run(self):
-		print('启动线程{}'.format(self.name))
-		print_s(self.name, self.q)
-		print('退出线程{}'.format(self.name))
+if __name__ == '__main__':
+	t1 = threading.Thread(target= make_local, args=('Alice',), name='Thread-A')
+	t2 = threading.Thread(target= make_local, args=('Bob',), name='Thread-B')
 
-# 打印方法
-def print_s(name, q):
-	while not myQueue.empty():
-		print('{} process {}'.format(name, q.get()))
-		sleep(2)
+	t1.start()
+	t2.start()
 
-threadNameList = ['线程1', '线程2', '线程3']
-numQueue = ['one', 'two', 'three', 'four', 'five']
-
-# 同步锁
-queueLock = threading.Lock()
-# 队列
-myQueue = queue.Queue(10)
-
-threadId = 1
-threads = []
-
-# 队列填充数据
-#queueLock.acquire()
-for i in numQueue:
-	myQueue.put(i)
-#queueLock.release()
-
-
-# 创建线程
-for t in threadNameList:
-	_t = myThread(threadId, t, myQueue)
-	_t.start()
-	threads.append(_t)
-	threadId += 1
-
-
-
-# # 等待队列清空
-# while not myQueue.empty():
-#     pass
-
-flag = 1
-
-for j in threads:
-	j.join()
-
-
-
+	t1.join()
+	t2.join()
+# hello,Alice-->in thread Thread-A
+# hello,Bob-->in thread Thread-B
