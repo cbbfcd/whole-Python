@@ -1,0 +1,14 @@
+# python实战项目
+
+
+# 目录
+
+<a href="./pygame_applications/README.mdown">游戏类项目</a><br/>
+
+
+# author
+<a href="https://github.com/cbbfcd">@波比小金刚</a>
+
+>欢迎fork。如果觉得不错请扔个star过来。
+
+> 如要转载，请注明出处。

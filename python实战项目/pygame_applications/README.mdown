@@ -1,0 +1,14 @@
+# python游戏
+
+
+# 目录
+
+<a href="./shotGame/README.mdown">1.射击游戏</a><br/>
+
+
+# author
+<a href="https://github.com/cbbfcd">@波比小金刚</a>
+
+>欢迎fork。如果觉得不错请扔个star过来。
+
+> 如要转载，请注明出处。
