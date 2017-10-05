@@ -2,15 +2,16 @@
 # @Author: cbbfcd
 # @Date:   2017-09-24 23:23:56
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-29 23:00:34
+# @Last Modified time: 2017-10-06 01:32:25
 # @Description: 飞机模块
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ship(object):
+class Ship(Sprite):
     '''集中管理飞机的一个类'''
 
     def __init__(self, ui_settings, screen):
+        super().__init__()
         '''初始化飞机，设置其初始位置'''
         self.screen = screen
         self.ui_settings = ui_settings

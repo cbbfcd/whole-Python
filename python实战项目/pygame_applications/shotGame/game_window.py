@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-09-24 22:15:09
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-09-29 23:11:12
+# @Last Modified time: 2017-10-06 01:39:07
 # @Description: 游戏窗口
 
 import pygame
@@ -12,6 +12,8 @@ import game_funcs as gf
 from ship import Ship
 from alien import Alien
 from game_stats import GameStats
+from button import Button
+from scoreboard import Scoreboard
 
 
 def run_game():
@@ -34,14 +36,18 @@ def run_game():
     gf.create_fleet(ui_settings, screen, ship, aliens)
     # 创建一个用于存储游戏统计信息的实例
     stats = GameStats(ui_settings)
+    # 绘制开始按钮
+    play_button = Button(ui_settings, screen, "Start")
+    # 绘制得分
+    sb = Scoreboard(ui_settings, screen, stats)
 
     # 开始游戏的主循环
     while True:
-        gf.check_events(ui_settings, screen, ship, bullets)
+        gf.check_events(ui_settings, screen, stats,sb, play_button, ship, aliens, bullets)
         if stats.game_active:
             ship.update()
-            gf.update_bullets(ui_settings, screen, ship, aliens, bullets)
-            gf.update_aliens(ui_settings, stats, screen, ship, aliens, bullets)
-        gf.update_screen(ui_settings, screen, ship, aliens, bullets)
+            gf.update_bullets(ui_settings, screen,stats,sb, ship, aliens, bullets)
+            gf.update_aliens(ui_settings, stats,sb, screen, ship, aliens, bullets)
+        gf.update_screen(ui_settings,stats, sb,  screen, ship, aliens, bullets, play_button)
 
 run_game()

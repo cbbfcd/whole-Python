@@ -3,7 +3,7 @@
 
 # 目录
 
-<a href="./pygame_applications/README.mdown">游戏类项目</a><br/>
+<a href="./pygame_applications/README.mdown">1. 游戏类项目</a><br/>
 
 
 # author
