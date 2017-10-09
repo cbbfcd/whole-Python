@@ -1,10 +1,9 @@
-# python实战项目
+# python数据可视化
 
 
 # 目录
 
-<a href="./pygame_applications/README.mdown">1. 游戏类项目</a><br/>
-<a href="./data-visualization/README.mdown">2. 数据可视化</a><br/>
+<a href="./demo1/README.mdown">1.matplotlib使用的demo</a><br/>
 
 
 # author

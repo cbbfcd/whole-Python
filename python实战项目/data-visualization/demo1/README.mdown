@@ -1,0 +1,22 @@
+# python数据可视化
+
+
+# 说明
+
+数据可视化的demo
+
+# 安装
+
+下载对应的numpy、scipy、matplotlib的whl文件。在<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">这里</a>可以找到。
+
+然后依次安装
+```
+pip3 install c:\libs\numpy-1.13.3+mkl-cp35-cp35m-win_amd64.whl
+```
+
+# author
+<a href="https://github.com/cbbfcd">@波比小金刚</a>
+
+>欢迎fork。如果觉得不错请扔个star过来。
+
+> 如要转载，请注明出处。
