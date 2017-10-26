@@ -872,4 +872,265 @@ HTTP 首部字段是构成 HTTP 报文的要素之一。在客户端与服务器
 
 6. Expect
 
+    ```
+    Expect: 100-continue
+    ```
+
+    客户端告知服务端希望的行为。
+
+7. From
+
+    首部字段 From 用来告知服务器使用用户代理的用户的电子邮件地址。
+
+8. Host
+
+    首部字段 Host 会告知服务器，请求的资源所处的互联网主机名和端口号。因为同一IP地址下部署了多个域名的虚拟主机的话，服务器不知道请求的是哪一个，就需要通过Host首部字段明确指出请求的主机名。
+
+    Host是请求报文中唯一要求必须要有的首部字段。若服务器未设定主机名，那直接发送一个空值即可。
+
+9. If-Match
+
+    只有当 If-Match 的字段值跟 ETag 值匹配一致时，服务器才会接受请求。
+    实体标记（ETag）是与特定资源关联的确定值，资源更新后Etag也会更新。
+
+    还可以使用星号（*）指定 If-Match 的字段值。针对这种情况，服务 器将会忽略 ETag 的值，只要资源存在就处理请求
+
+10. If-Modified-Since
+
+    如果在If-Modified-Since字段指定的日期时间后，资源发生了更新，服务器会接受请求。否则返回304 Not Modified
     
+    If-Modified-Since 用于确认代理或客户端拥有的本地资源的有效性。获取资源的更新日期时间，可通过确认首部字段 Last-Modified 来确定。
+
+11. If-None-Match
+
+    只有在 If-None-Match 的字段值与 ETag 值不一致时，可处理该请求。与If-Match 首部字段的作用相反。
+
+    在 GET 或 HEAD 方法中使用首部字段 If-None-Match 可获取最新的资源。
+
+12. If-Range
+
+    它告知服务器若指定的 IfRange 字段值（ETag 值或者时间）和请求资源的 ETag 值或时间相一致时，则作为范围请求处理。反之，则返回全体资源。
+
+13. If-Unmodified-Since
+
+    和首部字段 If-Modified-Since的作用相反。它的作用的是告知服务器，指定的请求资源只有在字段值内指定的日期时间之后，未发生更新的情况下，才能处理请求
+
+14. Max-Forwards
+
+    ```
+    Max-Forwards: 10
+    ```
+
+    在代理服务器间转发一次这个数值就会减去1，服务器接收到 Max-Forwards值为 0 的请求时，就不再转发了，就会发起响应。
+
+15. Range
+
+    ```
+    Range: bytes=5001-10000
+    ```
+
+    对于只需获取部分资源的范围请求，包含首部字段Range即可告知服务器资源的指定范围。上面的示例表示请求获取从第 5001 字节至第 10000 字节的资源。
+
+    接收到附带Range首部字段请求的服务器，会在处理请求后返回状态码为206Partial Content 的响应。无法处理该范围请求时，则会返回状态码200OK的响应及全部资源。
+
+16. Referer
+
+    首部字段 Referer 会告知服务器请求的原始资源的 URI。
+    就是说查看这个首部就知道请求是哪个页面发起的。
+
+17. User-Agent
+
+    首部字段 User-Agent 会将创建请求的浏览器和用户代理名称等信息传达给服务器。
+    爬虫作者也可能会把自己的邮箱加入到这个首部字段中。
+
+### 6.4 部分响应首部及其指令解析
+
+1. Accept-Ranges
+
+    只有两种：
+
+    ```
+    Accept-Ranges: none // 告知客户端，服务器不能处理范围请求
+    Accept-Ranges: byte // 告知客户端，服务器可以处理范围请求
+    ```
+
+2. Age
+
+    ```
+    Age: 600
+    ```
+
+    告诉客户端，源服务器在多久之前创建了响应。
+
+    如果是缓存服务器发起响应，该值表示的是缓存资源向源服务器发起资源认证到认证完成的时间。直白的说就是，10分钟前我刚跟源服务器确认过资源。
+
+3. ETag
+
+    ```
+    ETag: "82e22293907ce725faf67773957acd12"
+    ```
+
+    ETag表示实体表示，是服务器分配给资源的字符串形式的唯一标识。资源更新的同时ETag也会更新。
+
+    强ETag值：
+
+    无论发生多么细微的变化，都会更新值。
+
+    弱ETag值：
+
+    弱 ETag 值只用于提示资源是否相同。
+    前边有个 W 表示。只有资源发生了根本改变，产生差异时才会改变 ETag 值。
+
+4. Location
+
+    ```
+    Location: http://www.usagidesign.jp/sample.html
+    ```
+
+    基本上，该字段会配合 3xx ：Redirection 的响应，提供重定向的 URI
+
+5. Retry-After
+    
+    ```
+    Retry-After: 120
+    ```
+    
+    首部字段Retry-After告知客户端应该在多久之后再次发送请求。主要配合状态码503 Service Unavailable 响应，或 3xx Redirect 响应一起使用
+
+6. Server
+
+    ```
+    Server: Apache/2.2.17 (Unix)
+    ```
+
+    首部字段 Server 告知客户端当前服务器上安装的 HTTP 服务器应用程序的信息
+
+7. Vary
+
+    ```
+    Vary: Accept-Language
+    ```
+
+    从代理服务器接收到源服务器返回包含Vary指定项的响应之后，若再要进行缓存，仅对请求中含有相同 Vary 指定首部字段的请求返回缓存。
+
+8. WWW-Authenticate
+    
+    ```
+    WWW-Authenticate: Basic realm="Usagidesign Auth"
+    ```
+
+    用于HTTP访问认证。它会告知客户端适用于访问请求URI所指定资源的认证方案（Basic 或是 Digest）和 带参数提示的质询（challenge）。
+
+    状态码 401 Unauthorized 响应中， 肯定带有首部字段 WWW-Authenticate
+    
+### 6.5 部分实体首部及其指令解析
+
+1. Allow
+
+    ```
+    Allow: GET, HEAD
+    ```
+
+    告诉客户端支持的HTTP方法。
+
+2. Content-Encoding
+
+    ```
+    Content-Encoding: gzip
+    ```
+
+    告诉客户端返回的实体的编码方式，其实就是压缩的方式。
+
+3. Content-Language
+
+    ```
+    Content-Language: zh-C
+    ```
+
+    告诉客户端实体使用的啥语言
+
+4. Content-Length
+
+    ```
+    Content-Length: 15000
+    ```
+    
+    告诉客户端返回的实体的主体大小，单位是byte。
+
+5. Content-Location
+    
+    ```
+    Content-Location: http://www.hackr.jp/index-ja.html
+    ```
+
+    报文主体部分相对应的 URI
+
+6. Content-MD5
+
+    ```
+    Content-MD5: OGFkZDUwNGVhNGY3N2MxMDIwZmQ4NTBmY2IyTY==
+    ```
+
+    客户端采用同样的算法，然后与之比较，从而确定资源的有效性和完整性。
+
+7. Content-Range
+
+    ```
+    Content-Range: bytes 5001-10000/1000
+    ```
+
+    告诉客户端返回的实体范围。用于范围请求。
+
+8. Content-Type
+
+    ```
+    Content-Type: text/html; charset=UTF-8
+    ```
+
+    实体主体内对象的媒体类型。
+
+9. Expires
+
+    ```
+    Expires: Wed, 04 Jul 2012 08:26:05 GM
+    ```
+
+    告诉客户端资源失效的日期。
+
+10. Last-Modified
+
+    ```
+    Last-Modified: Wed, 23 May 2012 09:59:55 GMT
+    ```
+    
+    资源最终修改的时间。
+
+### 6.6 与Cookie有关的首部及其指令解析
+
+1. Set-Cookie 响应首部字段
+
+    ```
+    Set-Cookie: status=enable; expires=Tue, 05 Jul 2011 07:26:31
+    ```
+
+    当服务器准备开始管理客户端的状态时，会事先告知各种信息。
+    
+    Set-Cookie 的字段值：
+        1. expires  指定浏览器可发送 Cookie 的有效期。 
+        2. path     限制指定 Cookie 的发送范围的文件目录
+        3. domain   指定domain:example.com，结尾是example.com都可以发送cookie。类似模糊匹配。
+        4. secure   限制 Web 页面仅在 HTTPS 安全连接时，才可以发送 Cookie
+        5. HttpOnly 防止 XSS 
+
+2. Cookie 请求首部字段
+
+    ```
+    Cookie: status=enable
+    ```
+    
+    当客户端想获得 HTTP 状态管理支 持时，就会在请求中包含从服务器接收到的 Cookie。
+
+
+## 7. HTTPS
+
+
