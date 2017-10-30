@@ -1,0 +1,685 @@
+<!doctype html>
+<html>
+<head>
+<title>ChinaUnix博客-专业IT技术博客</title>
+<meta name="description" content="ChinaUnix博客每天千篇余篇博文新资讯，40多万活跃博主，为IT技术人提供最全面的IT资讯和交流互动的IT博客平台-中国最专业的IT技术ChinaUnix博客。"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta property="wb:webmaster" content="31e73aee60da45c8" />
+<link href="/css/site/style.css" rel="stylesheet" />
+<script type='text/javascript' src='http://168.it168.com/a/h600.js'></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+	try{
+		if(!/iPad/i.test(navigator.userAgent)){
+			var oldurl=window.location.href;
+			var wapUrl= oldurl.replace('blog.chinaunix.net', "m.blog.chinaunix.net") ;
+			window.location.href = wapUrl;
+		}
+	}catch(e){}
+}
+</script>
+
+</head>
+
+<body>
+<div class="nav_con1">
+  <div class="nav_con1_1"><span><a href="http://www.chinaunix.net">ChinaUnix首页</a> | <a href="http://linux.chinaunix.net/">Linux</a> | <a href="http://u.it168.com/vip/"><font color="red">认证专区</font></a> | <a href="http://www.it168.com/itclub/ ">沙龙</a> | <a href="http://news.chinaunix.net/">新闻</a> | <a href="http://bbs.chinaunix.net/">论坛</a> | <a href="http://selftest.chinaunix.net/">自测</a> | <a href="http://blog.chinaunix.net/">博客</a> | <a href="http://hpcbbs.it168.com/" target="_blank" style="color:red;">HPC论坛</a></span> 
+  <script src="/site/loginstatusbar.html"></script>
+  </div>
+</div>
+<div class="box">
+  <div class="ad_con1">
+    <div class="ad_con1_1" id='ADV_17325'><script>LG('ADV_17325')</script></div>
+    <div class="ad_con1_2" id='ADV_17326'><script>LG('ADV_17326')</script></div>
+    <div class="clear"></div>
+  </div>
+  <div class="nav_con2">
+    <div class="nav_con2_1"><a href="/"></a></div>
+    <div class="nav_con2_2"><a href="/">博客首页</a><a href="/site/expert.html">博客专家</a><a href="/site/commendago.html">往日推荐</a><a href="/ranklist/article.html">排行榜</a><a href="/site/topic.html" class="a1">专题荟萃</a><a href="/special/list.html" class="a1">博客文集</a></div>
+    <div class="clear"></div>
+  </div>
+   <style>
+  .nav_con3 span .txt1{ float:left; margin:12px 0 0 0;}
+  .nav_con3 span{*margin-top:0;}
+  .bor13221{border:1px #bbb solid;width:206px;position:absolute;top:29px;left:0;background:#fff; z-index:9999;display:none}
+  .bor13221 li{height:26px;line-height:26px;padding-left:6px;color:#555;font-size:14px;cursor:pointer;}
+  .here{background:#f3f3f3;}
+  </style>
+  <div class="nav_con3"><span style="position:relative; z-index:9999;">
+  <!--提示层 -->
+	 <div class="bor13221">
+	  <ul>
+	  </ul>
+	</div>
+ <!--提示层 -->
+  <form action='/site/search.html' method='post'>
+    <input type="text" autocomplete="off" id='search_input_id' class="txt1"   name='keywords' />
+    <select class="sel1" name='type' id='search_type_blog' style="float:left;margin:12px 0 0 4px;">
+      <option value='blog'>博文</option>
+	  <option value='author'>博主</option>
+    </select>
+    <input type="submit" value='' name='submit' class="btn1" style="float:left;margin:12px 0 0 4px;">
+ </form>
+    </span>热搜：
+    		            <a href="/site/search/keywords/%E5%AD%98%E5%82%A8/type/blog.html" target="_blank">存储</a>
+                    <a href="/site/search/keywords/C%23/type/blog.html" target="_blank">C#</a>
+                    <a href="/site/search/keywords/.net/type/blog.html" target="_blank">.net</a>
+                    <a href="/site/search/keywords/C%2B%2B/type/blog.html" target="_blank">C++</a>
+                    <a href="/site/search/keywords/%E6%95%B0%E6%8D%AE%E5%BA%93/type/blog.html" target="_blank">数据库</a>
+                    <a href="/site/search/keywords/AIX/type/blog.html" target="_blank">AIX</a>
+                    <a href="/site/search/keywords/Hyper-V/type/blog.html" target="_blank">Hyper-V</a>
+                    <a href="/site/search/keywords/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/type/blog.html" target="_blank">移动开发</a>
+             </div>
+   <script type="text/javascript">
+	$(function(){
+		//点击添加进文本框
+		$(".bor13221 li").live( 'click' , function(e){
+			if ( e && e.stopPropagation )
+			{
+				//因此它支持W3C的stopPropagation()方法
+				e.stopPropagation();
+			}
+			else
+			{
+				//否则，我们需要使用IE的方式来取消事件冒泡
+				window.event.cancelBubble = true; 
+			}
+			$('#search_input_id').val($(this).text());
+			$(".bor13221 ul").html('');
+			$(".bor13221").hide();
+		});
+		$(".bor13221 ul li").live({
+			mouseenter:
+			function()
+			{
+				$(".bor13221 ul li").removeClass("here");
+				$(this).addClass('here');
+			},
+			mouseleave:
+			function()
+			{
+				$(".bor13221 ul li").removeClass("here");
+				$(this).removeClass('here');
+			}
+		});
+		//自动提示
+		$('#search_input_id').keyup(function(event){
+			//取消博主的提示
+			var search_type_blog = $('#search_type_blog').val();
+			if(search_type_blog == 'author') return false;
+
+			var key = $(this).val();
+			//获取键值
+			var keycode = event.which; //38 上 40 下
+			var count = $('.bor13221 ul li').length;
+			if(key != '' && keycode != 38 && keycode != 40)
+			{
+				$.getJSON("http://api.sou.it168.com/autoWenKuCloud?jsoncallback=?",{"ty":"json","offset":"0","limit":"10","q":key}, function(result)
+					{
+						var arr = result.data;
+
+						var html ='';
+						for (i=0;i<arr.length ;i++ )   
+						{   
+							html += '<li>'+arr[i]+'</li>';
+						} 
+						
+						$('.bor13221 ul').html(html);
+						(arr.length > 1) ?  $(".bor13221").show() : $(".bor13221").hide();
+					}
+				);
+			}
+			else if(keycode == 38)
+			{
+				if(count > 0)
+				{
+					//遍历li
+					var curr_li_num;
+					$('.bor13221 ul li').each(function(index , dom){
+						if($(dom).attr('class') == 'here')
+						{
+							curr_li_num = index;
+							return false;
+						}
+					}); 
+					var next_li_num;
+					if(typeof(curr_li_num) == 'undefined')
+					{
+						next_li_num = count - 1;
+					}
+					else
+					{
+						if(curr_li_num == 0)
+						{
+							next_li_num = count - 1;
+						}
+						else
+						{
+							next_li_num = curr_li_num - 1;
+						}
+					}
+					$(".bor13221 ul li").removeClass("here");
+					$(".bor13221 ul li:eq(" + next_li_num + ")").addClass("here");
+					$('#search_input_id').val($(".bor13221 ul li:eq(" + next_li_num + ")").text());
+				}
+			}
+			else if(keycode == 40)
+			{
+				if(count > 0)
+				{
+					//遍历li
+					var curr_li_num;
+					$('.bor13221 ul li').each(function(index , dom){
+						if($(dom).attr('class') == 'here')
+						{
+							curr_li_num = index;
+							return false;
+						}
+					}); 
+					var next_li_num;
+					if(typeof(curr_li_num) == 'undefined')
+					{
+						next_li_num = 0;
+					}
+					else
+					{
+						if(curr_li_num == count - 1)
+						{
+							next_li_num = 0;
+						}
+						else
+						{
+							next_li_num = curr_li_num + 1;
+						}
+					}
+					$(".bor13221 ul li").removeClass("here");
+					$(".bor13221 ul li:eq(" + next_li_num + ")").addClass("here");
+					$('#search_input_id').val($(".bor13221 ul li:eq(" + next_li_num + ")").text());
+				}
+			}
+		});
+		$(document).click(function(e){
+			$(".bor13221").hide();
+		});
+
+	});
+  </script>
+  <!-- 内容部分 -->
+  	<div class="cu_contain1">
+  <div class="classify_left1">
+    <div class="classify_left1_1">
+      <div class="classify_tit1" onclick="location.href='/site/index.html'">全部分类</div>
+      <ul>
+		<li><a href="/mobiledev.html"><span class="span1"></span>移动开发与应用</a></li>
+        <li><a href="/web.html"><span class="span2"></span>WEB前端</a></li>
+        <li><a href="/architecture.html"><span class="span3"></span>架构与运维</a></li>
+        <li><a href="/program.html"><span class="span4"></span>程序设计</a></li>
+        <li><a href="/database.html"><span class="span5"></span>数据库</a></li>
+        <li><a href="/os.html"><span class="span6"></span>操作系统</a></li>
+        <li><a href="/technology.html"><span class="span7"></span>热点技术</a></li>
+        <li><a href="/others.html"><span class="span8"></span>综合</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="classify_middle1">
+    <div class="cu_con1">
+      <div class="cu_tit1"><a href="/site/commendago.html" target="_blank">更多>></a>最新精华博文推荐</div>
+      <ul>
+                <li><span>【博文推荐】</span><a href="http://blog.chinaunix.net/uid-23916356-id-5765908.html" target="_blank">系统运维：mysql5.7 MGR集群搭建</a></li>
+                <li><span>【专家博文】</span><a href="http://blog.chinaunix.net/uid-28541347-id-5763124.html" target="_blank">浅析Linux的共享内存与tmpfs文件系统</a></li>
+                <li><span>【编辑推荐】</span><a href="http://blog.chinaunix.net/uid-7852080-id-5763151.html" target="_blank">进程的处理器亲和性和vCPU的绑定</a></li>
+                <li><span>【博文推荐】</span><a href="http://blog.chinaunix.net/uid-29043620-id-5763164.html" target="_blank">Linux中内存buffer和cache的区别</a></li>
+                <li><span>【博文推荐】</span><a href="http://blog.chinaunix.net/uid-26313110-id-5763156.html" target="_blank">PowerPath常用命令总结及应用</a></li>
+              </ul>
+    </div>
+    <div class="cu_con2">
+      <div class="cu_tit1"><a href="/site/expert.html" target="_blank">更多>></a>人气最旺专家</div>
+      <div class="cu_con3">
+                <div class="classify_left1_3 cu_con2_1"><a href="http://blog.chinaunix.net/uid/23069658.html" target="_blank"><img src="http://image4.it168.com/2013/11/4/b75f777e-7171-48fa-88ff-8533d534450e.jpg"></a><span>
+          <p><a href="http://blog.chinaunix.net/uid/23069658.html" target="_blank"><b>王家乐</b></a></p>
+          <p><em>领域：</em>程序设计</p>
+          <p><em>介绍：</em>2007年重庆邮电大学计算机科学与技术专业毕业，继续攻读通信与信息系统硕士...</p>
+          </span>
+          <div class="clear"></div>
+        </div>
+                <div class="classify_left1_3 cu_con2_1"><a href="http://blog.chinaunix.net/uid/11344913.html" target="_blank"><img src="http://image4.it168.com/2013/12/16/5e1efadf-b33f-46d9-8561-23a214d94d4b.jpg"></a><span>
+          <p><a href="http://blog.chinaunix.net/uid/11344913.html" target="_blank"><b>刘歧</b></a></p>
+          <p><em>领域：</em>linux</p>
+          <p><em>介绍：</em>CU论坛嵌入式开发版主，2003年开始接触Linux程序设计，多年从事嵌入式Linux...</p>
+          </span>
+          <div class="clear"></div>
+        </div>
+              </div>
+    </div>
+  </div>
+  <div class="classify_right1">
+    <div class="focus_con">
+      <div class="focus_con1"> <a href="javascript:goUrl();" ><img src="/image/site/fcous.png" id="imgInit"></a>
+        <div class="focus_con1_1"></div>
+        <ul class="focus_ul1">
+                              <li><a href="javascript:void(0);" id="n1" target="_parent"  class="here1" onclick="goImg('n1',1);">1</a></li>
+                              <li><a href="javascript:void(0);" id="n2" target="_parent"   onclick="goImg('n2',2);">2</a></li>
+                              <li><a href="javascript:void(0);" id="n3" target="_parent"   onclick="goImg('n3',3);">3</a></li>
+                              <li><a href="javascript:void(0);" id="n4" target="_parent"   onclick="goImg('n4',4);">4</a></li>
+                              <li><a href="javascript:void(0);" id="n5" target="_parent"   onclick="goImg('n5',5);">5</a></li>
+                            </ul>
+      </div>
+    </div>
+
+    <div class="focus_con2" id='ADV_15224'>SACC2017 会议资料 即刻下载</div>
+    <script language="JavaScript">
+	var imgUrl = new Array();
+	var imgLink = new Array();
+	var imgText = new Array();
+	var adNum=1;
+					imgUrl[1] = "http://image4.it168.com/2017/10/26/1b256c08-e341-4fcf-81e0-7e9e7dc262df.jpg";
+		imgLink[1] = "http://bbs.chinaunix.net/thread-4289688-1-1.html";
+		imgText[1] = "SACC2017 会议资料 即刻下载";
+					imgUrl[2] = "http://image4.it168.com/2017/10/17/bc033d63-5947-42e9-9c14-8c162830dbed.jpg";
+		imgLink[2] = "http://survey.ruijie.com.cn/m/17104107.aspx#";
+		imgText[2] = "锐捷网络2017有奖调研";
+					imgUrl[3] = "http://image4.it168.com/2017/10/26/e4492a00-35d1-4d3f-84b7-e4c17bc9693d.jpg";
+		imgLink[3] = "https://m.qlchat.com/topic/2000000002571058.htm?preview=Y&intoPreview=Y";
+		imgText[3] = "百度外卖——大数据自定义报表系统设计";
+					imgUrl[4] = "http://image4.it168.com/2017/10/26/7e031c4e-30d0-498f-8e58-29eaa46520e3.jpg";
+		imgLink[4] = "https://jinshuju.net/f/UKJIke";
+		imgText[4] = "轻松搞定！Wi-Fi故障排除18式！";
+					imgUrl[5] = "http://image4.it168.com/2016/7/1/9f7f0d3d-9f16-433b-b970-adb9226591b3.jpg";
+		imgLink[5] = "http://bbs.chinaunix.net/thread-4232879-1-1.html";
+		imgText[5] = "【微学堂】让技术分享无处不在";
+		var imgTotal = 5;
+	</script>
+    <script language="javascript" type="text/javascript" src="/js/index.js"></script>
+    <div class="focus_con3">
+      <ul>
+        <li id="ADV_17734"><script>LG('ADV_17734')</script></li>
+        <li id="ADV_17735"><script>LG('ADV_17735')</script></li>
+        <li id="ADV_17736"><script>LG('ADV_17736')</script></li>
+        <li id="ADV_17737"><script>LG('ADV_17737')</script></li>
+      </ul>
+    </div>
+    <div class="focus_con4">
+      <div class="focus_tit1">博客最新公告</div>
+      <ul>
+                <li><a href="http://blog.chinaunix.net/uid-10718265-id-5030594.html" target="_blank">·我写的技术博文 如何才能被推荐？  </a></li>
+                <li><a href="http://blog.chinaunix.net/uid-24789255-id-5075574.html" target="_blank">·新注册用户需要认证后才能发博文 </a></li>
+                <li><a href="http://blog.chinaunix.net/uid-24789255-id-4250323.html" target="_blank">· 关于个人页面“博文数”显示错误公告</a></li>
+              </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="ad_con1" id="ADV_17327"><script>LG('ADV_17327')</script></div>
+<div class="classify_contain1" id="classify_contain1">
+  <div class="classify_left1">
+    <div class="classify_left1_2 classify_left1_4 mt0">
+      <div class="classify_tit2"><a href="/site/expert.html">更多>></a>推荐专家</div>
+            <div class="classify_left1_3"><a href="/uid/22312037.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/022/31/20/37_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/22312037.html" target="_blank"><b> 施昌权—淘宝卫霍</b></a></p>
+        <p><em>领域：</em>架构与运维</p>
+        <p><em>介绍：</em>阿里巴巴是个快乐的少年</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/20639775.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/63/97/75_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/20639775.html" target="_blank"><b>张秀云</b></a></p>
+        <p><em>领域：</em>架构与运维</p>
+        <p><em>介绍：</em>从2007年开始从事计算机相关工作，期间经历过网络管理员、linux...</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/26950862.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/026/95/08/62_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/26950862.html" target="_blank"><b>李辉</b></a></p>
+        <p><em>领域：</em>热点技术</p>
+        <p><em>介绍：</em>新浪彩票MySQL DBA，擅长MySQL数据库的管理、性能调优、架构设计...</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/20708886.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/70/88/86_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/20708886.html" target="_blank"><b>蔡金龙</b></a></p>
+        <p><em>领域：</em>数据库</p>
+        <p><em>介绍：</em>大众点评网MySQL DBA曾就职于阿里巴巴担任Oracle DBA,Mysql DBA...</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+          </div>
+    <div class="classify_left1_2">
+      <div class="classify_tit2"><a href="/site/expert.html" target="_blank">更多>></a>专家列表</div>
+      <div class="classify_left2">
+        <ul>
+                    <li><a href="/uid/411974.html" target="_blank" title="宋运奎">宋运奎</a></li>
+                    <li><a href="/uid/12924167.html" target="_blank" title="余洪春">余洪春</a></li>
+                    <li><a href="/uid/579346.html" target="_blank" title="张鹏亮">张鹏亮</a></li>
+                    <li><a href="/uid/9419692.html" target="_blank" title="胡安伟">胡安伟</a></li>
+                    <li><a href="/uid/26470037.html" target="_blank" title="李云">李云</a></li>
+                    <li><a href="/uid/28989651.html" target="_blank" title="王朱珍">王朱珍</a></li>
+                    <li><a href="/uid/20802110.html" target="_blank" title="高强">高强</a></li>
+                    <li><a href="/uid/27006543.html" target="_blank" title="瑞赛奇">瑞赛奇</a></li>
+                    <li><a href="/uid/20543672.html" target="_blank" title="傅 炜">傅 炜</a></li>
+                    <li><a href="/uid/16844903.html" target="_blank" title="宁连杰">宁连杰</a></li>
+                    <li><a href="/uid/27107082.html" target="_blank" title="姜皓">姜皓</a></li>
+                    <li><a href="/uid/10915175.html" target="_blank" title="刘鑫">刘鑫</a></li>
+                    <li><a href="/uid/25723371.html" target="_blank" title="冯占海">冯占海</a></li>
+                    <li><a href="/uid/16829731.html" target="_blank" title="岳雷">岳雷</a></li>
+                    <li><a href="/uid/29252440.html" target="_blank" title="何昊">何昊</a></li>
+                    <li><a href="/uid/7655508.html" target="_blank" title="丁俊">丁俊</a></li>
+                    <li><a href="/uid/22414998.html" target="_blank" title="刘凯">刘凯</a></li>
+                    <li><a href="/uid/20662820.html" target="_blank" title="刘廷伟">刘廷伟</a></li>
+                    <li><a href="/uid/25498312.html" target="_blank" title="李达宇">李达宇</a></li>
+                    <li><a href="/uid/15795819.html" target="_blank" title="侯衍广">侯衍广</a></li>
+                    <li><a href="/uid/24985.html" target="_blank" title="于利敏">于利敏</a></li>
+                    <li><a href="/uid/10821989.html" target="_blank" title="何 祺">何 祺</a></li>
+                    <li><a href="/uid/509190.html" target="_blank" title="高俊峰">高俊峰</a></li>
+                    <li><a href="/uid/7528962.html" target="_blank" title="付合利">付合利</a></li>
+                    <li><a href="/uid/25135004.html" target="_blank" title="李庆彬">李庆彬</a></li>
+                    <li><a href="/uid/20788636.html" target="_blank" title="曾福振">曾福振</a></li>
+                    <li><a href="/uid/7607759.html" target="_blank" title="李丙洋">李丙洋</a></li>
+                  </ul>
+      </div>
+    </div>
+    <div class="ad_con1"><a href="http://blog.chinaunix.net/uid-24789255-id-3150492.html"><img src="http://image4.it168.com/2013/1/10/8bca412f-9c60-44a1-ba6f-8c75dc571239.jpg" title="申请专家"></a></div>
+    <div class="classify_left1_2 classify_left1_4">
+      <div class="classify_tit2"><a href="/ranklist/commendblog.html" target="_blank">更多>></a>推荐博客</div>
+            <div class="classify_left1_3"><a href="/uid/29386764.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/029/38/67/64_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/29386764.html" target="_blank">Eric</a></p>
+        <p>ID：xhload3d</p>
+        <p>领域：Web前端</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/20692368.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/69/23/68_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/20692368.html" target="_blank">蒋栋年</a></p>
+        <p>ID：dreamjdn</p>
+        <p>领域：程序设计</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/23284114.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/023/28/41/14_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/23284114.html" target="_blank">侯杰</a></p>
+        <p>ID：十字螺丝钉</p>
+        <p>领域：数据库</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/77311.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/000/07/73/11_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/77311.html" target="_blank">黄学良</a></p>
+        <p>ID：hxl</p>
+        <p>领域：数据库</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+            <div class="classify_left1_3"><a href="/uid/7270462.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/007/27/04/62_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>
+        <p><a href="/uid/7270462.html" target="_blank">张国汉</a></p>
+        <p>ID：ghan</p>
+        <p>领域：操作系统</p>
+        </span>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_con2"></div>
+          </div>
+      </div>
+  <div class="classify_middle1">
+          <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/architecture.html" target="_blank">架构与运维</a>】</span><a href="/uid-15866552-id-5769435.html" target="_blank">mysql主从复制失效的恢复</a></div>
+      <div class="two_cont2_2"><a href="/uid/15866552.html">dahailinux</a> | 2017-08-21 11:26:31 | 阅读<a href="/uid-15866552-id-5769435.html">(2510)</a> | 评论<a href="/uid-15866552-id-5769435.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/15866552.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/015/86/65/52_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>前言:      由于修改了linux服务器的主机名,所以mysql主从复制失效了,现在需要恢复主从复制.这个有点不同于纯净的库的主从复制.首先要把网站放一个维护页面.要不然用户...<a href="/uid-15866552-id-5769435.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/database.html" target="_blank">数据库</a>】</span><a href="/uid-25472509-id-5769364.html" target="_blank">内容分享</a></div>
+      <div class="two_cont2_2"><a href="/uid/25472509.html">cissdy</a> | 2017-08-18 15:26:28 | 阅读<a href="/uid-25472509-id-5769364.html">(0)</a> | 评论<a href="/uid-25472509-id-5769364.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/25472509.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/025/47/25/09_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span> 用expdp或impdp命令时, 可暂不指出用户名/密码@实例名 as 身份, 然后根据提示再输入,  如:     expdp schemas=scott DIRECTORY=dpdata  dumpfile=expdp.dmp ;一. 创...<a href="/uid-25472509-id-5769364.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/technology.html" target="_blank">热点技术</a>】</span><a href="/uid-7374279-id-5769224.html" target="_blank">机器学习:spark ALS预测电影-python</a></div>
+      <div class="two_cont2_2"><a href="/uid/7374279.html">hiyachen</a> | 2017-08-15 09:58:16 | 阅读<a href="/uid-7374279-id-5769224.html">(2260)</a> | 评论<a href="/uid-7374279-id-5769224.html">(1)</a></div>
+      <div class="two_cont2_3"><a href="/uid/7374279.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/007/37/42/79_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>机器学习:spark ALS预测电影-python<a href="/uid-7374279-id-5769224.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/os.html" target="_blank">操作系统</a>】</span><a href="/uid-20786208-id-5769167.html" target="_blank">linux内存泄漏检测</a></div>
+      <div class="two_cont2_2"><a href="/uid/20786208.html">linuxDOS</a> | 2017-08-13 09:34:37 | 阅读<a href="/uid-20786208-id-5769167.html">(2790)</a> | 评论<a href="/uid-20786208-id-5769167.html">(3)</a></div>
+      <div class="two_cont2_3"><a href="/uid/20786208.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/78/62/08_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>内存泄露 memleak  kmalloc  malloc free meminfo  top  ps<a href="/uid-20786208-id-5769167.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-31460252-id-5769142.html" target="_blank">学习笔记TF040:多GPU并行</a></div>
+      <div class="two_cont2_2"><a href="/uid/31460252.html">libinggen</a> | 2017-08-12 11:14:33 | 阅读<a href="/uid-31460252-id-5769142.html">(2670)</a> | 评论<a href="/uid-31460252-id-5769142.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/31460252.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/031/46/02/52_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>TensorFlow并行，模型并行，数据并行。模型并行根据不同模型设计不同并行方式，模型不同计算节点放在不同硬伯上资源运算。数据并行，比较通用简便实现大规模并行方式，同时...<a href="/uid-31460252-id-5769142.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-31460252-id-5769141.html" target="_blank">学习笔记TF039:TensorBoard</a></div>
+      <div class="two_cont2_2"><a href="/uid/31460252.html">libinggen</a> | 2017-08-12 11:13:33 | 阅读<a href="/uid-31460252-id-5769141.html">(6440)</a> | 评论<a href="/uid-31460252-id-5769141.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/31460252.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/031/46/02/52_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>首先向大家和《TensorFlow实战》的作者说句不好意思。我现在看的书是《TensorFlow实战》。但从TF024开始，我在学习笔记的参考资料里一直写的是《TensorFlow实践》，我自己...<a href="/uid-31460252-id-5769141.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-31460252-id-5769138.html" target="_blank">学习笔记TF037:实现强化学习策略网络</a></div>
+      <div class="two_cont2_2"><a href="/uid/31460252.html">libinggen</a> | 2017-08-12 11:08:45 | 阅读<a href="/uid-31460252-id-5769138.html">(2370)</a> | 评论<a href="/uid-31460252-id-5769138.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/31460252.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/031/46/02/52_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>强化学习(Reinforcement Learing)，机器学习重要分支，解决连续决策问题。强化学习问题三概念，环境状态(Environment State)、行动(Action)、奖励(Reward)，目标获得最多累...<a href="/uid-31460252-id-5769138.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/technology.html" target="_blank">热点技术</a>】</span><a href="/uid-29779867-id-5769125.html" target="_blank">【技术干货】听阿里云CDN安防技术专家金九讲tengine+lua开发</a></div>
+      <div class="two_cont2_2"><a href="/uid/29779867.html">小资一夏</a> | 2017-08-11 16:36:59 | 阅读<a href="/uid-29779867-id-5769125.html">(1470)</a> | 评论<a href="/uid-29779867-id-5769125.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/29779867.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/029/77/98/67_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>一、介绍  二、安装  三、运行  四、开发   1.介绍Tengine：轻量级、高性能、高并发、配置化、模块化、可扩展、可移植的Web和反向代理 服务器，Tengine是nginx超集，...<a href="/uid-29779867-id-5769125.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/mobiledev.html" target="_blank">移动开发与应用</a>】</span><a href="/uid-192452-id-5768933.html" target="_blank">ubuntu 14.04 删除nginx</a></div>
+      <div class="two_cont2_2"><a href="/uid/192452.html">mfc42d</a> | 2017-08-08 16:09:53 | 阅读<a href="/uid-192452-id-5768933.html">(2600)</a> | 评论<a href="/uid-192452-id-5768933.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/192452.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/000/19/24/52_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>sudo apt-get purge nginx nginx-common<a href="/uid-192452-id-5768933.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/others.html" target="_blank">综合</a>】</span><a href="/uid-20099692-id-5768930.html" target="_blank">根据2017年软考系统规划与设计师考试大纲整理的要求</a></div>
+      <div class="two_cont2_2"><a href="/uid/20099692.html">missing-cn</a> | 2017-08-08 15:40:24 | 阅读<a href="/uid-20099692-id-5768930.html">(2420)</a> | 评论<a href="/uid-20099692-id-5768930.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/20099692.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/09/96/92_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>根据2017年软考系统规划与设计师考试大纲整理的要求说明大纲从字面分析可知考试的要求从低到高分为4个级别，假设总分225分按照以下比例分配（个人预估仅供参考）了解：5%熟...<a href="/uid-20099692-id-5768930.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/os.html" target="_blank">操作系统</a>】</span><a href="/uid-26983585-id-5768908.html" target="_blank">浅谈测试需求分析</a></div>
+      <div class="two_cont2_2"><a href="/uid/26983585.html">hfm_honey</a> | 2017-08-08 10:29:35 | 阅读<a href="/uid-26983585-id-5768908.html">(0)</a> | 评论<a href="/uid-26983585-id-5768908.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/26983585.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/026/98/35/85_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>1. 什么是测试需求？ 　　确切地讲，所谓的测试需求就是在项目中要测试什么。我们在测试活动中，首先需要明确测试需求（What），才能决定怎么测（How），测试时间（When）...<a href="/uid-26983585-id-5768908.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-531464-id-5768600.html" target="_blank">找出最耗cpu的线程&定位代码</a></div>
+      <div class="two_cont2_2"><a href="/uid/531464.html">wizardzj</a> | 2017-08-02 17:10:46 | 阅读<a href="/uid-531464-id-5768600.html">(2670)</a> | 评论<a href="/uid-531464-id-5768600.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/531464.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/000/53/14/64_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>1.先找出Java进程ID    命令jps 等等2.找出该进程内最耗费CPU的线程   命令top -Hp  pid3.将线程ID转换为十六进制   命令printf &quot;%x\n&quot; pid4.jstack分析 命令jstack ...<a href="/uid-531464-id-5768600.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/others.html" target="_blank">综合</a>】</span><a href="/uid-20375883-id-5768533.html" target="_blank">《醒獅》妙用回文音群</a></div>
+      <div class="two_cont2_2"><a href="/uid/20375883.html">黃志華</a> | 2017-08-01 10:06:03 | 阅读<a href="/uid-20375883-id-5768533.html">(2420)</a> | 评论<a href="/uid-20375883-id-5768533.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/20375883.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/020/37/58/83_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>從《醒獅》這個標題，除了想起中國喜慶文化中的舞獅活動，也自然聯想到「睡獅」的比喻，再繼而想到此曲面世於三十年代日本侵華期間，作曲人很有可能藉這首樂曲振奮國人的抗...<a href="/uid-20375883-id-5768533.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-15063109-id-5768186.html" target="_blank"> 围棋开源软件DarkForestGo学习</a></div>
+      <div class="two_cont2_2"><a href="/uid/15063109.html">sxcong</a> | 2017-07-24 15:27:53 | 阅读<a href="/uid-15063109-id-5768186.html">(5380)</a> | 评论<a href="/uid-15063109-id-5768186.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/15063109.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/015/06/31/09_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>学习DarkForestGO的同时，用CPP调用源程序写了一个DEMO<a href="/uid-15063109-id-5768186.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        <div class="classify_con1">
+      <div class="two_cont2_1"><span>【<a href="/program.html" target="_blank">程序设计</a>】</span><a href="/uid-29544048-id-5767792.html" target="_blank">STMP一个简单的发送邮件</a></div>
+      <div class="two_cont2_2"><a href="/uid/29544048.html">Jack_Tan123</a> | 2017-07-18 13:15:00 | 阅读<a href="/uid-29544048-id-5767792.html">(0)</a> | 评论<a href="/uid-29544048-id-5767792.html">(0)</a></div>
+      <div class="two_cont2_3"><a href="/uid/29544048.html" target="_blank"><img src="http://passport.ixpub.net/data/avatar/029/54/40/48_avatar_small.jpg" onerror="this.onerror=null;this.src='http://passport.ixpub.net/images/noavatar_small.gif'" /></a><span>点击(此处)折叠或打开#! perluse Net::SMTP;    #导入模块,该模块好像不支持带附件操作.use Encode;my $email_host = &#039;172.16.1.44&#039;;    #服务器的地址#my @email_...<a href="/uid-29544048-id-5767792.html" target="_blank">【阅读全文】</a></span></div>
+      <div class="bg_con1"></div>
+    </div>
+        </div>
+  <div class="classify_right1">
+    <div class="classify_right1_1"><a href="/uid/24789255.html" target="_blank">官方博客</a></div>
+    <div class="classify_right1_2">
+      <div class="classify_tit3">最新活动</div>
+      <ul class="classify_ul2">
+                <li ><span class="span_bg1"></span><a href="http://bbs.chinaunix.net/thread-4182662-1-1.html" target="_blank" title="有奖：网络架构的世界真有“试衣间” ">有奖：网络架构的世界真有“试衣间”</a></li>
+                <li ><span class="span_bg1"></span><a href="http://selftest.chinaunix.net/Start_24eabffd-d115-47b8-8b04-ec670d67826d.html" target="_blank" title="有奖自测：2015DTCC填调查赢门票！">有奖自测：2015DTCC填调查赢门票！</a></li>
+                <li ><span class="span_bg1"></span><a href="http://blog.chinaunix.net/uid-24789255-id-4404978.html" target="_blank" title=" CU博客频道8月技术图书有奖试读活动 ">CU博客频道8月技术图书有奖试读活动</a></li>
+                <li ><span class="span_bg1"></span><a href="http://blog.chinaunix.net/uid-24789255-id-4342139.html" target="_blank" title="CU博客频道7月技术图书有奖试读活动">CU博客频道7月技术图书有奖试读活动</a></li>
+                <li class="noline1"><span class="span_bg1"></span><a href="http://blog.chinaunix.net/uid-24789255-id-4288187.html" target="_blank" title="有奖征集：文集--博客系列博文管理 ">有奖征集：文集--博客系列博文管理</a></li>
+              </ul>
+    </div>
+<script language="javascript">
+jQuery(function(){
+ var scrtime;
+ jQuery("#con").hover(function(){
+  clearInterval(scrtime);
+ },function(){
+ scrtime = setInterval(function(){
+  var $ul = jQuery("#con ul");
+  var liHeight = $ul.find("li:last").height();
+  $ul.animate({marginTop : liHeight+20 +"px"},500,function(){
+	  $ul.find("li:last").prependTo($ul)
+	  $ul.find("li:first").hide();
+	  $ul.css({marginTop:0});
+	  $ul.find("li:first").fadeIn();
+  }); 
+ },5000);
+ }).trigger("mouseleave");
+});
+</script>
+
+    <div class="ad_con1"><a href="http://blog.chinaunix.net/uid-24789255-id-3988872.html"><img src="http://image4.it168.com/2013/12/31/9d2919bb-326a-45fc-9d72-8daa4512c731.jpg" title="扫一扫 关注博客微信阅读号"></a></div>
+    <div class="classify_right1_2">
+      <div class="classify_tit3">一周热评博文</div>
+      <ul class="classify_ul3">
+              </ul>
+    </div>
+    <div class="classify_right1_2">
+      <div class="classify_tit3">一周热点博文</div>
+      <ul class="classify_ul3">
+              </ul>
+    </div>
+
+        
+    
+        <div class="classify_right1_2">
+      <div class="classify_tit3">博客帮助</div>
+      <ul class="classify_ul3">
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.itpub.net/29254281/viewspace-1569918/" target="_blank">linux：小花狸ITPUB博客备份工具</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-114279.html" target="_blank">如何利用客户端在CU发博客</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-3022626.html" target="_blank">博客登陆提示密码错误帮助</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-22742.html" target="_blank">如何将您的博文置顶</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-22746.html" target="_blank">如何为您的博文插入图片</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-22755.html" target="_blank">CU博客系统分类的使用</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-23846.html" target="_blank">CU博客改版反馈意见</a></div>
+          <p></p>
+        </li>
+                <li>
+          <div><span class="span_bg2"></span><a href="http://blog.chinaunix.net/uid-24789255-id-23264.html" target="_blank">新版博文改进的一些功能</a></div>
+          <p></p>
+        </li>
+              </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="page_con1"> 
+  <ul id="yw0" class="yiiPager"><li class="first hidden"><a href="/site/index.html">首页</a></li>
+<li class="previous hidden"><a href="/site/index.html"><<</a></li>
+<li class="page selected"><a href="/site/index.html">1</a></li>
+<li class="page"><a href="/site/index/page/2.html">2</a></li>
+<li class="page"><a href="/site/index/page/3.html">3</a></li>
+<li class="page"><a href="/site/index/page/4.html">4</a></li>
+<li class="page"><a href="/site/index/page/5.html">5</a></li>
+<li class="page"><a href="/site/index/page/6.html">6</a></li>
+<li class="page"><a href="/site/index/page/7.html">7</a></li>
+<li class="page"><a href="/site/index/page/8.html">8</a></li>
+<li class="page"><a href="/site/index/page/9.html">9</a></li>
+<li class="next"><a href="/site/index/page/2.html">>></a></li>
+<li class="last"><a href="/site/index/page/9.html">末页</a></li></ul>       共9页
+</div>
+<style>
+/*二维码*/
+.it168_fl2 {position:fixed;height:183px;margin:0 0 200px -620px;left:50%;bottom:0;width:110px;background:#efefef;color:#666;z-index: 1000;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+.it168_fl2 a{display: block;height:183px;text-align: center;width: 110px;text-decoration:none;}
+.it168_fl2 a div{line-height:20px; text-align:center; padding:8px;color:#555}
+.it168_fl2 a:hover{background:#d0d0d0;color:#666;text-decoration:none;}
+.it168_fl2 img{margin:0px auto;}
+</style>
+
+<div class="it168_fl2" >
+    <a target="_blank" href="http://bbs.chinaunix.net/thread-4188049-1-1.html">
+    <div>CU官方微信</div><img style="width: 100px;height: 100px;" alt="Chinaunix官方微信" src="/image/Chinaunix.jpg" complete="complete">
+    <div>扫码送文库金币</div>
+    </a>
+</div>
+<div class="it168_fl2" style=' bottom: -190px;'>
+    <a target="_blank" href="http://sacc.it168.com">
+    <div>架构师技术大会</div><img style="width: 100px;height: 100px;" alt="架构师技术大会" src="/image/sacc.jpg" complete="complete">
+    <div>扫一扫关注</div>
+    </a>
+</div>
+<script type="text/javascript" smua="d=p&s=l&u=u3118751&w=300&h=250" src="//www.ynbojie.com/smu0/o.js"></script>  
+      
+  <!-- footer -->
+  <div class="footer">
+    <p class="p"> <a target="_blank" href="http://www.it168.com/bottomfile/about.shtml" rel="nofollow">盛拓传媒简介</a> | <a target="_blank" href="http://www.it168.com/bottomfile/it168.shtml" rel="nofollow">关于IT168</a> | <a target="_blank" href="http://www.it168.com/bottomfile/hzhb.shtml">合作伙伴</a> | <a target="_blank" href="http://www.it168.com/bottomfile/ggfw.shtml" rel="nofollow">广告服务</a> | <a target="_blank" href="http://www.it168.com/bottomfile/sytk.shtml" rel="nofollow">使用条款</a> | <a target="_blank" href="http://www.it168.com/bottomfile/tgzn.shtml" rel="nofollow">投稿指南</a> | <a target="_blank" href="http://www.wintalent.cn:8031/wt5/sequelmedia/web/index" rel="nofollow">诚聘精英</a> | <a target="_blank" href="http://www.it168.com/bottomfile/lxwm.shtml" rel="nofollow">联系我们</a> | <a target="_blank" href="http://www.it168.com//bottomfile/flgw/fl.htm" rel="nofollow">法律声明</a> | <a target="_blank" href="http://www.it168.com/bottomfile/sitemap/sitemap.html" rel="nofollow">网站导航</a> | <a target="_blank" href="http://archive.it168.com/" rel="nofollow">往日回顾</a></p>
+    <p class="p1">北京盛拓优讯信息技术有限公司. 版权所有 京ICP备16024965号 北京市公安局海淀分局网监中心备案编号：11010802020122<br>
+      广播电视节目制作经营许可证(京) 字第1234号 中国互联网协会会员 </p>
+    <div class="pic_div"><a href="http://ulic.baidu.com/client/clientDetailCerInfo.do?id=1602" class="pic3"></a><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202008062400006" class="pic2"></a><a href="http://www.bj.cyberpolice.cn/index.jsp" class="pic1">网络110 报警服务</a> </div>
+  </div>
+</div>
+ <script>if(typeof(BLA)!='undefined'){BLA();}</script>
+<script language="javascript" src="http://stat.it168.com/pv.js"></script>
+<script>
+function sendPV(){
+    var pvTrack = new PvTrack();
+    pvTrack.type = 35; // 频道类别ID
+    pvTrack.channel = 189; // 频道ID
+    pvTrack.pageType = 0;
+    pvTrack.track();
+}
+window.setTimeout("sendPV()", 1000);
+</script>
+<script type="text/javascript">
+//  var _gaq = _gaq || [];
+//  _gaq.push(['_setAccount', 'UA-20237423-2']);
+//  _gaq.push(['_setDomainName', '.chinaunix.net']);
+//  _gaq.push(['_trackPageview']);
+//
+//  (function() {
+//    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+//    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+//    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+//  })();
+
+</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0ee5e8cdc4d43389b3d1bfd76e83216b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>
