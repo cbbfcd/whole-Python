@@ -1,4 +1,4 @@
-# Http入门葵花宝典
+# <Diagrammatic HTTP>
 
 <hr/>
 
@@ -1207,6 +1207,107 @@ HTTP，HTTPS相比，HTTPS更安全，但是也更加耗开销，更慢，所以
 
 ## 8. 用户认证
 
+认证就是保证正在客户端操作的用户就是其本人。常用的方式就是密码、生物识别、证书等手段。
+
+HTTP/1.1 使用的认证方式：
+
+1. BASIC 基本认证
+2. DIGEST 摘要认证
+3. SSL 客户端认证
+4. FormBase 基于表单认证
+
+
+### 8.1 Basic认证
+
+老牌的认证方式了，过程如下 ：
+
+<img src="./aut.png" />
+
+### 8.2 DIGEST 认证
+
+由于Basic认证不灵活也不是特别安全，从HTTP/1.1起就有了DIGEST认证。DIGEST认证同样使用质询 / 响应的方式 。但不会像 BASIC 认证那样直接发送明文密码。
+
+所谓质询响应方式是指，一开始一方会先发送认证要求给另一方，接着使用从另一方那接收到的质询码计算生成响应码。最后将响应码返 回给对方进行认证的方式。
+
+过程如下：
+
+<img src="./degist.png" />
+
+首部字段 WWW-Authenticate 内必须包含 realm 和 nonce 这两个字段的信息。
+客户端就是依靠向服务器回送这两个值进行认证的。
+
+### 8.3 SSL 客户端认证
+
+SSL 客户端认证是借由 HTTPS 的客户端证书完成认证的方式。
+
+过程大致就是服务端响应一个CertificateRequest报文，要求客户端提供证书，客户端以Client Certificate 报文的方式发送证书给服务端。
+
+验证通过后获取里面的公钥，然后进行加密通信。
+
+SSL客户端认证常常采用双因素的认证模式，就是证书+表单验证这种混合方式。
+
+### 8.4 基于表单认证
+
+这个就不多说了，大多数网站都是这样的。提供一个登录界面，提交用户名密码认证。
+
+其中服务器端会在本地保存一个SessionID与用户状态绑定，这个SessionID也会放在Set-Cookie中返回给客户端，为减轻跨站脚本攻击（XSS）造成的损失，建议事先在Cookie内加上httponly。
+
+客户端接收到从服务器端发来的SessionID后，会将其作为Cookie保存在本地。下次向服务器发送请求时，浏览器会自动发送Cookie，所以SessionID也随之发送到服务器。服务器端可通过验证 接收到的 Session ID 识别用户和其认证状态。
+
+
+## 9. HTTP的追加协议
+
+随着网络技术、需求的不断发展，HTTP的功能上的疲软开始显现，所以针对其功能上的不足，推出了一些新的技术、协议。
+
+### 9.1 WebSocket
+
+Web 浏览器与 Web 服务器之间全双工通信标准。
+
+WebSocket是基于HTTP协议的额，所以第一次的请求还是由客户端发起，然后双方就可以互相通信了。服务器可以直接推送数据给客户端。
+
+第一次请求握手:
+
+```
+GET /chat HTTP/1.1 
+Host: server.example.com 
+Upgrade: websocket // 这个是告诉服务器，咱们改成websocket协议来通信
+Connection: Upgrade Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==  // 键值
+Origin: http://example.com 
+Sec-WebSocket-Protocol: chat, superchat // 子协议
+Sec-WebSocket-Version: 13
+```
+
+
+服务器对于上述请求的响应：
+
+```
+HTTP/1.1 101 Switching Protocols // 切换协议了
+Upgrade: websocket 
+Connection: Upgrade 
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=  // 由请求中的键值生成
+Sec-WebSocket-Protocol: chat
+```
+
+API:
+```
+var ws = new WebSocket(ws://a.example.com);
+ws.onopen = function(){
+    ws.send('hello world!')
+}
+```
+
+
+### 9.2 HTTP/2.0
+
+HTTP/2.0 的目标是改善用户在使用 Web 时的速度体验。
+
+主要是基于HTTP1.1，然后结合Google的SPDY，微软的HTTP Speed ＋ Mobility ，还有Network-Friendly HTTP Upgrade 以改善诸如客户端拉拽/服务端推送、压缩、多路复用、TLS义务化、流量控制、协商、WebSocket等方面。
+
+### 9.3 WebDAV
+
+WebDAV（Web-based Distributed Authoring and Versioning，基于万维网的分布式创作和版本控制）是一个可对Web服务器上的内容直接进行文件复制、编辑等操作的分布式文件系统。它作为扩展 HTTP/1.1 的协议定义在 RFC4918。
+
+除了创建、删除文件等基本功能，它还具备文件创建者管理、文件编辑过程中禁止其他用户内容覆盖的加锁功能，以及对文件内容修改的 版本控制功能。
 
 
 
