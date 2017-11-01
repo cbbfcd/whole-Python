@@ -2,7 +2,7 @@
 # @Author: cbbfcd
 # @Date:   2017-10-24 22:10:17
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-10-24 22:58:13
+# @Last Modified time: 2017-10-31 12:22:09
 # @Description: 设置代理服务器爬取
 
 # 首先补充一下 GET请求和 POST请求的方式
@@ -43,12 +43,12 @@ def use_proxy(proxy_addr_list, url):
 			data = opener.open(url, timeout=10).read().decode('utf-8')
 		except Exception as e:
 			print('error', str(e))
-			use_proxy(proxy_addr_list, 'http://www.baidu.com')# 递归调用
+			use_proxy(proxy_addr_list, url)# 递归调用
 		else:
 			print(len(data))
 	else:
-		raise IndexError('no member in list')
+		print('no member in list')
 
-proxy_addr_list = ['121.31.102.153:8123', '110.73.10.207:8123', '110.73.15.217:8123', '115.200.32.10:8123']
+proxy_addr_list = ['61.155.164.110:3128', '113.89.52.77:9999', '112.81.143.245:8118', '27.220.10.87:8118']
 
 use_proxy(proxy_addr_list, 'http://www.baidu.com')
