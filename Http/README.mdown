@@ -1,4 +1,4 @@
-# <Diagrammatic HTTP>
+<h1>Diagrammatic HTTP</h1>
 
 <hr/>
 
@@ -7,10 +7,6 @@
 >如果觉得不错请扔个star过来。
 
 > 如要转载，请注明出处。
-
-<hr/>
-
-[TOC]
 
 <hr/>
 
