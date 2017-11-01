@@ -2,7 +2,7 @@
 # @Author: 28906
 # @Date:   2017-10-30 22:10:32
 # @Last Modified by:   cbbfcd
-# @Last Modified time: 2017-11-01 10:36:57
+# @Last Modified time: 2017-11-01 14:05:55
 # @Description: 搜狗微信爬虫
 import time
 import urllib.request
@@ -69,9 +69,8 @@ def outHtml(data):
         f.write(html)
 
 
-proxys = ['27.219.198.237:8118', '42.242.189.239:4336', '113.116.144.164:9000', '60.169.78.218:808',
-          '110.16.80.106:8080', '175.17.1.143:8080', '113.65.189.191 :9797']
+proxys = ['175.17.1.143:8080', '113.65.189.191 :9797']
 key = urllib.request.quote('前端')
 url = 'http://weixin.sogou.com/weixin?query={}&type={}&page={}'.format(
     key, '2', '1')
-outHtml(getLinksByProxy(proxys, url))
+print(getLinksByProxy(proxys, url))
