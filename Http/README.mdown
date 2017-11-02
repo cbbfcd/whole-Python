@@ -1,4 +1,4 @@
-# <Diagrammatic HTTP>
+# Diagrammatic HTTP
 
 <hr/>
 
