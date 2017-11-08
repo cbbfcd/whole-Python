@@ -14,3 +14,4 @@
 [9.设置超时时间](./set_timeout.py)<br/>
 [10.搜狗微信爬虫](./weichat.py)<br/>
 [11.反爬技术--浏览器伪装技术](./like_browser.py)<br/>
+[12.定向爬虫](./directional.py)<br/>
