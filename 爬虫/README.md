@@ -15,3 +15,4 @@
 [10.搜狗微信爬虫](./weichat.py)<br/>
 [11.反爬技术--浏览器伪装技术](./like_browser.py)<br/>
 [12.定向爬虫](./directional.py)<br/>
+[13.scrapy小项目](./myspider/README.md)<br/>
