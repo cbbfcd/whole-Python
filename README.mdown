@@ -16,6 +16,7 @@
 <a href="./python实战项目/README.mdown">python项目实战</a><br/>
 <a href="./Http/README.mdown">Http入门葵花宝典</a><br/>
 <a href="./爬虫/README.md">爬虫</a><br/>
+<a href="./python进阶系列/README.md">python进阶系列</a><br/>
 
 
 # author
