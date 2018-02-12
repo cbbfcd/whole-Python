@@ -18,8 +18,9 @@ class MyspiderItem(scrapy.Item):
 	commentscount = scrapy.Field() # 评论数
 	categoryname = scrapy.Field() # 类别名
 	categorytitle = scrapy.Field() # 类别标题
+	buildtime = scrapy.Field() # 创建时间
 
 	def get_insert_sql(self):
-		insert_sql = "insert into arts(title,originalurl,viewscount,tags,collectioncount,commentscount,categoryname,categorytitle) values(%s,%s,%s,%s,%s,%s,%s,%s)"
-		params = (self['title'],self['originalurl'],str(self['viewscount']),self['tags'],str(self['collectioncount']),str(self['commentscount']),self['categoryname'],self['categorytitle'])
+		insert_sql = "insert into arts(title,originalurl,viewscount,tags,collectioncount,commentscount,categoryname,categorytitle,buildtime) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+		params = (self['title'],self['originalurl'],str(self['viewscount']),self['tags'],str(self['collectioncount']),str(self['commentscount']),self['categoryname'],self['categorytitle'],self['buildtime'])
 		return insert_sql,params

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
+import re
+import time
 from myspider.items import MyspiderItem
 
 
@@ -26,9 +28,17 @@ class JuejinSpider(scrapy.Spider):
 			item['commentscount'] = i['commentsCount']
 			item['categoryname'] = i['category']['name']
 			item['categorytitle'] = i['category']['title']
+			item['buildtime']= self.handledate2timestamp(i['createdAt'])
 			yield item
 		else:
 			new_link = 'http://timeline-merger-ms.juejin.im/v1/get_entry_by_rank?src=web&limit=100&category=all&before={}'.format(rankIndex)
 			yield scrapy.Request(new_link, callback=self.parse)
 	
-		
+	
+	def handledate2timestamp(self, datestr):
+		'''处理日期字符串转为时间戳'''
+		datestr = datestr[:-1]
+		_date = datestr.replace(r'T', ' ')
+		milliseconds = _date[-3:]
+		timeArray = time.strptime(_date, '%Y-%m-%d %H:%M:%S.%f')
+		return str(int(time.mktime(timeArray))) + milliseconds

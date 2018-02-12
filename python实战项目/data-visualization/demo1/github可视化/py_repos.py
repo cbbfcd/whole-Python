@@ -9,18 +9,22 @@ import requests
 import pygal
 from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
 
-url = 'https://api.github.com/search/repositories?q=language:python&sort=stars'
+language = 'javascript'
+res_dicts = []
+# url = 'https://api.github.com/search/repositories?q=language:{}&sort=stars&page={}'.format(language,page)
+for i in range(1, 3):
+	r = requests.get('https://api.github.com/search/repositories?q=language:{}&sort=stars&page={}'.format(language,i))
+	res = r.json()
+	res_dicts += res['items']
+# r = requests.get(url)
 
-r = requests.get(url)
-
-res = r.json()
-res_dicts = res['items']
+# res = r.json()
+# res_dicts = res['items']
 
 my_config = pygal.Config()
 my_config.x_label_rotation = 45
 my_config.show_legend = False
-my_config.width = 1000
-
+my_config.width = 1200
 
 names, plot_dicts = [], []
 for res_dict in res_dicts:
@@ -35,7 +39,7 @@ for res_dict in res_dicts:
 # 可视化
 my_style = LS('#333366', base_style=LCS)
 chart = pygal.Bar(my_config, style=my_style)
-chart.title = 'Most Star Python Project on GitHub'
+chart.title = 'Most Star {} Project on GitHub'.format(language)
 chart.x_labels = names
 
 chart.add('', plot_dicts)
